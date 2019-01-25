@@ -1,0 +1,56 @@
+{
+  "name": "pilebunker",
+  "version": "3.0.0",
+  "description": "shiropro weapon calculator pilebunker",
+  "private": true,
+  "author": "Panepo <panepo@github.io>",
+  "homepage": "https://panepo.github.io/PileBunker",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Panepo/PileBunker.git"
+  },
+  "scripts": {
+    "start": "react-scripts-ts start",
+    "build": "react-scripts-ts build",
+    "test": "react-scripts-ts test --env=jsdom --coverage",
+    "eject": "react-scripts-ts eject",
+    "parser": "npm run parserC && npm run parserL",
+    "parserL": "lsc  ./src/raw/parser.ls --nodejs --harmoy",
+    "parserC": "python ./src/raw/charDataParaser.py",
+    "deploy": "gh-pages -d build"
+  },
+  "dependencies": {
+    "@material-ui/core": "^3.9.0",
+    "@material-ui/icons": "^3.0.2",
+    "connected-react-router": "6.2.2",
+    "localforage": "1.7.3",
+    "lokijs": "^1.5.5",
+    "react": "16.7.0",
+    "react-dom": "16.7.0",
+    "react-redux": "6.0.0",
+    "react-router": "4.3.1",
+    "react-scripts-ts": "3.1.0",
+    "redux": "4.0.1",
+    "redux-logger": "3.0.6",
+    "redux-persist": "5.10.0",
+    "redux-thunk": "2.3.0",
+    "typeface-roboto": "^0.0.54"
+  },
+  "devDependencies": {
+    "@types/history": "4.7.2",
+    "@types/jest": "23.3.13",
+    "@types/lokijs": "^1.5.2",
+    "@types/node": "10.12.18",
+    "@types/react": "16.7.20",
+    "@types/react-dom": "16.0.11",
+    "@types/react-redux": "7.0.0",
+    "@types/react-router": "4.4.3",
+    "@types/redux-logger": "3.0.6",
+    "@types/webpack-env": "1.13.6",
+    "csstype": "^2.4.2",
+    "gh-pages": "^2.0.1",
+    "livescript": "^1.5.0",
+    "redux-devtools-extension": "2.13.7",
+    "typescript": "3.2.4"
+  }
+}
