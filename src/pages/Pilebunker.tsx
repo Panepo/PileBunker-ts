@@ -1,5 +1,8 @@
 import * as React from 'react';
 import { createStyles, Theme, WithStyles, withStyles } from '@material-ui/core';
+
+import MenuChar from '../components/MenuChar';
+
 import Grid from '@material-ui/core/Grid';
 import ExpansionPanel from '@material-ui/core/ExpansionPanel';
 import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
@@ -56,15 +59,40 @@ class Pilebunker extends React.Component<Pilebunker.Props, Pilebunker.State> {
                 <Typography className={this.props.classes.secondaryHeading}>I am an expansion panel</Typography>
               </ExpansionPanelSummary>
               <ExpansionPanelDetails>
-                <Typography>
-                  Nulla facilisi. Phasellus sollicitudin nulla et quam mattis feugiat. Aliquam eget
-                  maximus est, id dignissim quam.
-                </Typography>
+                <MenuChar />
               </ExpansionPanelDetails>
             </ExpansionPanel>
             <ExpansionPanel expanded={this.state.expanded === 'panel2'} onChange={this.handleChange('panel2')}>
               <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-                <Typography className={this.props.classes.heading}>環境設定</Typography>
+                <Typography className={this.props.classes.heading}>設施設定</Typography>
+                <Typography className={this.props.classes.secondaryHeading}>
+                  You are currently not an owner
+                </Typography>
+              </ExpansionPanelSummary>
+              <ExpansionPanelDetails>
+                <Typography>
+                  Donec placerat, lectus sed mattis semper, neque lectus feugiat lectus, varius pulvinar
+                  diam eros in elit. Pellentesque convallis laoreet laoreet.
+                </Typography>
+              </ExpansionPanelDetails>
+            </ExpansionPanel>
+            <ExpansionPanel expanded={this.state.expanded === 'panel3'} onChange={this.handleChange('panel3')}>
+              <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
+                <Typography className={this.props.classes.heading}>バフ・デバフ設定</Typography>
+                <Typography className={this.props.classes.secondaryHeading}>
+                  You are currently not an owner
+                </Typography>
+              </ExpansionPanelSummary>
+              <ExpansionPanelDetails>
+                <Typography>
+                  Donec placerat, lectus sed mattis semper, neque lectus feugiat lectus, varius pulvinar
+                  diam eros in elit. Pellentesque convallis laoreet laoreet.
+                </Typography>
+              </ExpansionPanelDetails>
+            </ExpansionPanel>
+            <ExpansionPanel expanded={this.state.expanded === 'panel4'} onChange={this.handleChange('panel4')}>
+              <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
+                <Typography className={this.props.classes.heading}>敵設定</Typography>
                 <Typography className={this.props.classes.secondaryHeading}>
                   You are currently not an owner
                 </Typography>

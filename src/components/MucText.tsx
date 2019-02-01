@@ -54,7 +54,6 @@ class MucText extends React.Component<MucText.Props> {
             underline: classes.textUnderline
           }}
           value={modelValue}
-          readOnly
           autoFocus
         />
       </FormControl>
