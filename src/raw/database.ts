@@ -1,7 +1,7 @@
 import * as Lokijs from 'lokijs';
-import weaponData from './weapons.json';
-import typeData from './weaponTypes.json';
-import charData from './chars.json';
+import * as weaponData from './weapons.json';
+import * as typeData from './weaponTypes.json';
+import * as charData from './chars.json';
 
 const db = new Lokijs('db');
 export const dbWeapon: Collection<object> = db.addCollection('dbWeapon');
