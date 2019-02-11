@@ -5,13 +5,14 @@ import {
   listPlainQ,
   listRarity
 } from '../constants/ConstList';
+import { QueryInput } from '../model/modelQuery';
 
-export const queryChar = (type: string, plain: number, rarity: number) => {
+export const queryChar = (input: QueryInput): LokiObj[] => {
   for (let i = 0; i < listTypeS.length; i += 1) {
-    if (listTypeS[i] === type) {
-      return listRarity.reduce((output: object[], data: number) => {
+    if (listTypeS[i] === input.type) {
+      return listRarity.reduce((output: LokiObj[], data: number) => {
         // tslint:disable-next-line:no-bitwise
-        if (rarity & Math.pow(2, data - 1)) {
+        if (input.rarity & Math.pow(2, data - 1)) {
           let charTemp = dbChar
             .chain()
             .find({
@@ -19,7 +20,7 @@ export const queryChar = (type: string, plain: number, rarity: number) => {
                 { weapon: listType[i] },
                 {
                   $and: [
-                    { plain: { $in: listPlainQ[plain - 1] } },
+                    { plain: { $in: listPlainQ[input.plain - 1] } },
                     { rarity: data.toString() }
                   ]
                 }
@@ -27,7 +28,7 @@ export const queryChar = (type: string, plain: number, rarity: number) => {
             })
             .data();
 
-          charTemp.forEach((char: object) => {
+          charTemp.forEach((char: LokiObj) => {
             output.push(char);
           });
         }

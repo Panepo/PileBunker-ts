@@ -2,6 +2,9 @@
   "extends": [
     "tslint-react"
   ],
+  "linterOptions": {
+    "exclude": [ "src/raw/*.json"]
+  },
   "rules": {
     "align": [
       true,

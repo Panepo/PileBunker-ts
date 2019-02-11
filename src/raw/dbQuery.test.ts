@@ -1,10 +1,9 @@
 import { dbChar } from './database';
 import * as dbQuery from './dbQuery';
+import { QueryInput } from '../model/modelQuery';
 
 it('Query character from database', () => {
-  const type: string = 'bell';
-  const plain: number = 2;
-  const rarity: number = 8;
+  const input: QueryInput = { type: 'bell', plain: 2, rarity: 8 };
 
   const anwser: LokiObj[] = dbChar.chain()
     .find({
@@ -20,5 +19,5 @@ it('Query character from database', () => {
     })
     .data();
 
-  expect(dbQuery.queryChar(type, plain, rarity)).toEqual(anwser);
+  expect(dbQuery.queryChar(input)).toEqual(anwser);
 });

@@ -5,9 +5,12 @@ import * as TodoActions from '../actions/todo';
 // import { Todo } from '../model/model';
 import { RootState } from '../reducers/index';
 import { createStyles, Theme, WithStyles, withStyles } from '@material-ui/core';
-import TextField from '@material-ui/core/TextField';
-import Divider from '@material-ui/core/Divider';
-import MucText from './MucText';
+import InputLabel from '@material-ui/core/InputLabel';
+import Select from '@material-ui/core/Select';
+import FormControl from '@material-ui/core/FormControl';
+import MenuItem from '@material-ui/core/MenuItem';
+
+import { listType, listTypeS } from '../constants/ConstList';
 
 export namespace MenuChar {
   export interface Props extends WithStyles<typeof styles> {
@@ -19,55 +22,46 @@ export namespace MenuChar {
 const styles = (theme: Theme) => createStyles({
   root: {
   },
-  textBody: {
-  },
-  button: {
-  },
-  textField: {
-    marginLeft: theme.spacing.unit,
-    marginRight: theme.spacing.unit,
+  formControl: {
+    margin: theme.spacing.unit,
+    minWidth: 120,
   },
 });
 
 class MenuChar extends React.Component<MenuChar.Props, MenuChar.State> {
   state = {
+    type: '',
   };
 
-  handleChar = () => {
-    console.log('FQ');
-  }
+  handleChange = (event: any) => {
+    this.setState({ [event.target.name]: event.target.value });
+  };
+
+  renderSelectType = (): JSX.Element => {
+    return (
+      <FormControl className={this.props.classes.formControl}>
+        <InputLabel htmlFor="select-type">武器種</InputLabel>
+          <Select
+            value={this.state.type}
+            onChange={this.handleChange}
+            inputProps={{
+              name: 'type',
+              id: 'select-type',
+            }}
+          >
+            {listType.reduce((output: any[], data: string, i: number) => {
+              output.push(<MenuItem value={listTypeS[i]}>{data}</MenuItem>);
+              return output;
+            },               [])}
+          </Select>
+        </FormControl>
+    );
+  };
 
   render(): JSX.Element {
     return (
       <div className={this.props.classes.root}>
-        <TextField
-          id="input-char"
-          label="城娘選擇"
-          className={this.props.classes.textField}
-          onClick={this.handleChar}
-          margin="normal"
-          variant="outlined"
-        />
-        <TextField
-          id="input-level"
-          label="城娘等級"
-          className={this.props.classes.textField}
-          value={1}
-          margin="normal"
-          variant="outlined"
-        />
-        <TextField
-          id="input-love"
-          label="絆"
-          className={this.props.classes.textField}
-          value={1}
-          margin="normal"
-          variant="outlined"
-        />
-        <Divider variant="middle" />
-        <MucText modelLabel={'耐久'} modelValue={1} />
-        <MucText modelLabel={'攻擊'} modelValue={1} />
-        <MucText modelLabel={'防禦'} modelValue={1} />
+        {this.renderSelectType()}
       </div>
     );
   }
