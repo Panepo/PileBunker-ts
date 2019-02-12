@@ -1,16 +1,13 @@
-export interface CalcInput {
-  column: string;
-  value: number | string;
-}
-
-export interface CalcState {
-  // 城娘設定頁面
+export interface CharInput {
   charType: string; // 武器種
   charLevel: number; // 城娘等級
   charAtkParm: number; // 城娘攻擊成長係數
+  charMax: string; // 城娘的巨大化等級
   charCompanion: number; // 城娘の伴
   charStructure: number; // 設施的攻擊力
+}
 
+export interface BuffInput {
   // バフ設定頁面
   buffAtkPercent: number; // バフ攻撃%
   buffAtkNumber: number; // バフ攻擊
@@ -19,7 +16,12 @@ export interface CalcState {
   buffDamageUp: number; // バフ与ダメ
   buffDirectUp: number; // バフ直撃ボーナス
   buffHitnumber: number; // バフ攻撃対象数
+  buffIgoreDef: number; // バフ無視防禦%
+  buffTerrain: boolean; // 地形適性有無
+  buffDirect: boolean; // 直擊有無
+}
 
+export interface EnemyInput {
   // 敵設定頁面
   enemyNumber: number; // 數目
   enemyHitpoint: number; // 體力
@@ -27,7 +29,38 @@ export interface CalcState {
   enemyDefPercent: number; // デバフ防御%
   enemyDefNumber: number; // デバフ防御
   enemyDamageUp: number; // デバフ被ダメ
+  enemyFly: boolean; // 飛行敵
+  enemyMonster: boolean; // 妖怪
+}
 
-  // 輸出
+export interface CalcState {
   output: LokiObj[];
+}
+
+// slotType: <[name cname frame1 frame2 range hp atk def hpM atkM defM]>
+export interface WeaponType {
+  name: string;
+  cname: string;
+  frame1: number;
+  frame2: number;
+  range: number;
+  hp: number;
+  atk: number;
+  def: number;
+  hpM: number;
+  atkM: number;
+  defM: number;
+}
+
+// slotWeapon: <[name type atk hit f1 f2 range rare text]>
+export interface WeaponInfo {
+  name: string;
+  type: string;
+  atk: number;
+  hit: number;
+  f1: number;
+  f2: number;
+  range: number;
+  rare: number;
+  text: string;
 }

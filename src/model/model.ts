@@ -1,16 +1,8 @@
-
-export interface Todo {
-  id: number;
-  text: string;
-  completed: boolean;
-}
-
 export enum ActionType {
-  ADD_TODO,
-  DELETE_TODO,
-  COMPLETE_TODO,
-  UNCOMPLETE_TODO,
-  INPUT_CHANGE,
+  CHAR_QUERY,
+  INPUT_CHAR_CHANGE,
+  INPUT_BUFF_CHANGE,
+  INPUT_ENEMY_CHANGE,
 }
 
 export interface Action<T> {
