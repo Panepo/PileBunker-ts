@@ -16,13 +16,17 @@ import { CharInput, BuffInput, EnemyInput, WeaponType, WeaponInfo } from '../mod
 //        INT(INT((1234-50)/1000*110+50)*1.10)=198
 
 export const calcAtk = (input: CharInput): number => {
-  const typeSelected: WeaponType = dbType.findOne({ name: input.charType });
-  const typeAtk: number = (typeSelected.atkM - typeSelected.atk) / 1000;
-  const comAtk: number = 1 + Math.floor(input.charCompanion / 10) / 100;
-  let charAtk: number = Math.floor(typeAtk * input.charLevel + typeSelected.atk);
-  charAtk = Math.floor((charAtk * input.charAtkParm) / 100);
-  charAtk = Math.floor(charAtk * comAtk);
-  return charAtk;
+  const typeSelected: WeaponType | null = dbType.findOne({ $loki: { $eq: { name: input.charType }}});
+
+  if (typeSelected) {
+    const typeAtk: number = (typeSelected.atkM - typeSelected.atk) / 1000;
+    const comAtk: number = 1 + Math.floor(input.charCompanion / 10) / 100;
+    let charAtk: number = Math.floor(typeAtk * input.charLevel + typeSelected.atk);
+    charAtk = Math.floor((charAtk * input.charAtkParm) / 100);
+    charAtk = Math.floor(charAtk * comAtk);
+    return charAtk;
+  }
+  return 0;
 };
 
 // ===============================================================================
@@ -40,10 +44,10 @@ export const calcAtk = (input: CharInput): number => {
 // 		攻撃・隙 速度上昇割合＝裝備上昇割合＋特技計略上昇割合
 // 		※計算結果は小數點以下四捨五入
 
-export const calcOutput = (charInput: CharInput, buffInput: BuffInput, enemyInput: EnemyInput): LokiObj[] => {
+export const calcOutput = (charInput: CharInput, buffInput: BuffInput, enemyInput: EnemyInput): WeaponInfo[] => {
   const weaponSelected: WeaponInfo[] = dbWeapon
     .chain()
-    .find({ type: charInput.charType })
+    .find({ $loki: { $eq: { name: charInput.charType }}})
     .data();
   let maxMux: number = 1;
   let paraMux: number = 1;
@@ -119,44 +123,47 @@ export const calcOutput = (charInput: CharInput, buffInput: BuffInput, enemyInpu
   // ===============================================================
   // ダメージ計算
   weaponSelected.map(data => {
-    let totalAtk;
+    let totalAtk: number = 0;
+    let paraMuxTemp: number = paraMux;
 
-    if (parameters.weaponAntiFly.includes(data.name) && input.fly === 'fly') {
-      let paraMuxTemp = paraMux * 1.5;
-      totalAtk =
-        ((charAtk + data.atk) * maxMux * (1 + input.skillAtkUp / 100) +
-          input.skillAtkUpInt) *
-        paraMuxTemp;
-    } else if (
-      input.cannon === 'cannon' &&
-      input.type === 'hammer' &&
-      parameters.weaponAtkUp.includes(data.name)
-    ) {
-      let paraMuxTemp = paraMux * (1 + parameters.weaponAtkUpValue / 100);
-      totalAtk =
-        ((charAtk + data.atk) * maxMux * (1 + input.skillAtkUp / 100) +
-          input.skillAtkUpInt) *
-        paraMuxTemp;
-    } else {
-      totalAtk =
-        ((charAtk + data.atk) * maxMux * (1 + input.skillAtkUp / 100) +
-          input.skillAtkUpInt) *
-        paraMux;
+    // ===============================================================
+    // 飛行敵に対する特殊武器攻撃力ボーナス
+    if (enemyInput.enemyFly) {
+      for (let i = 0; i < parameters.weaponAntiFly.length; i += 1) {
+        if (parameters.weaponAntiFly[i] === data.name) {
+          paraMuxTemp *= 1.5;
+        }
+      }
     }
+
+    // ===============================================================
+    // 直擊に対する特殊武器攻撃力ボーナス
+    if (charInput.charType === 'hammer' && buffInput.buffDirect) {
+      for (let i = 0; i < parameters.weaponAtkUp.length; i += 1) {
+        if (parameters.weaponAtkUp[i] === data.name) {
+          paraMuxTemp *= (1 + parameters.weaponAtkUpValue / 100);
+        }
+      }
+    }
+
+    totalAtk =
+      ((charAtk + data.atk) * maxMux * (1 + buffInput.buffAtkPercent / 100) +
+      buffInput.buffAtkNumber) *
+      paraMuxTemp;
 
     data.damage = calcDam(
       totalAtk,
       totalDef,
       data.name,
-      input.skillDamUp,
-      input.skillRecDamUp
+      buffInput.buffDamageUp,
+      enemyInput.enemyDamageUp
     );
 
-    data.frame1 = Math.round(data.f1 / (1 + input.skillSpdUpF / 100));
-    if (input.skillSpdUpB >= parameters.maxskillSpdUpB) {
+    data.frame1 = Math.round(data.f1 / (1 + buffInput.buffSpeedPre / 100));
+    if (buffInput.buffSpeedPost >= parameters.maxskillSpdUpB) {
       data.frame2 = 0;
     } else {
-      data.frame2 = Math.round(data.f2 * (1 - input.skillSpdUpB / 100));
+      data.frame2 = Math.round(data.f2 * (1 - buffInput.buffSpeedPost / 100));
     }
     data.dps =
       Math.floor(

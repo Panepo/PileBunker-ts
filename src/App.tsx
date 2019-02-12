@@ -1,9 +1,7 @@
 import * as React from 'react';
-import { connect } from 'react-redux';
 import { Route, RouteComponentProps } from 'react-router';
 import { history } from './configureStore';
 import { ConnectedRouter } from 'connected-react-router';
-import { RootState } from './reducers/index';
 
 import Header from './index/Header';
 import Ribbon from './index/Ribbon';
@@ -58,10 +56,4 @@ class App extends React.Component<App.Props> {
   }
 }
 
-function mapStateToProps(state: RootState) {
-    return {
-        todoList: state.todoList
-    };
-}
-
-export default withRoot(withStyles(styles)(connect(mapStateToProps)(withWidth()(App))));
+export default withRoot(withStyles(styles)(withWidth()(App)));

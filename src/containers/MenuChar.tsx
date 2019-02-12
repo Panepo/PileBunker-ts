@@ -1,9 +1,13 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import * as TodoActions from '../actions/todo';
-// import { Todo } from '../model/model';
+
+import { QueryInput, CharInfo } from '../model/modelQuery';
+import { CharInput } from '../model/modelCalc';
+import * as ActionsQuery from '../actions/actionQuery';
+import * as ActionsCalc from '../actions/actionCalc';
 import { RootState } from '../reducers/index';
+
 import { createStyles, Theme, WithStyles, withStyles } from '@material-ui/core';
 import InputLabel from '@material-ui/core/InputLabel';
 import Select from '@material-ui/core/Select';
@@ -14,8 +18,13 @@ import { listType, listTypeS } from '../constants/ConstList';
 
 export namespace MenuChar {
   export interface Props extends WithStyles<typeof styles> {
+    actionsQ: typeof ActionsQuery;
+    actionsC: typeof ActionsCalc;
+    charInfo: CharInfo[];
+    charInput: CharInput;
   }
   export interface State {
+    queryInput: QueryInput;
   }
 }
 
@@ -30,11 +39,12 @@ const styles = (theme: Theme) => createStyles({
 
 class MenuChar extends React.Component<MenuChar.Props, MenuChar.State> {
   state = {
-    type: '',
+    queryInput: { type: 'bell', plain: 2, rarity: 8 },
   };
 
-  handleChange = (event: any) => {
-    this.setState({ [event.target.name]: event.target.value });
+  handleChange = (name: string) => (event: any) => {
+    this.props.actionsC.charInput({...this.props.charInput, charType: event.target.value });
+    this.setState({ queryInput: { ...this.state.queryInput, type: event.target.value } });
   };
 
   renderSelectType = (): JSX.Element => {
@@ -42,15 +52,15 @@ class MenuChar extends React.Component<MenuChar.Props, MenuChar.State> {
       <FormControl className={this.props.classes.formControl}>
         <InputLabel htmlFor="select-type">武器種</InputLabel>
           <Select
-            value={this.state.type}
-            onChange={this.handleChange}
+            value={this.props.charInput.charType}
+            onChange={this.handleChange('charType')}
             inputProps={{
-              name: 'type',
-              id: 'select-type',
+              name: 'charType',
+              id: 'select-charType',
             }}
           >
             {listType.reduce((output: any[], data: string, i: number) => {
-              output.push(<MenuItem value={listTypeS[i]}>{data}</MenuItem>);
+              output.push(<MenuItem key={'select-charType' + i.toString()} value={listTypeS[i]}>{data}</MenuItem>);
               return output;
             },               [])}
           </Select>
@@ -69,13 +79,15 @@ class MenuChar extends React.Component<MenuChar.Props, MenuChar.State> {
 
 function mapStateToProps(state: RootState) {
   return {
-    todoList: state.todoList
+    charInfo: state.reducerQuery.output,
+    charInput: state.reducerCalc.charInput
   };
 }
 
 function mapDispatchToProps(dispatch: any) {
   return {
-    actions: bindActionCreators(TodoActions as any, dispatch)
+    actionsQ: bindActionCreators(ActionsQuery as any, dispatch),
+    actionsC: bindActionCreators(ActionsCalc as any, dispatch)
   };
 }
 

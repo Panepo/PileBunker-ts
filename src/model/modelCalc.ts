@@ -34,7 +34,10 @@ export interface EnemyInput {
 }
 
 export interface CalcState {
-  output: LokiObj[];
+  charInput: CharInput;
+  buffInput: BuffInput;
+  enemyInput: EnemyInput;
+  output: WeaponInfo[];
 }
 
 // slotType: <[name cname frame1 frame2 range hp atk def hpM atkM defM]>
@@ -63,4 +66,11 @@ export interface WeaponInfo {
   range: number;
   rare: number;
   text: string;
+
+  damage: number;
+  frame1: number;
+  frame2: number;
+  dps: number;
+  ref: number;
+  refText: string;
 }

@@ -1,11 +1,12 @@
 import { dbChar } from './database';
 import * as dbQuery from './dbQuery';
 import { QueryInput } from '../model/modelQuery';
+import { CharInfo } from '../model/modelQuery';
 
 it('Query character from database', () => {
   const input: QueryInput = { type: 'bell', plain: 2, rarity: 8 };
 
-  const anwser: LokiObj[] = dbChar.chain()
+  const anwser: CharInfo[] = dbChar.chain()
     .find({
       $and: [
         { weapon: 'bell' },

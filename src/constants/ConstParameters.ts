@@ -1,4 +1,4 @@
-export const defaultLevel: = 50; // define the default level
+export const defaultLevel = 50; // define the default level
 export const defaultHPParm = 100; // define the default hp parameter
 export const defaultAtkParm = 100; // define the default atk parameter
 export const defaultDefParm = 100; // define the default def parameter

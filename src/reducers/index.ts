@@ -2,14 +2,18 @@
 import { connectRouter } from 'connected-react-router';
 import { History } from 'history';
 import { combineReducers } from 'redux';
-import { Todo } from '../model/model';
-import * as todoReducder from './todo';
+import * as reducerCalc from './reducerCalc';
+import * as reducerQuery from './reducerQuery';
+import { QueryState } from '../model/modelQuery';
+import { CalcState } from '../model/modelCalc';
 
 export interface RootState {
-  todoList: Array<Todo>;
+  reducerQuery: QueryState;
+  reducerCalc: CalcState;
 }
 
 export default (history: History) => combineReducers({
   router: connectRouter(history),
-  ...todoReducder
+  ...reducerQuery,
+  ...reducerCalc
 });
