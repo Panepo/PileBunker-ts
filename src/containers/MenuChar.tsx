@@ -13,8 +13,16 @@ import InputLabel from '@material-ui/core/InputLabel';
 import Select from '@material-ui/core/Select';
 import FormControl from '@material-ui/core/FormControl';
 import MenuItem from '@material-ui/core/MenuItem';
+import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
 
-import { listType, listTypeS } from '../constants/ConstList';
+import { listType, listTypeS, listBut, listButS } from '../constants/ConstList';
+import { imageData } from '../images/index';
 
 export namespace MenuChar {
   export interface Props extends WithStyles<typeof styles> {
@@ -25,6 +33,7 @@ export namespace MenuChar {
   }
   export interface State {
     queryInput: QueryInput;
+    statusDialog: boolean;
   }
 }
 
@@ -33,19 +42,52 @@ const styles = (theme: Theme) => createStyles({
   },
   formControl: {
     margin: theme.spacing.unit,
-    minWidth: 120,
+    width: 120,
   },
+  typeImage: {
+    width: 15,
+    height: 15,
+    marginRight: theme.spacing.unit,
+  }
 });
 
 class MenuChar extends React.Component<MenuChar.Props, MenuChar.State> {
   state = {
     queryInput: { type: 'bell', plain: 2, rarity: 8 },
+    statusDialog: false,
   };
 
   handleChange = (name: string) => (event: any) => {
-    this.props.actionsC.charInput({...this.props.charInput, charType: event.target.value });
-    this.setState({ queryInput: { ...this.state.queryInput, type: event.target.value } });
+    switch (name) {
+      case 'charType': {
+        this.props.actionsC.charInput({...this.props.charInput, charType: event.target.value });
+        this.setState({ queryInput: { ...this.state.queryInput, type: event.target.value } });
+        break;
+      }
+      case 'charLevel': {
+        this.props.actionsC.charInput({...this.props.charInput, charLevel: event.target.value });
+        break;
+      }
+      case 'charMax': {
+        this.props.actionsC.charInput({...this.props.charInput, charMax: event.target.value });
+        break;
+      }
+      case 'charCompanion': {
+        this.props.actionsC.charInput({...this.props.charInput, charCompanion: event.target.value });
+        break;
+      }
+      case 'charStructure': {
+        this.props.actionsC.charInput({...this.props.charInput, charStructure: event.target.value });
+        break;
+      }
+      default: {
+      }
+    }
   };
+
+  handleSelectChar = (status: boolean) => () => {
+    this.setState({ statusDialog: status});
+  }
 
   renderSelectType = (): JSX.Element => {
     return (
@@ -60,7 +102,12 @@ class MenuChar extends React.Component<MenuChar.Props, MenuChar.State> {
             }}
           >
             {listType.reduce((output: any[], data: string, i: number) => {
-              output.push(<MenuItem key={'select-charType' + i.toString()} value={listTypeS[i]}>{data}</MenuItem>);
+              output.push(
+                <MenuItem key={'select-charType' + i.toString()} value={listTypeS[i]}>
+                  <img className={this.props.classes.typeImage} src={imageData[listTypeS[i]]} alt={listTypeS[i]} />
+                  {data}
+                </MenuItem>
+                );
               return output;
             },               [])}
           </Select>
@@ -68,10 +115,120 @@ class MenuChar extends React.Component<MenuChar.Props, MenuChar.State> {
     );
   };
 
+  renderSelectLevel = (): JSX.Element => {
+    return (
+      <TextField
+        id="select-charLevel"
+        label="城娘等級"
+        className={this.props.classes.formControl}
+        value={this.props.charInput.charLevel}
+        onChange={this.handleChange('charLevel')}
+        margin="normal"
+      />
+    );
+  };
+
+  renderSelectAtkParm = (): JSX.Element => {
+    return (
+      <TextField
+        id="select-charAtkParm"
+        label="攻擊成長係數"
+        className={this.props.classes.formControl}
+        value={this.props.charInput.charAtkParm}
+        onClick={this.handleSelectChar(true)}
+        margin="normal"
+      />
+    );
+  };
+
+  renderSelectDialog = (): JSX.Element => {
+    return (
+      <Dialog
+        open={this.state.statusDialog}
+        onClose={this.handleSelectChar(false)}
+        aria-labelledby="select-dialog-title"
+        aria-describedby="select-dialog-description"
+      >
+        <DialogTitle id="select-dialog-title">{'Use Google\'s location service?'}</DialogTitle>
+        <DialogContent>
+          <DialogContentText id="select-dialog-description">
+            Let Google help apps determine location. This means sending anonymous location data to
+            Google, even when no apps are running.
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={this.handleSelectChar(false)} color="primary">
+            Disagree
+          </Button>
+          <Button onClick={this.handleSelectChar(false)} color="primary" autoFocus>
+            Agree
+          </Button>
+        </DialogActions>
+      </Dialog>
+    );
+  }
+
+  renderSelecMax = (): JSX.Element => {
+    return (
+      <FormControl className={this.props.classes.formControl}>
+        <InputLabel htmlFor="select-type">巨大化</InputLabel>
+        <Select
+          value={this.props.charInput.charMax}
+          onChange={this.handleChange('charMax')}
+          inputProps={{
+            name: 'charMax',
+            id: 'select-charMax',
+          }}
+        >
+          {listBut.reduce((output: any[], data: string, i: number) => {
+            output.push(
+              <MenuItem key={'select-charType' + i.toString()} value={listButS[i]}>
+                {data}
+              </MenuItem>
+              );
+            return output;
+          },              [])}
+        </Select>
+      </FormControl>
+    );
+  };
+
+  renderSelectCompanion = (): JSX.Element => {
+    return (
+      <TextField
+        id="select-charCompanion"
+        label="伴"
+        className={this.props.classes.formControl}
+        value={this.props.charInput.charCompanion}
+        onChange={this.handleChange('charCompanion')}
+        margin="normal"
+      />
+    );
+  };
+
+  renderSelectStructure = (): JSX.Element => {
+    return (
+      <TextField
+        id="select-charStructure"
+        label="設施攻擊"
+        className={this.props.classes.formControl}
+        value={this.props.charInput.charStructure}
+        onChange={this.handleChange('charStructure')}
+        margin="normal"
+      />
+    );
+  };
+
   render(): JSX.Element {
     return (
       <div className={this.props.classes.root}>
         {this.renderSelectType()}
+        {this.renderSelectLevel()}
+        {this.renderSelectAtkParm()}
+        {this.renderSelectDialog()}
+        {this.renderSelecMax()}
+        {this.renderSelectCompanion()}
+        {this.renderSelectStructure()}
       </div>
     );
   }
