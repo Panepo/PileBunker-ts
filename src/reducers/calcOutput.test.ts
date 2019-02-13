@@ -22,7 +22,7 @@ it('Calculate character attack for lv50 龜居城', () => {
     charCompanion: 100,
     charStructure: 0,
    };
-  expect(calc.calcAtk(input)).toEqual(138);
+  expect(calc.calcAtk(input)).toEqual(126);
 });
 
 it('Calculate character attack for lv125 プラハ城[改壱]', () => {

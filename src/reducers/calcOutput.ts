@@ -16,17 +16,17 @@ import { CharInput, BuffInput, EnemyInput, WeaponType, WeaponInfo } from '../mod
 //        INT(INT((1234-50)/1000*110+50)*1.10)=198
 
 export const calcAtk = (input: CharInput): number => {
-  const typeSelected: WeaponType | null = dbType.findOne({ $loki: { $eq: { name: input.charType }}});
+  const typeSelected: WeaponType[] = dbType
+    .chain()
+    .find({ $and: [{ name: input.charType }, { name: input.charType }]})
+    .data();
 
-  if (typeSelected) {
-    const typeAtk: number = (typeSelected.atkM - typeSelected.atk) / 1000;
-    const comAtk: number = 1 + Math.floor(input.charCompanion / 10) / 100;
-    let charAtk: number = Math.floor(typeAtk * input.charLevel + typeSelected.atk);
-    charAtk = Math.floor((charAtk * input.charAtkParm) / 100);
-    charAtk = Math.floor(charAtk * comAtk);
-    return charAtk;
-  }
-  return 0;
+  const typeAtk: number = (typeSelected[0].atkM - typeSelected[0].atk) / 1000;
+  const comAtk: number = 1 + Math.floor(input.charCompanion / 10) / 100;
+  let charAtk: number = Math.floor(typeAtk * input.charLevel + typeSelected[0].atk);
+  charAtk = Math.floor((charAtk * input.charAtkParm) / 100);
+  charAtk = Math.floor(charAtk * comAtk);
+  return charAtk;
 };
 
 // ===============================================================================
@@ -47,7 +47,7 @@ export const calcAtk = (input: CharInput): number => {
 export const calcOutput = (charInput: CharInput, buffInput: BuffInput, enemyInput: EnemyInput): WeaponInfo[] => {
   const weaponSelected: WeaponInfo[] = dbWeapon
     .chain()
-    .find({ $loki: { $eq: { name: charInput.charType }}})
+    .find({ $loki: { $containsString: { name: charInput.charType }}})
     .data();
   let maxMux: number = 1;
   let paraMux: number = 1;

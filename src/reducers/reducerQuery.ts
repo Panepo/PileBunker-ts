@@ -4,11 +4,12 @@ import { QueryInput, QueryState } from '../model/modelQuery';
 import { queryChar } from '../raw/dbQuery';
 
 const initialState: QueryState = {
-  output: queryChar({ type: 'sword', plain: 15, rarity: 64 }),
+  input: { type: 'sword', plain: 15, rarity: 192 },
+  output: queryChar({ type: 'sword', plain: 15, rarity: 192 }),
 };
 
 export const reducerQuery = createReducer(initialState, {
   [ActionType.CHAR_QUERY](state: QueryState, action: Action<QueryInput>) {
-    return { output: queryChar(action.payload) };
+    return { ...state, input: action.payload, output: queryChar(action.payload) };
   },
 });

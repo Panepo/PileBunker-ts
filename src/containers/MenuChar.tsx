@@ -2,24 +2,21 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-import { QueryInput, CharInfo } from '../model/modelQuery';
 import { CharInput } from '../model/modelCalc';
+import { QueryInput, CharInfo } from '../model/modelQuery';
 import * as ActionsQuery from '../actions/actionQuery';
 import * as ActionsCalc from '../actions/actionCalc';
 import { RootState } from '../reducers/index';
 
 import { createStyles, Theme, WithStyles, withStyles } from '@material-ui/core';
+
+// import MenuQuery from '../components/MenuQuery';
+
 import InputLabel from '@material-ui/core/InputLabel';
 import Select from '@material-ui/core/Select';
 import FormControl from '@material-ui/core/FormControl';
 import MenuItem from '@material-ui/core/MenuItem';
 import TextField from '@material-ui/core/TextField';
-import Button from '@material-ui/core/Button';
-import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
-import DialogTitle from '@material-ui/core/DialogTitle';
 
 import { listType, listTypeS, listBut, listButS } from '../constants/ConstList';
 import { imageData } from '../images/index';
@@ -28,11 +25,11 @@ export namespace MenuChar {
   export interface Props extends WithStyles<typeof styles> {
     actionsQ: typeof ActionsQuery;
     actionsC: typeof ActionsCalc;
-    charInfo: CharInfo[];
     charInput: CharInput;
+    charQuery: QueryInput;
+    charInfo: CharInfo[];
   }
   export interface State {
-    queryInput: QueryInput;
     statusDialog: boolean;
   }
 }
@@ -53,15 +50,14 @@ const styles = (theme: Theme) => createStyles({
 
 class MenuChar extends React.Component<MenuChar.Props, MenuChar.State> {
   state = {
-    queryInput: { type: 'bell', plain: 2, rarity: 8 },
     statusDialog: false,
   };
 
   handleChange = (name: string) => (event: any) => {
     switch (name) {
       case 'charType': {
+        this.props.actionsQ.charQuery({...this.props.charQuery, type: event.target.value });
         this.props.actionsC.charInput({...this.props.charInput, charType: event.target.value });
-        this.setState({ queryInput: { ...this.state.queryInput, type: event.target.value } });
         break;
       }
       case 'charLevel': {
@@ -80,13 +76,20 @@ class MenuChar extends React.Component<MenuChar.Props, MenuChar.State> {
         this.props.actionsC.charInput({...this.props.charInput, charStructure: event.target.value });
         break;
       }
-      default: {
-      }
+      default: {}
     }
   };
 
   handleSelectChar = (status: boolean) => () => {
     this.setState({ statusDialog: status});
+  }
+
+  handleCharOpen = () => {
+    this.setState({ statusDialog: true});
+  }
+
+  handleCharClose = () => {
+    this.setState({ statusDialog: false});
   }
 
   renderSelectType = (): JSX.Element => {
@@ -135,38 +138,23 @@ class MenuChar extends React.Component<MenuChar.Props, MenuChar.State> {
         label="攻擊成長係數"
         className={this.props.classes.formControl}
         value={this.props.charInput.charAtkParm}
-        onClick={this.handleSelectChar(true)}
+        onClick={this.handleCharOpen}
         margin="normal"
       />
     );
   };
 
-  renderSelectDialog = (): JSX.Element => {
+  /* renderSelectDialog = (): JSX.Element => {
     return (
-      <Dialog
-        open={this.state.statusDialog}
-        onClose={this.handleSelectChar(false)}
-        aria-labelledby="select-dialog-title"
-        aria-describedby="select-dialog-description"
-      >
-        <DialogTitle id="select-dialog-title">{'Use Google\'s location service?'}</DialogTitle>
-        <DialogContent>
-          <DialogContentText id="select-dialog-description">
-            Let Google help apps determine location. This means sending anonymous location data to
-            Google, even when no apps are running.
-          </DialogContentText>
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={this.handleSelectChar(false)} color="primary">
-            Disagree
-          </Button>
-          <Button onClick={this.handleSelectChar(false)} color="primary" autoFocus>
-            Agree
-          </Button>
-        </DialogActions>
-      </Dialog>
+      <MenuQuery
+        statusDialog={this.state.statusDialog}
+        statusFunction={this.handleCharClose}
+        charInfo={this.props.charInfo}
+        charInput={this.props.charInput}
+        charQuery={this.props.charQuery}
+        />
     );
-  }
+  } */
 
   renderSelecMax = (): JSX.Element => {
     return (
@@ -225,7 +213,6 @@ class MenuChar extends React.Component<MenuChar.Props, MenuChar.State> {
         {this.renderSelectType()}
         {this.renderSelectLevel()}
         {this.renderSelectAtkParm()}
-        {this.renderSelectDialog()}
         {this.renderSelecMax()}
         {this.renderSelectCompanion()}
         {this.renderSelectStructure()}
@@ -235,7 +222,9 @@ class MenuChar extends React.Component<MenuChar.Props, MenuChar.State> {
 }
 
 function mapStateToProps(state: RootState) {
+  console.log(state);
   return {
+    charQuery: state.reducerQuery.input,
     charInfo: state.reducerQuery.output,
     charInput: state.reducerCalc.charInput
   };

@@ -5,6 +5,7 @@ export interface QueryInput {
 }
 
 export interface QueryState {
+  input: QueryInput;
   output: CharInfo[];
 }
 
