@@ -3,14 +3,14 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 import { CharInput } from '../model/modelCalc';
-import { QueryInput, CharInfo } from '../model/modelQuery';
+import { QueryInput } from '../model/modelQuery';
 import * as ActionsQuery from '../actions/actionQuery';
 import * as ActionsCalc from '../actions/actionCalc';
 import { RootState } from '../reducers/index';
 
 import { createStyles, Theme, WithStyles, withStyles } from '@material-ui/core';
 
-// import MenuQuery from '../components/MenuQuery';
+import MenuQuery from './MenuQuery';
 
 import InputLabel from '@material-ui/core/InputLabel';
 import Select from '@material-ui/core/Select';
@@ -27,7 +27,6 @@ export namespace MenuChar {
     actionsC: typeof ActionsCalc;
     charInput: CharInput;
     charQuery: QueryInput;
-    charInfo: CharInfo[];
   }
   export interface State {
     statusDialog: boolean;
@@ -144,17 +143,14 @@ class MenuChar extends React.Component<MenuChar.Props, MenuChar.State> {
     );
   };
 
-  /* renderSelectDialog = (): JSX.Element => {
+  renderSelectDialog = (): JSX.Element => {
     return (
       <MenuQuery
         statusDialog={this.state.statusDialog}
         statusFunction={this.handleCharClose}
-        charInfo={this.props.charInfo}
-        charInput={this.props.charInput}
-        charQuery={this.props.charQuery}
         />
     );
-  } */
+  }
 
   renderSelecMax = (): JSX.Element => {
     return (
@@ -213,6 +209,7 @@ class MenuChar extends React.Component<MenuChar.Props, MenuChar.State> {
         {this.renderSelectType()}
         {this.renderSelectLevel()}
         {this.renderSelectAtkParm()}
+        {this.renderSelectDialog()}
         {this.renderSelecMax()}
         {this.renderSelectCompanion()}
         {this.renderSelectStructure()}
@@ -222,10 +219,8 @@ class MenuChar extends React.Component<MenuChar.Props, MenuChar.State> {
 }
 
 function mapStateToProps(state: RootState) {
-  console.log(state);
   return {
     charQuery: state.reducerQuery.input,
-    charInfo: state.reducerQuery.output,
     charInput: state.reducerCalc.charInput
   };
 }
