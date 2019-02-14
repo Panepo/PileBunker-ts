@@ -7,6 +7,7 @@ import * as ActionsQuery from '../actions/actionQuery';
 import * as ActionsCalc from '../actions/actionCalc';
 import { RootState } from '../reducers/index';
 import { createStyles, Theme, WithStyles, withStyles } from '@material-ui/core';
+import TableChar from './TableChar';
 import MucToggleButton from '../components/MucToggleButton';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
@@ -184,6 +185,7 @@ class MenuQuery extends React.Component<MenuQuery.Props> {
             {this.renderSelectRarity()}
           </DialogContentText>
         </DialogContent>
+        <TableChar />
         <DialogActions>
           <Button onClick={this.props.statusFunction} color="primary">
             Disagree

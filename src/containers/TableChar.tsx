@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { CharInput } from '../model/modelCalc';
 import { CharInfo } from '../model/modelQuery';
-import * as ActionsQuery from '../actions/actionQuery';
 import * as ActionsCalc from '../actions/actionCalc';
 import { RootState } from '../reducers/index';
 import { createStyles, Theme, WithStyles, withStyles } from '@material-ui/core';
@@ -14,7 +13,6 @@ import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import Checkbox from '@material-ui/core/Checkbox';
-// import { tableCharHead, tableCharInd } from '../constants/ConstList';
 
 import MucTableHead from '../components/MucTableHead';
 import { stableSort, getSorting } from './TableFunc';
@@ -46,18 +44,22 @@ const styles = (theme: Theme) => createStyles({
   },
   tableWrapper: {
     overflowX: 'auto',
-},
+  },
 });
 
 class TableChar extends React.Component<TableChar.Props, TableChar.State> {
   state = {
-    data: [],
-    order: 'asc',
-    orderBy: 'calories',
-    selected: [],
+    order: 'desc' as 'asc' | 'desc',
+    orderBy: 'rarity',
+    selected: [] as number[],
+    data: this.props.charInfo,
     page: 0,
     rowsPerPage: 5,
   };
+
+  static getDerivedStateFromProps(nextProps: Readonly<TableChar.Props>) {
+    return { data: nextProps.charInfo };
+  }
 
   handleRequestSort = (event: any, property: string) => {
     const orderBy = property;
@@ -78,9 +80,9 @@ class TableChar extends React.Component<TableChar.Props, TableChar.State> {
     this.setState({ selected: [] });
   };
 
-  handleClick = (event: any, id: never) => {
+  handleClick = (event: any, id: number) => {
     const { selected } = this.state;
-    const selectedIndex = selected.indexOf(id);
+    const selectedIndex: number = selected.indexOf(id);
     let newSelected: number[] = [];
 
     if (selectedIndex === -1) {
@@ -107,7 +109,7 @@ class TableChar extends React.Component<TableChar.Props, TableChar.State> {
     this.setState({ rowsPerPage: event.target.value });
   };
 
-  isSelected = (id: never) => this.state.selected.indexOf(id) !== -1;
+  isSelected = (id: number) => this.state.selected.indexOf(id) !== -1;
 
   render() {
     const { classes } = this.props;
@@ -130,7 +132,7 @@ class TableChar extends React.Component<TableChar.Props, TableChar.State> {
             <TableBody>
               {stableSort(data, getSorting(order, orderBy))
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                .map(n => {
+                .map((n: CharInfo) => {
                   const isSelected = this.isSelected(n.id);
                   return (
                     <TableRow
@@ -148,10 +150,13 @@ class TableChar extends React.Component<TableChar.Props, TableChar.State> {
                       <TableCell component="th" scope="row" padding="none">
                         {n.name}
                       </TableCell>
-                      <TableCell align="right">{n.calories}</TableCell>
-                      <TableCell align="right">{n.fat}</TableCell>
-                      <TableCell align="right">{n.carbs}</TableCell>
-                      <TableCell align="right">{n.protein}</TableCell>
+                      <TableCell align="left">{n.weapon}</TableCell>
+                      <TableCell align="left">{n.rarity}</TableCell>
+                      <TableCell align="left">{n.plain}</TableCell>
+                      <TableCell align="right">{n.hpF}</TableCell>
+                      <TableCell align="right">{n.atF}</TableCell>
+                      <TableCell align="right">{n.dfF}</TableCell>
+                      <TableCell align="right">{n.totF}</TableCell>
                     </TableRow>
                   );
                 })}
@@ -185,14 +190,13 @@ class TableChar extends React.Component<TableChar.Props, TableChar.State> {
 
 function mapStateToProps(state: RootState) {
   return {
-    charQuery: state.reducerQuery.input,
+    charInfo: state.reducerQuery.output,
     charInput: state.reducerCalc.charInput
   };
 }
 
 function mapDispatchToProps(dispatch: any) {
   return {
-    actionsQ: bindActionCreators(ActionsQuery as any, dispatch),
     actionsC: bindActionCreators(ActionsCalc as any, dispatch)
   };
 }

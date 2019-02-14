@@ -16,13 +16,13 @@ for weapon, i in weapons.data
       outWeapon[i][slotValue] = weapon[j]
 
 for weapon, i in outWeapon
+  weapon.id = i
   weapon.ref = 0
   weapon.refText = '+0'
   weapon.damage = 0
   weapon.frame1 = 0
   weapon.frame2 = 0
   weapon.dps = 0
-
 
 outWeapon = JSON.stringify outWeapon
 console.log 'weapons.json arrange complete!'
@@ -51,6 +51,9 @@ for char, i in chars.data
   for slotValue, j in chars.slotChar
     if slotValue !== 'X'
       outChar[i][slotValue] = char[j]
+
+for char, i in outChar
+  char.id = i
 
 outChar = JSON.stringify outChar
 console.log 'chars.json arrange complete!'
