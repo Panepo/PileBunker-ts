@@ -67,6 +67,7 @@ export interface WeaponInfo {
   rare: number;
   text: string;
 
+  id: number;
   damage: number;
   frame1: number;
   frame2: number;

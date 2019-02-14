@@ -1,23 +1,18 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-
 import { CharInput } from '../model/modelCalc';
 import { QueryInput } from '../model/modelQuery';
 import * as ActionsQuery from '../actions/actionQuery';
 import * as ActionsCalc from '../actions/actionCalc';
 import { RootState } from '../reducers/index';
-
 import { createStyles, Theme, WithStyles, withStyles } from '@material-ui/core';
-
 import MenuQuery from './MenuQuery';
-
 import InputLabel from '@material-ui/core/InputLabel';
 import Select from '@material-ui/core/Select';
 import FormControl from '@material-ui/core/FormControl';
 import MenuItem from '@material-ui/core/MenuItem';
 import TextField from '@material-ui/core/TextField';
-
 import { listType, listTypeS, listBut, listButS } from '../constants/ConstList';
 import { imageData } from '../images/index';
 
@@ -78,10 +73,6 @@ class MenuChar extends React.Component<MenuChar.Props, MenuChar.State> {
       default: {}
     }
   };
-
-  handleSelectChar = (status: boolean) => () => {
-    this.setState({ statusDialog: status});
-  }
 
   handleCharOpen = () => {
     this.setState({ statusDialog: true});

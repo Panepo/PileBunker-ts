@@ -11,6 +11,7 @@ export interface QueryState {
 
 // slotChar: <[name weapon rarity plain hpF atF dfF totF]>
 export interface CharInfo {
+  id: number;
   name: string;
   weapon: string;
   rarity: string;
