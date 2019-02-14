@@ -4,11 +4,6 @@ export interface QueryInput {
   rarity: number;
 }
 
-export interface QuerySelector {
-  selector: string;
-  value: string;
-}
-
 export interface QueryState {
   input: QueryInput;
   output: CharInfo[];

@@ -19,8 +19,7 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Button from '@material-ui/core/Button';
 
-import { listType, listTypeS, listPlain, listPlainS } from '../constants/ConstList';
-// import { imageData } from '../images/index';
+import { listType, listTypeS, listPlain, listPlainS, listRarityS, listRarityQ } from '../constants/ConstList';
 
 export namespace MenuQuery {
   export interface Props extends WithStyles<typeof styles> {
@@ -47,14 +46,12 @@ const styles = (theme: Theme) => createStyles({
 });
 
 class MenuQuery extends React.Component<MenuQuery.Props> {
-  handleType = (modelId: string) => (event: any) => {
-    console.log('FQ');
-    console.log(modelId);
-  }
-
-  handleTerrain = (modelId: string) => (event: any) => {
-    console.log('FQQ');
-    console.log(modelId);
+  // ================================================================================
+  // Render select character type
+  // ================================================================================
+  handleType = (modelId: string) => {
+    this.props.actionsQ.charQuery({...this.props.charQuery, type: modelId });
+    this.props.actionsC.charInput({...this.props.charInput, charType: modelId });
   }
 
   renderSelectType = () => {
@@ -75,7 +72,7 @@ class MenuQuery extends React.Component<MenuQuery.Props> {
               modelId={listTypeS[i]}
               modelTitle={data}
               modelFunction={
-                modelId => {this.props.actionsQ.charQueryInput({selector: 'type', value: modelId}); }}
+                modelId => {this.handleType(modelId); }}
             />
           );
           return output;
@@ -84,6 +81,22 @@ class MenuQuery extends React.Component<MenuQuery.Props> {
         )}
       </div>);
   };
+
+  // ================================================================================
+  // Render select character terrain
+  // ================================================================================
+  handleTerrain = (modelId: string) => {
+    let plainTemp = this.props.charQuery.plain;
+    // tslint:disable-next-line:no-bitwise
+    if (plainTemp & +modelId) {
+      // tslint:disable-next-line:no-bitwise
+      plainTemp ^= +modelId;
+    } else {
+      // tslint:disable-next-line:no-bitwise
+      plainTemp |= +modelId;
+    }
+    this.props.actionsQ.charQuery({...this.props.charQuery, plain: plainTemp });
+  }
 
   renderSelectTerrain = () => {
     const plainTemp = (
@@ -114,6 +127,51 @@ class MenuQuery extends React.Component<MenuQuery.Props> {
       );
   }
 
+  // ================================================================================
+  // Render select character rarity
+  // ================================================================================
+  handleRarity = (modelId: string) => {
+    let rarityTemp = this.props.charQuery.rarity;
+    // tslint:disable-next-line:no-bitwise
+    if (rarityTemp & +modelId) {
+      // tslint:disable-next-line:no-bitwise
+      rarityTemp ^= +modelId;
+    } else {
+      // tslint:disable-next-line:no-bitwise
+      rarityTemp |= +modelId;
+    }
+    this.props.actionsQ.charQuery({...this.props.charQuery, rarity: rarityTemp });
+  }
+
+  renderSelectRarity = () => {
+    const rarityTemp = (
+      <label key={'indexButton_rarity'} htmlFor="indexPlain">
+        稀有度：
+      </label>
+    );
+
+    return (
+      <div>
+        {listRarityQ.reduce((output: any[], data: string, i: number) => {
+          output.push(
+            <MucToggleButton
+              key={'select_rarity_' + i.toString()}
+              modelKey={'select_rarity_' + i.toString()}
+              // tslint:disable-next-line:no-bitwise
+              modelSwitch={(this.props.charQuery.rarity & listRarityS[i]).toString()}
+              modelId={listRarityS[i].toString()}
+              modelTitle={data}
+              modelFunction={modelId => {this.handleRarity(modelId); }}
+            />
+          );
+          return output;
+        },
+                            [rarityTemp]
+        )}
+      </div>
+    );
+  }
+
   render(): JSX.Element {
     return (
       <Dialog
@@ -123,14 +181,13 @@ class MenuQuery extends React.Component<MenuQuery.Props> {
         aria-describedby="select-dialog-description"
         maxWidth={'xl'}
       >
-        <DialogTitle id="select-dialog-title">{'Use Google\'s location service?'}</DialogTitle>
+        <DialogTitle id="select-dialog-title">城娘選擇</DialogTitle>
         <DialogContent>
           <DialogContentText id="select-dialog-description">
-            Let Google help apps determine location. This means sending anonymous location data to
-            Google, even when no apps are running.
+            {this.renderSelectType()}
+            {this.renderSelectTerrain()}
+            {this.renderSelectRarity()}
           </DialogContentText>
-          {this.renderSelectType()}
-          {this.renderSelectTerrain()}
         </DialogContent>
         <DialogActions>
           <Button onClick={this.props.statusFunction} color="primary">
