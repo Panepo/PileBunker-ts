@@ -18,7 +18,7 @@ import { CharInput, BuffInput, EnemyInput, WeaponType, WeaponInfo } from '../mod
 export const calcAtk = (input: CharInput): number => {
   const typeSelected: WeaponType[] = dbType
     .chain()
-    .find({ $and: [{ name: input.charType }]})
+    .find({ name: input.charType })
     .data();
 
   const typeAtk: number = (typeSelected[0].atkM - typeSelected[0].atk) / 1000;
@@ -47,7 +47,7 @@ export const calcAtk = (input: CharInput): number => {
 export const calcOutput = (charInput: CharInput, buffInput: BuffInput, enemyInput: EnemyInput): WeaponInfo[] => {
   const weaponSelected: WeaponInfo[] = dbWeapon
     .chain()
-    .find({ $and: [{ type: charInput.charType }]})
+    .find({ type: charInput.charType })
     .data();
   let maxMux: number = 1;
   let paraMux: number = 1;
