@@ -34,7 +34,7 @@ const styles = (theme: Theme) => createStyles({
   },
   formControl: {
     margin: theme.spacing.unit,
-    width: 120,
+    width: 160,
   },
   typeImage: {
     width: 15,

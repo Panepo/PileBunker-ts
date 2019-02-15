@@ -1,4 +1,4 @@
-export interface TableCharHead {
+export interface TableHeadInterface {
   id: string;
   numeric: boolean;
   disablePadding: boolean;
