@@ -1,7 +1,10 @@
 import * as React from 'react';
+import { connect } from 'react-redux';
+import { RootState } from '../reducers/index';
+import { CharInput } from '../model/modelCalc';
 import { createStyles, Theme, WithStyles, withStyles } from '@material-ui/core';
-
 import MenuChar from '../containers/MenuChar';
+import MenuBuff from '../containers/MenuBuff';
 
 import Grid from '@material-ui/core/Grid';
 import ExpansionPanel from '@material-ui/core/ExpansionPanel';
@@ -12,8 +15,8 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
 export namespace Pilebunker {
   export interface Props extends WithStyles<typeof styles> {
+    charInput: CharInput;
   }
-
   export interface State {
     expanded: string | boolean;
   }
@@ -56,7 +59,6 @@ class Pilebunker extends React.Component<Pilebunker.Props, Pilebunker.State> {
             <ExpansionPanel expanded={this.state.expanded === 'panel1'} onChange={this.handleChange('panel1')}>
               <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
                 <Typography className={this.props.classes.heading}>城娘設定</Typography>
-                <Typography className={this.props.classes.secondaryHeading}>I am an expansion panel</Typography>
               </ExpansionPanelSummary>
               <ExpansionPanelDetails>
                 <MenuChar />
@@ -65,23 +67,14 @@ class Pilebunker extends React.Component<Pilebunker.Props, Pilebunker.State> {
             <ExpansionPanel expanded={this.state.expanded === 'panel2'} onChange={this.handleChange('panel2')}>
               <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
                 <Typography className={this.props.classes.heading}>バフ設定</Typography>
-                <Typography className={this.props.classes.secondaryHeading}>
-                  I am an expansion panel
-                </Typography>
               </ExpansionPanelSummary>
               <ExpansionPanelDetails>
-                <Typography>
-                  Donec placerat, lectus sed mattis semper, neque lectus feugiat lectus, varius pulvinar
-                  diam eros in elit. Pellentesque convallis laoreet laoreet.
-                </Typography>
+                <MenuBuff />
               </ExpansionPanelDetails>
             </ExpansionPanel>
             <ExpansionPanel expanded={this.state.expanded === 'panel3'} onChange={this.handleChange('panel3')}>
               <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
                 <Typography className={this.props.classes.heading}>敵設定</Typography>
-                <Typography className={this.props.classes.secondaryHeading}>
-                  I am an expansion panel
-                </Typography>
               </ExpansionPanelSummary>
               <ExpansionPanelDetails>
                 <Typography>
@@ -97,4 +90,10 @@ class Pilebunker extends React.Component<Pilebunker.Props, Pilebunker.State> {
   }
 }
 
-export default withStyles(styles)(Pilebunker);
+function mapStateToProps(state: RootState) {
+  return {
+    charInput: state.reducerCalc.charInput
+  };
+}
+
+export default withStyles(styles)(connect(mapStateToProps)(Pilebunker));

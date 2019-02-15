@@ -13,10 +13,11 @@ import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import Checkbox from '@material-ui/core/Checkbox';
-
 import MucTableHead from '../components/MucTableHead';
-import { stableSort, getSorting } from './TableFunc';
+import { stableSort, getSorting } from '../functions/funcTable';
 import { tableCharHead } from '../constants/ConstTable';
+import { imageData } from '../images/index';
+import { listType, listTypeS } from '../constants/ConstList';
 
 export namespace TableChar {
   export interface Props extends WithStyles<typeof styles> {
@@ -46,6 +47,11 @@ const styles = (theme: Theme) => createStyles({
   tableWrapper: {
     overflowX: 'auto',
   },
+  typeImage: {
+    width: 15,
+    height: 15,
+    marginRight: theme.spacing.unit,
+  }
 });
 
 class TableChar extends React.Component<TableChar.Props, TableChar.State> {
@@ -112,7 +118,21 @@ class TableChar extends React.Component<TableChar.Props, TableChar.State> {
 
   handleSelect = (event: any, atF: string) => {
     this.props.closeFunction();
-    this.props.actionsC.charInput({...this.props.charInput, charAtkParm: +atF });
+    this.props.actionsC.charInput({...this.props.charInput, charAtkParm: +atF * 100 });
+  }
+
+  renderTypeIcon = (weapon: string): JSX.Element => {
+    for (let i = 0; i < listType.length; i += 1) {
+      if (listType[i] === weapon) {
+        return (
+          <label>
+            <img className={this.props.classes.typeImage} src={imageData[listTypeS[i]]} alt={listTypeS[i]} />
+            {weapon}
+          </label>
+        );
+      }
+    }
+    return <label>{weapon}</label>;
   }
 
   isSelected = (id: number) => this.state.selected.indexOf(id) !== -1;
@@ -156,7 +176,7 @@ class TableChar extends React.Component<TableChar.Props, TableChar.State> {
                       <TableCell component="th" scope="row" padding="none">
                         {n.name}
                       </TableCell>
-                      <TableCell align="left" padding="dense">{n.weapon}</TableCell>
+                      <TableCell align="left" padding="dense">{this.renderTypeIcon(n.weapon)}</TableCell>
                       <TableCell align="left" padding="dense">{n.rarity}</TableCell>
                       <TableCell align="left" padding="dense">{n.plain}</TableCell>
                       <TableCell align="left" padding="dense">{n.hpF}</TableCell>

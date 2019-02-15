@@ -15,6 +15,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import TextField from '@material-ui/core/TextField';
 import { listType, listTypeS, listBut, listButS } from '../constants/ConstList';
 import { imageData } from '../images/index';
+import NumberFormat from 'react-number-format';
 
 export namespace MenuChar {
   export interface Props extends WithStyles<typeof styles> {
@@ -41,6 +42,24 @@ const styles = (theme: Theme) => createStyles({
     marginRight: theme.spacing.unit,
   }
 });
+
+function NumberFormatCustom(props: any) {
+  const { inputRef, onChange, ...other } = props;
+
+  return (
+    <NumberFormat
+      {...other}
+      getInputRef={inputRef}
+      onValueChange={(values: any) => {
+        onChange({
+          target: {
+            value: values.value,
+          },
+        });
+      }}
+    />
+  );
+}
 
 class MenuChar extends React.Component<MenuChar.Props, MenuChar.State> {
   state = {
@@ -117,6 +136,9 @@ class MenuChar extends React.Component<MenuChar.Props, MenuChar.State> {
         value={this.props.charInput.charLevel}
         onChange={this.handleChange('charLevel')}
         margin="normal"
+        InputProps={{
+          inputComponent: NumberFormatCustom,
+        }}
       />
     );
   };
@@ -125,11 +147,14 @@ class MenuChar extends React.Component<MenuChar.Props, MenuChar.State> {
     return (
       <TextField
         id="select-charAtkParm"
-        label="攻擊成長係數"
+        label="攻擊成長係數(%)"
         className={this.props.classes.formControl}
         value={this.props.charInput.charAtkParm}
         onClick={this.handleCharOpen}
         margin="normal"
+        InputProps={{
+          inputComponent: NumberFormatCustom,
+        }}
       />
     );
   };
@@ -177,6 +202,9 @@ class MenuChar extends React.Component<MenuChar.Props, MenuChar.State> {
         value={this.props.charInput.charCompanion}
         onChange={this.handleChange('charCompanion')}
         margin="normal"
+        InputProps={{
+          inputComponent: NumberFormatCustom,
+        }}
       />
     );
   };
@@ -190,6 +218,9 @@ class MenuChar extends React.Component<MenuChar.Props, MenuChar.State> {
         value={this.props.charInput.charStructure}
         onChange={this.handleChange('charStructure')}
         margin="normal"
+        InputProps={{
+          inputComponent: NumberFormatCustom,
+        }}
       />
     );
   };
