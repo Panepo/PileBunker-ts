@@ -3,38 +3,44 @@ import { Action, ActionType } from '../model/model';
 import { CharInput, BuffInput, EnemyInput, CalcState } from '../model/modelCalc';
 import { calcOutput } from './calcOutput';
 
+const initialChar: CharInput = {
+  charType: 'sword',
+  charLevel: 1,
+  charAtkParm: 100,
+  charMax: 'max0',
+  charCompanion: 100,
+  charStructure: 0,
+};
+
+const initialBuff: BuffInput = {
+  buffAtkPercent: 0,
+  buffAtkNumber: 0,
+  buffSpeedPre: 0,
+  buffSpeedPost: 0,
+  buffDamageUp: 0,
+  buffDirectUp: 0,
+  buffHitnumber: 0,
+  buffIgoreDef: 0,
+  buffTerrain: true,
+  buffDirect: true,
+};
+
+const initialEnemy: EnemyInput = {
+  enemyNumber: 1,
+  enemyHitpoint: 1000,
+  enemyDef: 200,
+  enemyDefPercent: 0,
+  enemyDefNumber: 0,
+  enemyDamageUp: 0,
+  enemyFly: false,
+  enemyMonster: false,
+};
+
 const initialState: CalcState = {
-  charInput: {
-    charType: 'sword',
-    charLevel: 1,
-    charAtkParm: 100,
-    charMax: 'max0',
-    charCompanion: 100,
-    charStructure: 0,
-  },
-  buffInput: {
-    buffAtkPercent: 0,
-    buffAtkNumber: 0,
-    buffSpeedPre: 0,
-    buffSpeedPost: 0,
-    buffDamageUp: 0,
-    buffDirectUp: 0,
-    buffHitnumber: 0,
-    buffIgoreDef: 0,
-    buffTerrain: true,
-    buffDirect: true,
-  },
-  enemyInput: {
-    enemyNumber: 1,
-    enemyHitpoint: 1000,
-    enemyDef: 200,
-    enemyDefPercent: 0,
-    enemyDefNumber: 0,
-    enemyDamageUp: 0,
-    enemyFly: false,
-    enemyMonster: false,
-  },
-  output: [],
+  charInput: initialChar,
+  buffInput: initialBuff,
+  enemyInput: initialEnemy,
+  output: calcOutput(initialChar, initialBuff, initialEnemy),
 };
 
 export const reducerCalc = createReducer(initialState, {
