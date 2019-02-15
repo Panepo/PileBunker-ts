@@ -23,6 +23,7 @@ export namespace TableChar {
     actionsC: typeof ActionsCalc;
     charInput: CharInput;
     charInfo: CharInfo[];
+    closeFunction: () => void;
   }
   export interface State {
     data: CharInfo[];
@@ -109,6 +110,11 @@ class TableChar extends React.Component<TableChar.Props, TableChar.State> {
     this.setState({ rowsPerPage: event.target.value });
   };
 
+  handleSelect = (event: any, atF: string) => {
+    this.props.closeFunction();
+    this.props.actionsC.charInput({...this.props.charInput, charAtkParm: +atF });
+  }
+
   isSelected = (id: number) => this.state.selected.indexOf(id) !== -1;
 
   render() {
@@ -145,18 +151,18 @@ class TableChar extends React.Component<TableChar.Props, TableChar.State> {
                       selected={isSelected}
                     >
                       <TableCell padding="checkbox">
-                        <Checkbox checked={isSelected} />
+                        <Checkbox checked={isSelected} onClick={event => this.handleSelect(event, n.atF)}/>
                       </TableCell>
                       <TableCell component="th" scope="row" padding="none">
                         {n.name}
                       </TableCell>
-                      <TableCell align="left">{n.weapon}</TableCell>
-                      <TableCell align="left">{n.rarity}</TableCell>
-                      <TableCell align="left">{n.plain}</TableCell>
-                      <TableCell align="right">{n.hpF}</TableCell>
-                      <TableCell align="right">{n.atF}</TableCell>
-                      <TableCell align="right">{n.dfF}</TableCell>
-                      <TableCell align="right">{n.totF}</TableCell>
+                      <TableCell align="left" padding="dense">{n.weapon}</TableCell>
+                      <TableCell align="left" padding="dense">{n.rarity}</TableCell>
+                      <TableCell align="left" padding="dense">{n.plain}</TableCell>
+                      <TableCell align="left" padding="dense">{n.hpF}</TableCell>
+                      <TableCell align="left" padding="dense">{n.atF}</TableCell>
+                      <TableCell align="left" padding="dense">{n.dfF}</TableCell>
+                      <TableCell align="left" padding="dense">{n.totF}</TableCell>
                     </TableRow>
                   );
                 })}

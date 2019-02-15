@@ -185,13 +185,10 @@ class MenuQuery extends React.Component<MenuQuery.Props> {
             {this.renderSelectRarity()}
           </DialogContentText>
         </DialogContent>
-        <TableChar />
+        <TableChar closeFunction={this.props.statusFunction} />
         <DialogActions>
-          <Button onClick={this.props.statusFunction} color="primary">
-            Disagree
-          </Button>
           <Button onClick={this.props.statusFunction} color="primary" autoFocus>
-            Agree
+            Close
           </Button>
         </DialogActions>
       </Dialog>
