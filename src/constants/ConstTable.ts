@@ -18,12 +18,12 @@ export const tableCharHead = [
 
 export const tableWeaponHead = [
   { id: 'name', numeric: false, disablePadding: false, label: '名稱' },
-  { id: 'rare', numeric: false, disablePadding: false, label: '★' },
-  { id: 'refText', numeric: false, disablePadding: false, label: '精煉' },
-  { id: 'atk', numeric: false, disablePadding: false, label: '攻擊' },
-  { id: 'damage', numeric: false, disablePadding: false, label: '傷害' },
-  { id: 'dps', numeric: false, disablePadding: false, label: 'DPS' },
-  { id: 'frame1', numeric: false, disablePadding: false, label: '攻擊(f)' },
-  { id: 'frame2', numeric: false, disablePadding: false, label: '延遲(f)' },
+  { id: 'rare', numeric: false, disablePadding: true, label: '★' },
+  { id: 'refText', numeric: false, disablePadding: true, label: '精煉' },
+  { id: 'atk', numeric: false, disablePadding: true, label: '攻擊' },
+  { id: 'damage', numeric: false, disablePadding: true, label: '傷害' },
+  { id: 'dps', numeric: false, disablePadding: true, label: 'DPS' },
+  { id: 'frame1', numeric: false, disablePadding: true, label: '攻擊(f)' },
+  { id: 'frame2', numeric: false, disablePadding: true, label: '延遲(f)' },
   { id: 'text', numeric: false, disablePadding: false, label: '說明' },
 ];

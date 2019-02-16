@@ -36,3 +36,9 @@ it('Calculate character attack for lv125 プラハ城[改壱]', () => {
    };
   expect(calc.calcAtk(input)).toEqual(579);
 });
+
+it('Calculate damage', () => {
+  expect(calc.calcAtkDef(200, 100, 0, 100)).toEqual(200);
+  expect(calc.calcAtkDef(200, 100, 100, 0)).toEqual(200);
+  expect(calc.calcAtkDef(200, 100, 100, 100)).toEqual(400);
+});
