@@ -61,6 +61,7 @@ class MenuEnemy extends React.Component<MenuEnemy.Props> {
     return menuEnemyList.reduce((output: any[], data: MenuList, i: number) => {
       output.push(
         <TextField
+          key={data.id + i.toString()}
           id={data.id}
           label={data.label}
           className={this.props.classes.formControl}
