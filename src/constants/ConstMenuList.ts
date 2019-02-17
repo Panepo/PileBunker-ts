@@ -33,3 +33,12 @@ export const menuEnemySwitch: MenuList[] = [
   { id: 'switch-enemyFly', label: '飛行あり', value: 'enemyFly' },
   { id: 'switch-enemyMonster', label: '妖怪あり', value: 'enemyMonster' },
 ];
+
+export const menuRefineList: MenuList[] = [
+  { id: 'button-all-ref-0', label: '無精煉', value: 'all-ref-0' },
+  { id: 'button-all-ref-10', label: '全精煉+10', value: 'all-ref-10' },
+  { id: 'button-4-ref-10', label: '★4+10', value: '4-ref-10' },
+  { id: 'button-3-ref-10', label: '★3+10', value: '3-ref-10' },
+  { id: 'button-2-ref-10', label: '★2+10', value: '2-ref-10' },
+  { id: 'button-1-ref-10', label: '★1+10', value: '1-ref-10' },
+];

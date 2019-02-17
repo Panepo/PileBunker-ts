@@ -11,10 +11,12 @@ import TableCell from '@material-ui/core/TableCell';
 import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
+import Button from '@material-ui/core/Button';
 import Checkbox from '@material-ui/core/Checkbox';
 import MucTableHead from '../components/MucTableHead';
 import { stableSort, getSorting } from '../functions/funcTable';
 import { tableWeaponHead } from '../constants/ConstTable';
+import { MenuList, menuRefineList } from '../constants/ConstMenuList';
 
 export namespace TableWeapon {
   export interface Props extends WithStyles<typeof styles> {
@@ -41,11 +43,9 @@ const styles = (theme: Theme) => createStyles({
   tableWrapper: {
     overflowX: 'auto',
   },
-  typeImage: {
-    width: 15,
-    height: 15,
+  buttonList: {
     marginRight: theme.spacing.unit,
-  }
+  },
 });
 
 class TableWeapon extends React.Component<TableWeapon.Props, TableWeapon.State> {
@@ -116,6 +116,17 @@ class TableWeapon extends React.Component<TableWeapon.Props, TableWeapon.State> 
 
   isSelected = (id: number) => this.state.selected.indexOf(id) !== -1;
 
+  renderRefineButton = () => {
+    return menuRefineList.reduce((output: any[], data: MenuList, i: number) => {
+      output.push(
+        <Button color="primary" key={data.id + i.toString()} >
+          {data.label}
+        </Button>
+      );
+      return output;
+    },                           []);
+  }
+
   render() {
     const { classes } = this.props;
     const { data, order, orderBy, selected, rowsPerPage, page } = this.state;
@@ -124,6 +135,9 @@ class TableWeapon extends React.Component<TableWeapon.Props, TableWeapon.State> 
     return (
       <Paper className={classes.root}>
         <div className={classes.tableWrapper}>
+          <div className={classes.buttonList}>
+            {this.renderRefineButton()}
+          </div>
           <Table className={classes.table} aria-labelledby="tableTitle">
             <MucTableHead
               numSelected={selected.length}
