@@ -60,6 +60,7 @@ Lv.Xでの城娘の能力値Y算出（※2017/08/08メンテ後）
 * [React](https://facebook.github.io/react/)
 * [Redux](http://redux.js.org/)
 * [Create React App ](https://github.com/facebook/create-react-app)
+* [create-react-app-material-typescript-redux](https://github.com/innFactory/create-react-app-material-typescript-redux)
 * [Material-UI](https://material-ui.com/)
 * [LokiJS](http://lokijs.org/)
 * [localforage](https://github.com/localForage/localForage)
