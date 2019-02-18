@@ -15,7 +15,8 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Button from '@material-ui/core/Button';
-import { listType, listTypeS, listPlain, listPlainS, listRarityS, listRarityQ } from '../constants/ConstList';
+import { listPlain, listPlainS } from '../constants/ConstList';
+import { listType, ListType, listRarity, ListRarity } from '../constants/ConstCalc';
 
 export namespace MenuQuery {
   export interface Props extends WithStyles<typeof styles> {
@@ -59,14 +60,14 @@ class MenuQuery extends React.Component<MenuQuery.Props> {
 
     return (
       <div>
-        {listType.reduce((output: any[], data: string, i: number) => {
+        {listType.reduce((output: any[], data: ListType, i: number) => {
           output.push(
             <MucToggleButton
               key={'select_type_' + i.toString()}
               modelKey={'select_type_' + i.toString()}
               modelSwitch={this.props.charQuery.type}
-              modelId={listTypeS[i]}
-              modelTitle={data}
+              modelId={data.name}
+              modelTitle={data.cname}
               modelFunction={
                 modelId => {this.handleType(modelId); }}
             />
@@ -148,21 +149,21 @@ class MenuQuery extends React.Component<MenuQuery.Props> {
 
     return (
       <div>
-        {listRarityQ.reduce((output: any[], data: string, i: number) => {
+        {listRarity.reduce((output: any[], data: ListRarity, i: number) => {
           output.push(
             <MucToggleButton
               key={'select_rarity_' + i.toString()}
               modelKey={'select_rarity_' + i.toString()}
               // tslint:disable-next-line:no-bitwise
-              modelSwitch={(this.props.charQuery.rarity & listRarityS[i]).toString()}
-              modelId={listRarityS[i].toString()}
-              modelTitle={data}
+              modelSwitch={(this.props.charQuery.rarity & data.binary).toString()}
+              modelId={data.binary.toString()}
+              modelTitle={data.cname}
               modelFunction={modelId => {this.handleRarity(modelId); }}
             />
           );
           return output;
         },
-                            [rarityTemp]
+                           [rarityTemp]
         )}
       </div>
     );

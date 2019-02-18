@@ -1,5 +1,5 @@
 import { dbWeapon, dbType } from '../raw/database';
-import { listMelee, listMagic, listPhys } from '../constants/ConstList';
+import { listType, ListType } from '../constants/ConstCalc';
 import * as parameters from '../constants/ConstParameters';
 import { CharInput, BuffInput, EnemyInput, WeaponType, WeaponInfo } from '../model/modelCalc';
 
@@ -29,6 +29,15 @@ export const calcAtk = (input: CharInput): number => {
   return charAtk;
 };
 
+export const checkType = (weaponType: string): ListType => {
+  for (let i = 0; i < listType.length; i += 1) {
+    if (listType[i].name === weaponType) {
+      return listType[i];
+    }
+  }
+  return listType[0];
+};
+
 // ===============================================================================
 // calculate dps for each weapon
 // ===============================================================================
@@ -53,6 +62,7 @@ export const calcOutput = (charInput: CharInput, buffInput: BuffInput, enemyInpu
   let paraMux: number = 1;
   let totalDef: number = 0;
   let charAtk: number = calcAtk(charInput);
+  const weaponType: ListType = checkType(charInput.charType);
 
   // ===============================================================
   // 地形ボーナス
@@ -66,22 +76,16 @@ export const calcOutput = (charInput: CharInput, buffInput: BuffInput, enemyInpu
     if (charInput.charType === 'bow') {
       paraMux *= parameters.muxFlyBow;
     } else {
-      for (let i = 0; i < listMelee.length; i += 1) {
-        if (listMelee[i] === charInput.charType) {
-          paraMux *= parameters.muxFlyMelee;
-        }
+      if (weaponType.melee) {
+        paraMux *= parameters.muxFlyMelee;
       }
     }
   }
 
   // ===============================================================
   // 妖怪敵に対する攻撃力ボーナス
-  if (enemyInput.enemyMonster) {
-    for (let i = 0; i < listPhys.length; i += 1) {
-      if (listPhys[i] === charInput.charType) {
-        paraMux *= parameters.muxMonsMelee;
-      }
-    }
+  if (enemyInput.enemyMonster && weaponType.physic) {
+    paraMux *= parameters.muxMonsMelee;
   }
 
   // ===============================================================
@@ -96,23 +100,21 @@ export const calcOutput = (charInput: CharInput, buffInput: BuffInput, enemyInpu
 
   // ===============================================================
   // 巨大化補正
-  maxMux = parameters.muxMax[charInput.charMax];
+  maxMux = charInput.charMax;
 
   // ===============================================================
   // 兜防禦力計算
-  for (let i = 0; i < listMagic.length; i += 1) {
-    if (listMagic[i] === charInput.charType) {
-      totalDef = 0;
-    } else {
-      totalDef =
-        enemyInput.enemyDef *
-          (1 - enemyInput.enemyDefPercent / 100) *
-          (1 - buffInput.buffIgoreDef / 100) -
-          enemyInput.enemyDefNumber;
+  if (weaponType.magic) {
+    totalDef = 0;
+  } else {
+    totalDef =
+      enemyInput.enemyDef *
+        (1 - enemyInput.enemyDefPercent / 100) *
+        (1 - buffInput.buffIgoreDef / 100) -
+        enemyInput.enemyDefNumber;
 
-      if (totalDef <= 0) {
-        totalDef = 0;
-      }
+    if (totalDef <= 0) {
+      totalDef = 0;
     }
   }
 

@@ -2,7 +2,7 @@ export interface CharInput {
   charType: string; // 武器種
   charLevel: number; // 城娘等級
   charAtkParm: number; // 城娘攻擊成長係數
-  charMax: string; // 城娘的巨大化等級
+  charMax: number; // 城娘的巨大化等級
   charCompanion: number; // 城娘の伴
   charStructure: number; // 設施的攻擊力
 }

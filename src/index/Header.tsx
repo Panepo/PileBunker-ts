@@ -12,7 +12,7 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import IconBookmark from '@material-ui/icons/Bookmarks';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
-import { listLink, listDrawer } from '../constants/ConstLink';
+import { LinkInterface, listLink, listDrawer } from '../constants/ConstLink';
 
 const styles = (theme: Theme) => createStyles({
   root: {},
@@ -56,7 +56,7 @@ class Header extends React.Component<WithStyles<typeof styles>, State> {
   }
 
   render(): JSX.Element {
-    const renderLink = listLink.reduce((output: any[], data: {text: string, link: string}) => {
+    const renderLink = listLink.reduce((output: any[], data: LinkInterface) => {
       output.push(
         <Button
           color="primary"
@@ -71,7 +71,7 @@ class Header extends React.Component<WithStyles<typeof styles>, State> {
 
     const renderDrawer = (
       <List>
-        {listDrawer.map((data: {text: string, link: string}) => (
+        {listDrawer.map((data: LinkInterface) => (
           <ListItem
             button
             divider

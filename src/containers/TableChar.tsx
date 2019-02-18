@@ -16,8 +16,7 @@ import Checkbox from '@material-ui/core/Checkbox';
 import MucTableHead from '../components/MucTableHead';
 import { stableSort, getSorting } from '../functions/funcTable';
 import { tableCharHead } from '../constants/ConstTable';
-import { imageData } from '../images/index';
-import { listType, listTypeS } from '../constants/ConstList';
+import { listType } from '../constants/ConstCalc';
 
 export namespace TableChar {
   export interface Props extends WithStyles<typeof styles> {
@@ -123,10 +122,10 @@ class TableChar extends React.Component<TableChar.Props, TableChar.State> {
 
   renderTypeIcon = (weapon: string): JSX.Element => {
     for (let i = 0; i < listType.length; i += 1) {
-      if (listType[i] === weapon) {
+      if (listType[i].cname === weapon) {
         return (
           <label>
-            <img className={this.props.classes.typeImage} src={imageData[listTypeS[i]]} alt={listTypeS[i]} />
+            <img className={this.props.classes.typeImage} src={listType[i].image} alt={listType[i].name} />
             {weapon}
           </label>
         );

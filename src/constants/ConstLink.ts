@@ -1,3 +1,8 @@
+export interface LinkInterface {
+  text: string;
+  link: string;
+}
+
 export const listLink = [
   { text: '城プロRE', link: 'http://www.dmm.com/netgame_s/oshirore/' },
   { text: '攻略wiki', link: 'http://scre.swiki.jp/' },

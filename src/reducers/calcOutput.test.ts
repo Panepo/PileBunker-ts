@@ -6,7 +6,7 @@ it('Calculate character attack for lv70 熊本城', () => {
     charType: 'sword',
     charLevel: 70,
     charAtkParm: 130,
-    charMax: 'max0',
+    charMax: 1,
     charCompanion: 100,
     charStructure: 0,
    };
@@ -18,7 +18,7 @@ it('Calculate character attack for lv50 龜居城', () => {
     charType: 'lance',
     charLevel: 50,
     charAtkParm: 104,
-    charMax: 'max0',
+    charMax: 1,
     charCompanion: 100,
     charStructure: 0,
    };
@@ -30,7 +30,7 @@ it('Calculate character attack for lv125 プラハ城[改壱]', () => {
     charType: 'staff',
     charLevel: 125,
     charAtkParm: 137,
-    charMax: 'max0',
+    charMax: 1,
     charCompanion: 200,
     charStructure: 0,
    };

@@ -13,8 +13,7 @@ import Select from '@material-ui/core/Select';
 import FormControl from '@material-ui/core/FormControl';
 import MenuItem from '@material-ui/core/MenuItem';
 import TextField from '@material-ui/core/TextField';
-import { listType, listTypeS, listBut, listButS } from '../constants/ConstList';
-import { imageData } from '../images/index';
+import { listType, ListType, listMax, ListMax } from '../constants/ConstCalc';
 import NumberFormat from 'react-number-format';
 
 export namespace MenuChar {
@@ -113,11 +112,11 @@ class MenuChar extends React.Component<MenuChar.Props, MenuChar.State> {
               id: 'select-charType',
             }}
           >
-            {listType.reduce((output: any[], data: string, i: number) => {
+            {listType.reduce((output: any[], data: ListType, i: number) => {
               output.push(
-                <MenuItem key={'select-charType' + i.toString()} value={listTypeS[i]}>
-                  <img className={this.props.classes.typeImage} src={imageData[listTypeS[i]]} alt={listTypeS[i]} />
-                  {data}
+                <MenuItem key={'select-charType' + i.toString()} value={data.name}>
+                  <img className={this.props.classes.typeImage} src={data.image} alt={data.name} />
+                  {data.cname}
                 </MenuItem>
                 );
               return output;
@@ -180,10 +179,10 @@ class MenuChar extends React.Component<MenuChar.Props, MenuChar.State> {
             id: 'select-charMax',
           }}
         >
-          {listBut.reduce((output: any[], data: string, i: number) => {
+          {listMax.reduce((output: any[], data: ListMax, i: number) => {
             output.push(
-              <MenuItem key={'select-charType' + i.toString()} value={listButS[i]}>
-                {data}
+              <MenuItem key={'select-charType' + i.toString()} value={data.value}>
+                {data.cname}
               </MenuItem>
               );
             return output;

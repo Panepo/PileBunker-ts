@@ -5,9 +5,9 @@ import { calcOutput } from './calcOutput';
 
 const initialChar: CharInput = {
   charType: 'sword',
-  charLevel: 1,
+  charLevel: 50,
   charAtkParm: 100,
-  charMax: 'max0',
+  charMax: 1,
   charCompanion: 100,
   charStructure: 0,
 };
