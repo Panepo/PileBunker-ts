@@ -21,3 +21,17 @@ export function enemyInput(input: EnemyInput): Action<EnemyInput> {
     payload: input
   };
 }
+
+export function refineChange(wepName: string): Action<string> {
+  return {
+    type: ActionType.REFINE_CHANGE,
+    payload: wepName
+  };
+}
+
+export function refineChangeMarco(command: string): Action<string> {
+  return {
+    type: ActionType.REFINE_CHANGE_MARCO,
+    payload: command
+  };
+}

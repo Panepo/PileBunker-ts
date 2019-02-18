@@ -2,6 +2,7 @@ import createReducer from './createReducer';
 import { Action, ActionType } from '../model/model';
 import { CharInput, BuffInput, EnemyInput, CalcState } from '../model/modelCalc';
 import { calcOutput } from './calcOutput';
+import { updateRefine, updateRefineMarco } from './calcRefine';
 
 const initialChar: CharInput = {
   charType: 'sword',
@@ -52,5 +53,13 @@ export const reducerCalc = createReducer(initialState, {
   },
   [ActionType.INPUT_ENEMY_CHANGE](state: CalcState, action: Action<EnemyInput>) {
     return { ...state, enemyInput: action.payload, output: calcOutput(state.charInput, state.buffInput, action.payload) };
+  },
+  [ActionType.REFINE_CHANGE](state: CalcState, action: Action<string>) {
+    updateRefine(action.payload);
+    return { ...state, output: calcOutput(state.charInput, state.buffInput, state.enemyInput) };
+  },
+  [ActionType.REFINE_CHANGE_MARCO](state: CalcState, action: Action<string>) {
+    updateRefineMarco(action.payload);
+    return { ...state, output: calcOutput(state.charInput, state.buffInput, state.enemyInput) };
   },
 });

@@ -18,6 +18,7 @@ import { tableWeaponHead } from '../constants/ConstTable';
 
 export namespace TableWeapon {
   export interface Props extends WithStyles<typeof styles> {
+    actionsC: typeof ActionsCalc;
     weaponInfo: WeaponInfo[];
   }
   export interface State {
@@ -105,8 +106,8 @@ class TableWeapon extends React.Component<TableWeapon.Props, TableWeapon.State> 
     this.setState({ rowsPerPage: event.target.value });
   };
 
-  handleSelect = (event: any, atF: string) => {
-
+  handleRefine = (name: string) => (event: any) => {
+    this.props.actionsC.refineChange(name);
   }
 
   isSelected = (id: number) => this.state.selected.indexOf(id) !== -1;
@@ -137,7 +138,6 @@ class TableWeapon extends React.Component<TableWeapon.Props, TableWeapon.State> 
                   return (
                     <TableRow
                       hover
-                      onClick={event => this.handleClick(event, n.id)}
                       role="checkbox"
                       aria-checked={isSelected}
                       tabIndex={-1}
@@ -145,13 +145,13 @@ class TableWeapon extends React.Component<TableWeapon.Props, TableWeapon.State> 
                       selected={isSelected}
                     >
                       <TableCell padding="checkbox">
-                        <Checkbox checked={isSelected} />
+                        <Checkbox checked={isSelected} onClick={event => this.handleClick(event, n.id)}/>
                       </TableCell>
                       <TableCell component="th" scope="row" padding="none">
                         {n.name}
                       </TableCell>
                       <TableCell align="left" padding="dense">{n.rare}</TableCell>
-                      <TableCell align="left" padding="dense">{n.refText}</TableCell>
+                      <TableCell align="left" padding="dense" onClick={this.handleRefine(n.name)}>{n.refText}</TableCell>
                       <TableCell align="left" padding="dense">{n.atk}</TableCell>
                       <TableCell align="left" padding="dense">{n.damage}</TableCell>
                       <TableCell align="left" padding="dense">{n.dps}</TableCell>
