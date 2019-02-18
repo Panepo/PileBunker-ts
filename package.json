@@ -4,10 +4,10 @@
   "description": "shiropro weapon calculator pilebunker",
   "private": true,
   "author": "Panepo <panepo@github.io>",
-  "homepage": "https://panepo.github.io/PileBunker",
+  "homepage": "https://panepo.github.io/PileBunker-ts",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Panepo/PileBunker.git"
+    "url": "git+https://github.com/Panepo/PileBunker-ts.git"
   },
   "scripts": {
     "start": "react-scripts-ts start",
@@ -17,6 +17,7 @@
     "parser": "npm run parserC && npm run parserL",
     "parserL": "lsc  ./src/raw/parser.ls --nodejs --harmoy",
     "parserC": "python ./src/raw/charDataParaser.py",
+    "predeploy": "yarn build",
     "deploy": "gh-pages -d build"
   },
   "dependencies": {
