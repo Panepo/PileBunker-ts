@@ -19,5 +19,7 @@ export const listDrawer = [
   { text: 'Redux', link: 'http://redux.js.org/' },
   { text: 'Material Design Lite', link: 'https://getmdl.io/' },
   { text: 'Material-UI', link: 'https://material-ui.com/' },
-  { text: 'LokiJS', link: 'http://lokijs.org/' }
+  { text: 'LokiJS', link: 'http://lokijs.org/' },
+  { text: 'localForage', link: 'https://github.com/localForage/localForage' },
+  { text: 'react-number-format', link: 'https://github.com/s-yadav/react-number-format' }
 ];

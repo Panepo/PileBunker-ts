@@ -2,6 +2,7 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as ActionsCalc from '../actions/actionCalc';
+import { RootState } from '../reducers/index';
 import { createStyles, Theme, WithStyles, withStyles } from '@material-ui/core';
 import Button from '@material-ui/core/Button';
 import { MenuList, menuRefineList } from '../constants/ConstMenuList';
@@ -42,10 +43,15 @@ class MenuRefine extends React.Component<MenuRefine.Props> {
   }
 }
 
+function mapStateToProps(state: RootState) {
+  return {
+  };
+}
+
 function mapDispatchToProps(dispatch: any) {
   return {
     actionsC: bindActionCreators(ActionsCalc as any, dispatch)
   };
 }
 
-export default withStyles(styles)(connect(mapDispatchToProps)(MenuRefine));
+export default withStyles(styles)(connect(mapStateToProps, mapDispatchToProps)(MenuRefine));

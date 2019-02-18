@@ -28,7 +28,7 @@ export const listType: ListType[] = [
   { cname: '槌', name: 'hammer', image: imageHammer, melee: true, physic: true, magic: false },
   { cname: '拳', name: 'fist', image: imageFist, melee: true, physic: true, magic: false },
   { cname: '盾', name: 'shield', image: imageShield, melee: true, physic: true, magic: false },
-  { cname: '投剣', name: 'kunai', image: imageKunai, melee: true, physic: true, magic: false },
+  { cname: '投剣', name: 'kunai', image: imageKunai, melee: false, physic: true, magic: false },
   { cname: '弓', name: 'bow', image: imageBow, melee: false, physic: true, magic: false },
   { cname: '石弓', name: 'xbow', image: imageXbow, melee: false, physic: true, magic: false },
   { cname: '鉄砲', name: 'arqu', image: imageArqu, melee: false, physic: true, magic: false },

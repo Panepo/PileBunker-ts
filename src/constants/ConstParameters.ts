@@ -40,7 +40,12 @@ export const weaponAntiFly = [
 export const weaponAtkUp = ['義重の重槌', '真・義重の重槌'];
 export const weaponAtkUpValue = 50;
 
-export const wepIgnoreDef = [
+export interface WeaponIgnoreDef {
+  value: number;
+  name: string[];
+}
+
+export const wepIgnoreDef: WeaponIgnoreDef[] = [
   { value: 0.9, name: ['氏康の獅盾', '真・氏康の獅盾', 'ヴァリス改']},
   { value: 0.92, name: ['ヴァリス']},
   { value: 0.95, name: ['聖剣エクスカリバー']}

@@ -128,7 +128,6 @@ export const calcOutput = (charInput: CharInput, buffInput: BuffInput, enemyInpu
     let totalAtk: number = 0;
     let paraMuxTemp: number = paraMux;
 
-    /*
     // ===============================================================
     // 飛行敵に対する特殊武器攻撃力ボーナス
     if (enemyInput.enemyFly) {
@@ -147,7 +146,7 @@ export const calcOutput = (charInput: CharInput, buffInput: BuffInput, enemyInpu
           paraMuxTemp *= (1 + parameters.weaponAtkUpValue / 100);
         }
       }
-    }*/
+    }
 
     totalAtk =
       ((charAtk + data.atk) * maxMux * (1 + buffInput.buffAtkPercent / 100) +
@@ -184,14 +183,16 @@ export const calcOutput = (charInput: CharInput, buffInput: BuffInput, enemyInpu
 };
 
 export const calcDam = (totalAtk: number, totalDef: number, name: string, skillDamUp: number, skillRecDamUp: number): number => {
-  /*for (let i = 0; i < parameters.wepIgnoreDef.length; i += 1) {
-    for (let j = 0; i < parameters.wepIgnoreDef[i].name.length; j += 1) {
+  for (let i = 0; i < parameters.wepIgnoreDef.length; i += 1) {
+    for (let j = 0; j < parameters.wepIgnoreDef[i].name.length; j += 1) {
       if (parameters.wepIgnoreDef[i].name[j] === name) {
-        let tempDef = Math.round(totalDef * parameters.wepIgnoreDef[i].value);
-        return calcAtkDef(totalAtk, tempDef, skillDamUp, skillRecDamUp);
+        if (totalDef > 0) {
+          let tempDef = Math.round(totalDef * parameters.wepIgnoreDef[i].value);
+          return calcAtkDef(totalAtk, tempDef, skillDamUp, skillRecDamUp);
+        }
       }
     }
-  }*/
+  }
   return calcAtkDef(totalAtk, totalDef, skillDamUp, skillRecDamUp);
 };
 
