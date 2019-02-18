@@ -8,7 +8,8 @@ import NumberFormat from 'react-number-format';
 import { createStyles, Theme, WithStyles, withStyles } from '@material-ui/core';
 import TextField from '@material-ui/core/TextField';
 import { MenuList, menuBuffList, menuBuffSwitch } from '../constants/ConstMenuList';
-import MucToggleButton from '../components/MucToggleButton';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Checkbox from '@material-ui/core/Checkbox';
 
 export namespace MenuBuff {
   export interface Props extends WithStyles<typeof styles> {
@@ -49,12 +50,8 @@ class MenuBuff extends React.Component<MenuBuff.Props> {
     this.props.actionsC.buffInput({...this.props.buffInput, [value]: event.target.value });
   }
 
-  handleSwitch = (modelId: string) => {
-    if (this.props.buffInput[modelId]) {
-      this.props.actionsC.buffInput({...this.props.buffInput, [modelId]: false });
-    } else {
-      this.props.actionsC.buffInput({...this.props.buffInput, [modelId]: true });
-    }
+  handleSwitch = (name: string) => (event: any) => {
+    this.props.actionsC.buffInput({...this.props.buffInput, [name]: event.target.checked });
   }
 
   renderMenu = () => {
@@ -80,14 +77,17 @@ class MenuBuff extends React.Component<MenuBuff.Props> {
   renderMenuSwitch = () => {
     return menuBuffSwitch.reduce((output: any[], data: MenuList, i: number) => {
       output.push(
-        <MucToggleButton
+        <FormControlLabel
           key={data.id + i.toString()}
-          modelKey={data.id + i.toString()}
-          modelSwitch={this.props.buffInput[data.value] ? data.value : '0'}
-          modelId={data.value}
-          modelTitle={data.label}
-          modelFunction={
-            modelId => {this.handleSwitch(modelId); }}
+          control={
+            <Checkbox
+              checked={this.props.buffInput[data.value] ? true : false}
+              onChange={this.handleSwitch(data.value)}
+              value={data.value}
+              color="primary"
+            />
+          }
+          label={data.label}
         />
       );
       return output;

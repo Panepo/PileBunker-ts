@@ -16,8 +16,8 @@ export const menuBuffList: MenuList[] = [
 ];
 
 export const menuBuffSwitch: MenuList[] = [
-  { id: 'switch-buffTerrain', label: '地形適性あり', value: 'buffTerrain' },
-  { id: 'switch-buffDirect', label: '直擊あり', value: 'buffDirect' },
+  { id: 'switch-buffTerrain', label: '地形適性', value: 'buffTerrain' },
+  { id: 'switch-buffDirect', label: '直擊', value: 'buffDirect' },
 ];
 
 export const menuEnemyList: MenuList[] = [
@@ -30,8 +30,8 @@ export const menuEnemyList: MenuList[] = [
 ];
 
 export const menuEnemySwitch: MenuList[] = [
-  { id: 'switch-enemyFly', label: '飛行あり', value: 'enemyFly' },
-  { id: 'switch-enemyMonster', label: '妖怪あり', value: 'enemyMonster' },
+  { id: 'switch-enemyFly', label: '飛行', value: 'enemyFly' },
+  { id: 'switch-enemyMonster', label: '妖怪', value: 'enemyMonster' },
 ];
 
 export const menuRefineList: MenuList[] = [

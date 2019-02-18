@@ -6,6 +6,7 @@ import { createStyles, Theme, WithStyles, withStyles } from '@material-ui/core';
 import MenuChar from '../containers/MenuChar';
 import MenuBuff from '../containers/MenuBuff';
 import MenuEnemy from '../containers/MenuEnemy';
+import MenuRefine from '../containers/MenuRefine';
 import TableWeapon from '../containers/TableWeapon';
 
 import Grid from '@material-ui/core/Grid';
@@ -80,6 +81,14 @@ class Pilebunker extends React.Component<Pilebunker.Props, Pilebunker.State> {
               </ExpansionPanelSummary>
               <ExpansionPanelDetails>
                 <MenuEnemy />
+              </ExpansionPanelDetails>
+            </ExpansionPanel>
+            <ExpansionPanel expanded={this.state.expanded === 'panel4'} onChange={this.handleChange('panel4')}>
+              <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
+                <Typography className={this.props.classes.heading}>精煉設定</Typography>
+              </ExpansionPanelSummary>
+              <ExpansionPanelDetails>
+                <MenuRefine />
               </ExpansionPanelDetails>
             </ExpansionPanel>
             <TableWeapon />
