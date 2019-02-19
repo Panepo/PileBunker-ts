@@ -1,6 +1,6 @@
 language: node_js
 python:
-- "3.6"
+- '3.6'
 node_js:
 - 8.11.3
 before_install:
@@ -8,13 +8,15 @@ before_install:
 install:
 - yarn
 script:
-- git clone --depth 1 --branch gh-pages https://$GH_TOKEN@github.com/Panepo/PileBunker-ts build
+- git clone --depth 1 --branch gh-pages https://$GH_TOKEN@github.com/Panepo/PileBunker-ts
+  build
 - yarn parser
+- yarn test && codecov
 - yarn build
 deploy:
   provider: pages
   skip-cleanup: true
-  github-token: $GH_TOKEN
+  github-token: "$GH_TOKEN"
   keep-history: true
   local-dir: build
   on:
@@ -26,4 +28,4 @@ notifications:
   email: false
 env:
   global:
-    secure: tpsEKqE8LwhUHVOp2af2xW/BaNlNRZFAXfKsqNvpJF0N784pBDPtDZtbZjBYtnAeHtRQlL1rgN5TW/dVoHJh1yK695eaSwqKHHKgTzOHXz726MVCnpfGiFHQXtxmeNaQxF+dDfUafGmus7PEFIGiZe7JYol2KYmkbrfHwktLBNx+hS/QYnupBKZlNDtMj6ae/1TC971veT63RjXGLw6ZJw6L8b4kwrUrJuX0OmBgdiEtvizoSqd4B+sJN3WFEPI9YyL6elbbWsBcUWty+APbTBaI35ejKBw9S/2vb+QM46RF4b266Kg1yj+bT7UGmvXVyHM9+2kw7HWPNBgk0Z3bhkIfprixp9m5QrnrHmj9Rus11bg0cWXDTMNY4Ye+7AS8U8RkirdENixFpno6EeN+HXw4gMcq5Fhdtb3FJXblQY4/mhILjD/kPKq9Su+OiM9WNGqHHjbYB+c9uNdzO7aWsFs5OGP/cHPL1YWkM6BWgsCEfzQT3/Eq6Ybt8cz46kYdu8tIWDKKXk7RCw8iHv2wm90eaJt2f82YpqchUzw0C4oSIbMjlkG7qcrxnEcXO6IskvSzi36Eg9betesee7rreK7Ql75rBV0X0G8eELq31o+kAAGb86KgzGqrl8+66hrxYfpFqHf2wSfY34ORu7Ssr1+FtweUu0QKFqjyghzs+Tg=
+  - secure: cKidEbJ9Py5OP2EmFJ7xo4RL7jVIjb4FJw+ENcFjjtX3z98iPwA/YIMuTuGF95t+C7EymUnXb7Oh8q6OT06FlIxuZuwXJWRkKB7aztgf6dZiuSb8bzouh5GRZfH98pi4AoXkb1AMbo/w+Q7C0wWoh3CVFtZH45MUtX5VORQu01xqGaJ035iEANMJ7QRtpcNIuAjD4eY4l7Al1lL27Aj0YHziMAzlZUT+n8oM2lvkrJn/U5uinBGYDo3LMTwpiloXleMqcNZz6HKqHZ4bODwTMuwbhmW2ZcaMAubGr57ElAqUSqE8PIlJzruZOmPoKyHc0/72XiVAqnX3nF9lJfmWklG1gXmvU9zp7FxdtEesvYYPz9MleN5ueOq7n3Z1hKwr67RMvnYdF/XTRCP4suD/iEAue1QduIZeg/zvLMMRBMQdo/rNmi+24Zy4GdhOz6v1HpNo1MVqPhy6upe2KcMm7V70igwP+ca6eqsKl4vaRg7RBqdL8+SBBYmA2e+bOa3Y39iF4NLZy5fVfAjW57DqCJ2NS9e1LsCsPDFQ8eCKRGi7b96aWqb7UbkkYh3WSYzWUoiiwn8CuCa1qw0fC6lYR0c6j2LwDsST9thj3uHmanlCL5luo2lFxypCb7jIL7jhRKmY5pFyGnK3v0OqRuF/3k3Nsvq7RrV9IxWUXIqFTvc=

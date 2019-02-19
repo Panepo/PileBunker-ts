@@ -1,6 +1,15 @@
-# [PileBunker](https://github.com/Panepo/PileBunker)
+# [PileBunker](https://github.com/Panepo/PileBunker-ts)
 
-[![Build Status](https://travis-ci.org/Panepo/PileBunker.svg?branch=master)](https://travis-ci.org/Panepo/PileBunker.svg) [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg)](https://github.com/prettier/prettier)
+[![Build Status][travis-image]][travis-url][![Style Status][prettier-image]][prettier-url][![Coverage Status][codecov-image]][codecov-url]
+
+[travis-image]: https://travis-ci.org/Panepo/PileBunker-ts.svg
+[travis-url]: https://travis-ci.org/Panepo/PileBunker-ts.svg?branch=master
+
+[prettier-image]: https://img.shields.io/badge/code_style-prettier-ff69b4.svg
+[prettier-url]: https://github.com/prettier/prettier
+
+[codecov-image]: https://codecov.io/gh/Panepo/PileBunker-ts/branch/master/graph/badge.svg
+[codecov-url]: https://codecov.io/gh/Panepo/PileBunker-ts
 
 Shiropro RE weapon damage calculator PileBunker
 
