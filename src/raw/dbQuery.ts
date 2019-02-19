@@ -1,7 +1,5 @@
 import { dbChar } from './database';
-import {
-  listPlainQ
-} from '../constants/ConstList';
+import { listPlainQ } from '../constants/ConstList';
 import { listType, listRarity, ListRarity } from '../constants/ConstCalc';
 import { QueryInput } from '../model/modelQuery';
 import { CharInfo } from '../model/modelQuery';
