@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
+import { RouteComponentProps } from 'react-router';
 import { RootState } from '../reducers/index';
 import { CharInput } from '../model/modelCalc';
 import { createStyles, Theme, WithStyles, withStyles } from '@material-ui/core';
@@ -8,7 +9,6 @@ import MenuBuff from '../containers/MenuBuff';
 import MenuEnemy from '../containers/MenuEnemy';
 import MenuRefine from '../containers/MenuRefine';
 import TableWeapon from '../containers/TableWeapon';
-
 import Grid from '@material-ui/core/Grid';
 import ExpansionPanel from '@material-ui/core/ExpansionPanel';
 import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
@@ -17,7 +17,7 @@ import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
 export namespace Pilebunker {
-  export interface Props extends WithStyles<typeof styles> {
+  export interface Props extends RouteComponentProps<void>, WithStyles<typeof styles> {
     charInput: CharInput;
   }
   export interface State {
@@ -27,6 +27,9 @@ export namespace Pilebunker {
 
 const styles = (theme: Theme) => createStyles({
   root: {
+    marginTop: '-55vh',
+    marginBottom: '60px',
+    flex: 1
   },
   grid: {
     flexGrow: 1,

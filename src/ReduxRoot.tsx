@@ -20,10 +20,6 @@ if (process.env.NODE_ENV === 'development') {
 const { persistor, store } = configureStore();
 
 class ReduxRoot extends React.Component {
-  state = {
-    mobileOpen: true,
-  };
-
   render() {
     return (
       <Provider store={store}>

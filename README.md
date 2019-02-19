@@ -55,16 +55,18 @@ Lv.Xでの城娘の能力値Y算出（※2017/08/08メンテ後）
       INT(INT((1234-50)/1000*110+50)*1.10)=198
 ```
 
-## Library used
+## Reference
 
+* [御城プロジェクト：RE](http://www.dmm.com/netgame_s/oshirore/)
+* [御城プロジェクトRE 城プロRE 攻略 Wiki](https://scre.swiki.jp/)
+* [くろもじ屋](http://www116.sakura.ne.jp/~kuromoji/castle_enemy.htm)
 * [React](https://facebook.github.io/react/)
 * [Redux](http://redux.js.org/)
-* [Create React App ](https://github.com/facebook/create-react-app)
+* [Create React App](https://github.com/facebook/create-react-app)
 * [create-react-app-material-typescript-redux](https://github.com/innFactory/create-react-app-material-typescript-redux)
+* [Material Design Lite](https://getmdl.io/)
 * [Material-UI](https://material-ui.com/)
 * [LokiJS](http://lokijs.org/)
-* [localforage](https://github.com/localForage/localForage)
-* [react-number-format](https://github.com/s-yadav/react-number-format)
 
 ## Develop
 
