@@ -69,3 +69,33 @@ export const listRarity: ListRarity[] = [
   { cname: '★7', value: 7, binary: 64},
   { cname: '★8', value: 8, binary: 128},
 ];
+
+export interface ListTerrain {
+  cname: string;
+  value: number;
+}
+
+export const listTerrain: ListTerrain[] = [
+  { cname: '平', value: 1 },
+  { cname: '平山', value: 2 },
+  { cname: '山', value: 4 },
+  { cname: '水', value: 8 },
+];
+
+export const listTerrainQuery: string[][] = [
+  ['平'],
+  ['平山'],
+  ['平', '平山'],
+  ['山'],
+  ['平', '山'],
+  ['平山', '山'],
+  ['平', '平山', '山'],
+  ['水'],
+  ['平', '平水', '水'],
+  ['平山', '平山水', '水'],
+  ['平', '平山', '平水', '平山水', '水'],
+  ['山', '山水', '水'],
+  ['平', '山', '平水', '山水', '水'],
+  ['平山', '山', '平山水', '山水', '水'],
+  ['平', '平山', '山', '平水', '平山水', '山水', '水'],
+];

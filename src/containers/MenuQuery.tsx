@@ -15,8 +15,7 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Button from '@material-ui/core/Button';
-import { listPlain, listPlainS } from '../constants/ConstList';
-import { listType, ListType, listRarity, ListRarity } from '../constants/ConstCalc';
+import { listType, ListType, listRarity, ListRarity, listTerrain, ListTerrain } from '../constants/ConstCalc';
 
 export namespace MenuQuery {
   export interface Props extends WithStyles<typeof styles> {
@@ -104,21 +103,21 @@ class MenuQuery extends React.Component<MenuQuery.Props> {
 
     return (
       <div>
-        {listPlain.reduce((output: any[], data: string, i: number) => {
+        {listTerrain.reduce((output: any[], data: ListTerrain, i: number) => {
           output.push(
             <MucToggleButton
               key={'select_type_' + i.toString()}
               modelKey={'select_type_' + i.toString()}
               // tslint:disable-next-line:no-bitwise
-              modelSwitch={(this.props.charQuery.plain & listPlainS[i]).toString()}
-              modelId={listPlainS[i].toString()}
-              modelTitle={data}
+              modelSwitch={(this.props.charQuery.plain & data.value).toString()}
+              modelId={data.value.toString()}
+              modelTitle={data.cname}
               modelFunction={modelId => {this.handleTerrain(modelId); }}
             />
           );
           return output;
         },
-                          [plainTemp]
+                            [plainTemp]
         )}
       </div>
       );

@@ -56,6 +56,7 @@ function NumberFormatCustom(props: any) {
           },
         });
       }}
+      allowNegative={false}
     />
   );
 }
@@ -66,29 +67,31 @@ class MenuChar extends React.Component<MenuChar.Props, MenuChar.State> {
   };
 
   handleChange = (name: string) => (event: any) => {
-    switch (name) {
-      case 'charType': {
-        this.props.actionsQ.charQuery({...this.props.charQuery, type: event.target.value });
-        this.props.actionsC.charInput({...this.props.charInput, charType: event.target.value });
-        break;
+    if (event.target.value.length > 0) {
+      switch (name) {
+        case 'charType': {
+          this.props.actionsQ.charQuery({...this.props.charQuery, type: event.target.value });
+          this.props.actionsC.charInput({...this.props.charInput, charType: event.target.value });
+          break;
+        }
+        case 'charLevel': {
+          this.props.actionsC.charInput({...this.props.charInput, charLevel: event.target.value });
+          break;
+        }
+        case 'charMax': {
+          this.props.actionsC.charInput({...this.props.charInput, charMax: event.target.value });
+          break;
+        }
+        case 'charCompanion': {
+          this.props.actionsC.charInput({...this.props.charInput, charCompanion: event.target.value });
+          break;
+        }
+        case 'charStructure': {
+          this.props.actionsC.charInput({...this.props.charInput, charStructure: event.target.value });
+          break;
+        }
+        default: {}
       }
-      case 'charLevel': {
-        this.props.actionsC.charInput({...this.props.charInput, charLevel: event.target.value });
-        break;
-      }
-      case 'charMax': {
-        this.props.actionsC.charInput({...this.props.charInput, charMax: event.target.value });
-        break;
-      }
-      case 'charCompanion': {
-        this.props.actionsC.charInput({...this.props.charInput, charCompanion: event.target.value });
-        break;
-      }
-      case 'charStructure': {
-        this.props.actionsC.charInput({...this.props.charInput, charStructure: event.target.value });
-        break;
-      }
-      default: {}
     }
   };
 

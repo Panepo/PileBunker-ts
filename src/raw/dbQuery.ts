@@ -1,8 +1,6 @@
 import { dbChar } from './database';
-import { listPlainQ } from '../constants/ConstList';
-import { listType, listRarity, ListRarity } from '../constants/ConstCalc';
-import { QueryInput } from '../model/modelQuery';
-import { CharInfo } from '../model/modelQuery';
+import { listType, listRarity, ListRarity, listTerrainQuery } from '../constants/ConstCalc';
+import { QueryInput, CharInfo } from '../model/modelQuery';
 
 export const queryChar = (input: QueryInput): CharInfo[] => {
   for (let i = 0; i < listType.length; i += 1) {
@@ -17,7 +15,7 @@ export const queryChar = (input: QueryInput): CharInfo[] => {
                 { weapon: listType[i].cname },
                 {
                   $and: [
-                    { plain: { $in: listPlainQ[input.plain - 1] } },
+                    { plain: { $in: listTerrainQuery[input.plain - 1] } },
                     { rarity: data.value.toString() }
                   ]
                 }

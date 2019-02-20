@@ -41,13 +41,17 @@ function NumberFormatCustom(props: any) {
           },
         });
       }}
+      allowNegative={false}
+      allowEmptyFormatting={false}
     />
   );
 }
 
 class MenuEnemy extends React.Component<MenuEnemy.Props> {
   handleChange = (value: string) => (event: any) => {
-    this.props.actionsC.enemyInput({...this.props.enemyInput, [value]: event.target.value });
+    if (event.target.value.length > 0) {
+      this.props.actionsC.enemyInput({...this.props.enemyInput, [value]: event.target.value });
+    }
   }
 
   handleSwitch = (name: string) => (event: any) => {

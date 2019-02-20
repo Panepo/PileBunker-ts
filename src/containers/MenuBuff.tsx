@@ -41,13 +41,17 @@ function NumberFormatCustom(props: any) {
           },
         });
       }}
+      allowNegative={false}
+      allowEmptyFormatting={false}
     />
   );
 }
 
 class MenuBuff extends React.Component<MenuBuff.Props> {
   handleChange = (value: string) => (event: any) => {
-    this.props.actionsC.buffInput({...this.props.buffInput, [value]: event.target.value });
+    if (event.target.value.length > 0) {
+      this.props.actionsC.buffInput({...this.props.buffInput, [value]: event.target.value });
+    }
   }
 
   handleSwitch = (name: string) => (event: any) => {
