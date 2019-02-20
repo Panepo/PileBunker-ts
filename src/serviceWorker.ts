@@ -1,9 +1,8 @@
-// tslint:disable:no-console
 // In production, we register a service worker to serve assets from local cache.
 
 // This lets the app load faster on subsequent visits in production, and gives
 // it offline capabilities. However, it also means that developers (and users)
-// will only see deployed updates on the 'N+1' visit to a page, since previously
+// will only see deployed updates on the "N+1" visit to a page, since previously
 // cached resources are updated in the background.
 
 // To learn more about the benefits of this model, read https://goo.gl/KwvDNy.
@@ -23,8 +22,8 @@ export default function register() {
   if (process.env.NODE_ENV === 'production' && 'serviceWorker' in navigator) {
     // The URL constructor is available in all browsers that support SW.
     const publicUrl = new URL(
-      process.env.PUBLIC_URL!,
-      window.location.toString()
+      (process as { env: { [key: string]: string } }).env.PUBLIC_URL,
+      window.location.href
     );
     if (publicUrl.origin !== window.location.origin) {
       // Our service worker won't work if PUBLIC_URL is on a different origin
@@ -62,24 +61,25 @@ function registerValidSW(swUrl: string) {
     .then(registration => {
       registration.onupdatefound = () => {
         const installingWorker = registration.installing;
-        if (installingWorker) {
-          installingWorker.onstatechange = () => {
-            if (installingWorker.state === 'installed') {
-              if (navigator.serviceWorker.controller) {
-                // At this point, the old content will have been purged and
-                // the fresh content will have been added to the cache.
-                // It's the perfect time to display a 'New content is
-                // available; please refresh.' message in your web app.
-                console.log('New content is available; please refresh.');
-              } else {
-                // At this point, everything has been precached.
-                // It's the perfect time to display a
-                // 'Content is cached for offline use.' message.
-                console.log('Content is cached for offline use.');
-              }
-            }
-          };
+        if (installingWorker == null) {
+          return;
         }
+        installingWorker.onstatechange = () => {
+          if (installingWorker.state === 'installed') {
+            if (navigator.serviceWorker.controller) {
+              // At this point, the old content will have been purged and
+              // the fresh content will have been added to the cache.
+              // It's the perfect time to display a "New content is
+              // available; please refresh." message in your web app.
+              console.log('New content is available; please refresh.');
+            } else {
+              // At this point, everything has been precached.
+              // It's the perfect time to display a
+              // "Content is cached for offline use." message.
+              console.log('Content is cached for offline use.');
+            }
+          }
+        };
       };
     })
     .catch(error => {
@@ -92,9 +92,10 @@ function checkValidServiceWorker(swUrl: string) {
   fetch(swUrl)
     .then(response => {
       // Ensure service worker exists, and that we really are getting a JS file.
+      const contentType = response.headers.get('content-type');
       if (
         response.status === 404 ||
-        response.headers.get('content-type')!.indexOf('javascript') === -1
+        (contentType != null && contentType.indexOf('javascript') === -1)
       ) {
         // No service worker found. Probably a different app. Reload the page.
         navigator.serviceWorker.ready.then(registration => {
