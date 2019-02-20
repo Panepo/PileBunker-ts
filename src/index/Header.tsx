@@ -122,7 +122,7 @@ class Header extends React.Component<WithStyles<typeof styles>, State> {
               color="inherit"
               className={this.props.classes.grow}
               noWrap>
-              城プロRE 武器傷害機算機 蓬萊パイルバンカー
+              <b>城プロRE 武器傷害機算機 蓬萊パイルバンカー</b>
             </Typography>
             {renderLink}
           </Toolbar>
