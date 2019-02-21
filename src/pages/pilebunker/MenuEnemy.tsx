@@ -1,13 +1,13 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { EnemyInput } from '../model/modelCalc';
-import * as ActionsCalc from '../actions/actionCalc';
-import { RootState } from '../reducers/index';
+import { EnemyInput } from '../../model/modelCalc';
+import * as ActionsCalc from '../../actions/actionCalc';
+import { RootState } from '../../reducers/index';
 import NumberFormat from 'react-number-format';
 import { createStyles, Theme, WithStyles, withStyles } from '@material-ui/core';
 import TextField from '@material-ui/core/TextField';
-import { MenuList, menuEnemyList, menuEnemySwitch } from '../constants/ConstMenuList';
+import { MenuList, menuEnemyList, menuEnemySwitch } from '../../constants/ConstMenuList';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 

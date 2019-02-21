@@ -1,15 +1,15 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { RouteComponentProps } from 'react-router';
-import { RootState } from '../reducers/index';
-import { CharInput } from '../model/modelCalc';
+import { RootState } from '../../reducers/index';
+import { CharInput } from '../../model/modelCalc';
 import { createStyles, Theme, WithStyles, withStyles, withWidth } from '@material-ui/core';
 import { WithWidth } from '@material-ui/core/withWidth';
-import MenuChar from '../containers/MenuChar';
-import MenuBuff from '../containers/MenuBuff';
-import MenuEnemy from '../containers/MenuEnemy';
-import MenuRefine from '../containers/MenuRefine';
-import TableWeapon from '../containers/TableWeapon';
+import MenuChar from './MenuChar';
+import MenuBuff from './MenuBuff';
+import MenuEnemy from './MenuEnemy';
+import MenuRefine from './MenuRefine';
+import TableWeapon from './TableWeapon';
 import Grid from '@material-ui/core/Grid';
 import ExpansionPanel from '@material-ui/core/ExpansionPanel';
 import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
@@ -20,9 +20,9 @@ import RecentActorsIcon from '@material-ui/icons/RecentActors';
 import BuildIcon from '@material-ui/icons/Build';
 import PlaylistAddIcon from '@material-ui/icons/PlaylistAdd';
 import BugReportIcon from '@material-ui/icons/BugReport';
-import { isSmartphone } from '../helpers/responsive.helper';
+import { isSmartphone } from '../../helpers/responsive.helper';
 
-export namespace Pilebunker {
+export namespace PileBunker {
   export interface Props extends RouteComponentProps<void>, WithStyles<typeof styles>, WithWidth {
     charInput: CharInput;
   }
@@ -55,7 +55,7 @@ const styles = (theme: Theme) => createStyles({
   },
 });
 
-class Pilebunker extends React.Component<Pilebunker.Props, Pilebunker.State> {
+class PileBunker extends React.Component<PileBunker.Props, PileBunker.State> {
   state = {
     expanded: ''
   };
@@ -121,4 +121,4 @@ function mapStateToProps(state: RootState) {
   };
 }
 
-export default withStyles(styles)(connect(mapStateToProps)(withWidth()(Pilebunker)));
+export default withStyles(styles)(connect(mapStateToProps)(withWidth()(PileBunker)));

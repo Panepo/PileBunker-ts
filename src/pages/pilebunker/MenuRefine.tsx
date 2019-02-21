@@ -1,11 +1,11 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import * as ActionsCalc from '../actions/actionCalc';
-import { RootState } from '../reducers/index';
+import * as ActionsCalc from '../../actions/actionCalc';
+import { RootState } from '../../reducers/index';
 import { createStyles, Theme, WithStyles, withStyles } from '@material-ui/core';
 import Button from '@material-ui/core/Button';
-import { MenuList, menuRefineList } from '../constants/ConstMenuList';
+import { MenuList, menuRefineList } from '../../constants/ConstMenuList';
 
 export namespace MenuRefine {
   export interface Props extends WithStyles<typeof styles> {

@@ -5,7 +5,7 @@ import { ConnectedRouter } from 'connected-react-router';
 import Header from './index/Header';
 import Ribbon from './index/Ribbon';
 import Footer from './index/Footer';
-import Pilebunker from './pages/Pilebunker';
+import PileBunker from './pages/pilebunker/PileBunker';
 import { createStyles, Theme, WithStyles, withStyles } from '@material-ui/core';
 import withRoot from './withRoot';
 
@@ -25,8 +25,8 @@ const styles = (theme: Theme) => createStyles({
 class App extends React.Component<App.Props> {
   routes = (
     <div>
-      <Route exact={true} path="/" component={Pilebunker} />
-      <Route exact={true} path="/pilebunker" component={Pilebunker} />
+      <Route exact={true} path="/" component={PileBunker} />
+      <Route exact={true} path="/pilebunker" component={PileBunker} />
     </div>
   );
 

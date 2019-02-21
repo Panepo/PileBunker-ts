@@ -1,10 +1,9 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { CharInput } from '../model/modelCalc';
-import { CharInfo } from '../model/modelQuery';
-import * as ActionsCalc from '../actions/actionCalc';
-import { RootState } from '../reducers/index';
+import { WeaponInfo } from '../../model/modelCalc';
+import * as ActionsCalc from '../../actions/actionCalc';
+import { RootState } from '../../reducers/index';
 import { createStyles, Theme, WithStyles, withStyles } from '@material-ui/core';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -13,20 +12,17 @@ import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import Checkbox from '@material-ui/core/Checkbox';
-import MucTableHead from '../components/MucTableHead';
-import { stableSort, getSorting } from '../helpers/table.helper';
-import { tableCharHead } from '../constants/ConstTable';
-import { listType } from '../constants/ConstCalc';
+import MucTableHead from '../../components/MucTableHead';
+import { stableSort, getSorting } from '../../helpers/table.helper';
+import { tableWeaponHead } from '../../constants/ConstTable';
 
-export namespace TableChar {
+export namespace TableWeapon {
   export interface Props extends WithStyles<typeof styles> {
     actionsC: typeof ActionsCalc;
-    charInput: CharInput;
-    charInfo: CharInfo[];
-    closeFunction: () => void;
+    weaponInfo: WeaponInfo[];
   }
   export interface State {
-    data: CharInfo[];
+    data: WeaponInfo[];
     order: 'asc' | 'desc';
     orderBy: string;
     page: number;
@@ -46,25 +42,20 @@ const styles = (theme: Theme) => createStyles({
   tableWrapper: {
     overflowX: 'auto',
   },
-  typeImage: {
-    width: 15,
-    height: 15,
-    marginRight: theme.spacing.unit,
-  }
 });
 
-class TableChar extends React.Component<TableChar.Props, TableChar.State> {
+class TableWeapon extends React.Component<TableWeapon.Props, TableWeapon.State> {
   state = {
     order: 'desc' as 'asc' | 'desc',
-    orderBy: 'rarity',
+    orderBy: 'dps',
     selected: [] as number[],
-    data: this.props.charInfo,
+    data: this.props.weaponInfo,
     page: 0,
-    rowsPerPage: 5,
+    rowsPerPage: 10,
   };
 
-  static getDerivedStateFromProps(nextProps: Readonly<TableChar.Props>) {
-    return { data: nextProps.charInfo };
+  static getDerivedStateFromProps(nextProps: Readonly<TableWeapon.Props>) {
+    return { data: nextProps.weaponInfo };
   }
 
   handleRequestSort = (event: any, property: string) => {
@@ -115,23 +106,8 @@ class TableChar extends React.Component<TableChar.Props, TableChar.State> {
     this.setState({ rowsPerPage: event.target.value });
   };
 
-  handleSelect = (event: any, atF: string) => {
-    this.props.closeFunction();
-    this.props.actionsC.charInput({...this.props.charInput, charAtkParm: +atF * 100 });
-  }
-
-  renderTypeIcon = (weapon: string): JSX.Element => {
-    for (let i = 0; i < listType.length; i += 1) {
-      if (listType[i].cname === weapon) {
-        return (
-          <label>
-            <img className={this.props.classes.typeImage} src={listType[i].image} alt={listType[i].name} />
-            {weapon}
-          </label>
-        );
-      }
-    }
-    return <label>{weapon}</label>;
+  handleRefine = (name: string) => (event: any) => {
+    this.props.actionsC.refineChange(name);
   }
 
   isSelected = (id: number) => this.state.selected.indexOf(id) !== -1;
@@ -152,17 +128,16 @@ class TableChar extends React.Component<TableChar.Props, TableChar.State> {
               onSelectAllClick={this.handleSelectAllClick}
               onRequestSort={this.handleRequestSort}
               rowCount={data.length}
-              rows={tableCharHead}
+              rows={tableWeaponHead}
             />
             <TableBody>
               {stableSort(data, getSorting(order, orderBy))
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                .map((n: CharInfo) => {
+                .map((n: WeaponInfo) => {
                   const isSelected = this.isSelected(n.id);
                   return (
                     <TableRow
                       hover
-                      onClick={event => this.handleClick(event, n.id)}
                       role="checkbox"
                       aria-checked={isSelected}
                       tabIndex={-1}
@@ -170,18 +145,19 @@ class TableChar extends React.Component<TableChar.Props, TableChar.State> {
                       selected={isSelected}
                     >
                       <TableCell padding="checkbox">
-                        <Checkbox checked={isSelected} onClick={event => this.handleSelect(event, n.atF)}/>
+                        <Checkbox checked={isSelected} onClick={event => this.handleClick(event, n.id)}/>
                       </TableCell>
                       <TableCell component="th" scope="row" padding="none">
                         {n.name}
                       </TableCell>
-                      <TableCell align="left" padding="dense">{this.renderTypeIcon(n.weapon)}</TableCell>
-                      <TableCell align="left" padding="dense">{n.rarity}</TableCell>
-                      <TableCell align="left" padding="dense">{n.plain}</TableCell>
-                      <TableCell align="left" padding="dense">{n.hpF}</TableCell>
-                      <TableCell align="left" padding="dense">{n.atF}</TableCell>
-                      <TableCell align="left" padding="dense">{n.dfF}</TableCell>
-                      <TableCell align="left" padding="dense">{n.totF}</TableCell>
+                      <TableCell align="left" padding="dense">{n.rare}</TableCell>
+                      <TableCell align="left" padding="dense" onClick={this.handleRefine(n.name)}>{n.refText}</TableCell>
+                      <TableCell align="left" padding="dense">{n.atk}</TableCell>
+                      <TableCell align="left" padding="dense">{n.damage}</TableCell>
+                      <TableCell align="left" padding="dense">{n.dps}</TableCell>
+                      <TableCell align="left" padding="dense">{n.frame1}</TableCell>
+                      <TableCell align="left" padding="dense">{n.frame2}</TableCell>
+                      <TableCell align="left" padding="dense">{n.text}</TableCell>
                     </TableRow>
                   );
                 })}
@@ -215,8 +191,7 @@ class TableChar extends React.Component<TableChar.Props, TableChar.State> {
 
 function mapStateToProps(state: RootState) {
   return {
-    charInfo: state.reducerQuery.output,
-    charInput: state.reducerCalc.charInput
+    weaponInfo: state.reducerCalc.output,
   };
 }
 
@@ -226,4 +201,4 @@ function mapDispatchToProps(dispatch: any) {
   };
 }
 
-export default withStyles(styles)(connect(mapStateToProps, mapDispatchToProps)(TableChar));
+export default withStyles(styles)(connect(mapStateToProps, mapDispatchToProps)(TableWeapon));
