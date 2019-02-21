@@ -3,7 +3,8 @@ import { connect } from 'react-redux';
 import { RouteComponentProps } from 'react-router';
 import { RootState } from '../reducers/index';
 import { CharInput } from '../model/modelCalc';
-import { createStyles, Theme, WithStyles, withStyles } from '@material-ui/core';
+import { createStyles, Theme, WithStyles, withStyles, withWidth } from '@material-ui/core';
+import { WithWidth } from '@material-ui/core/withWidth';
 import MenuChar from '../containers/MenuChar';
 import MenuBuff from '../containers/MenuBuff';
 import MenuEnemy from '../containers/MenuEnemy';
@@ -19,9 +20,10 @@ import RecentActorsIcon from '@material-ui/icons/RecentActors';
 import BuildIcon from '@material-ui/icons/Build';
 import PlaylistAddIcon from '@material-ui/icons/PlaylistAdd';
 import BugReportIcon from '@material-ui/icons/BugReport';
+import { isSmartphone } from '../helpers/responsive.helper';
 
 export namespace Pilebunker {
-  export interface Props extends RouteComponentProps<void>, WithStyles<typeof styles> {
+  export interface Props extends RouteComponentProps<void>, WithStyles<typeof styles>, WithWidth {
     charInput: CharInput;
   }
   export interface State {
@@ -67,8 +69,8 @@ class Pilebunker extends React.Component<Pilebunker.Props, Pilebunker.State> {
   render(): JSX.Element {
     return (
       <main className={this.props.classes.root}>
-        <Grid container className={this.props.classes.grid} justify="center" spacing={16}>
-          <Grid item xs={8}>
+        <Grid container className={this.props.classes.grid} justify="center">
+          <Grid item xs={isSmartphone(this.props.width) ? 12 : 8}>
             <ExpansionPanel expanded={this.state.expanded === 'panel1'} onChange={this.handleChange('panel1')}>
               <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
                 <RecentActorsIcon color="primary" className={this.props.classes.icon} />
@@ -119,4 +121,4 @@ function mapStateToProps(state: RootState) {
   };
 }
 
-export default withStyles(styles)(connect(mapStateToProps)(Pilebunker));
+export default withStyles(styles)(connect(mapStateToProps)(withWidth()(Pilebunker)));

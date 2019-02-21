@@ -6,15 +6,11 @@ import Header from './index/Header';
 import Ribbon from './index/Ribbon';
 import Footer from './index/Footer';
 import Pilebunker from './pages/Pilebunker';
-
-// import { isSmartphone } from './responsive';
-
-import { createStyles, Theme, WithStyles, withStyles, withWidth } from '@material-ui/core';
+import { createStyles, Theme, WithStyles, withStyles } from '@material-ui/core';
 import withRoot from './withRoot';
-import { WithWidth } from '@material-ui/core/withWidth';
 
 export namespace App {
-  export interface Props extends RouteComponentProps<void>, WithStyles<typeof styles>, WithWidth {
+  export interface Props extends RouteComponentProps<void>, WithStyles<typeof styles> {
   }
 }
 
@@ -48,4 +44,4 @@ class App extends React.Component<App.Props> {
   }
 }
 
-export default withRoot(withStyles(styles)(withWidth()(App)));
+export default withRoot(withStyles(styles)(App));

@@ -13,7 +13,7 @@ import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import Checkbox from '@material-ui/core/Checkbox';
 import MucTableHead from '../components/MucTableHead';
-import { stableSort, getSorting } from '../functions/funcTable';
+import { stableSort, getSorting } from '../helpers/table.helper';
 import { tableWeaponHead } from '../constants/ConstTable';
 
 export namespace TableWeapon {

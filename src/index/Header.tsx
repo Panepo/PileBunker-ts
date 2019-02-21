@@ -1,5 +1,6 @@
 import * as React from 'react';
-import { createStyles, Theme, WithStyles, withStyles } from '@material-ui/core';
+import { createStyles, Theme, WithStyles, withStyles, withWidth } from '@material-ui/core';
+import { WithWidth } from '@material-ui/core/withWidth';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
@@ -13,6 +14,15 @@ import IconBookmark from '@material-ui/icons/Bookmarks';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import { LinkInterface, listLink, listDrawer } from '../constants/ConstLink';
+import { isSmartphone } from '../helpers/responsive.helper';
+
+export namespace Header {
+  export interface Props extends WithStyles<typeof styles>, WithWidth {
+  }
+  export interface State {
+    drawer: boolean;
+  }
+}
 
 const styles = (theme: Theme) => createStyles({
   root: {},
@@ -40,11 +50,7 @@ const styles = (theme: Theme) => createStyles({
   }
 });
 
-export interface State {
-  drawer: boolean;
-}
-
-class Header extends React.Component<WithStyles<typeof styles>, State> {
+class Header extends React.Component<Header.Props, Header.State> {
   state = {
     drawer: false
   };
@@ -121,10 +127,10 @@ class Header extends React.Component<WithStyles<typeof styles>, State> {
               variant="h6"
               color="inherit"
               className={this.props.classes.grow}
-              noWrap>
-              <b>城プロRE 武器傷害機算機 蓬萊パイルバンカー</b>
+              noWrap={!isSmartphone(this.props.width)}>
+              <b>{isSmartphone(this.props.width) ? '武器傷害機算機パイルバンカー' : '城プロRE 武器傷害機算機 蓬萊パイルバンカー'}</b>
             </Typography>
-            {renderLink}
+            {isSmartphone(this.props.width) ? null : renderLink}
           </Toolbar>
         </AppBar>
       </header>
@@ -132,4 +138,4 @@ class Header extends React.Component<WithStyles<typeof styles>, State> {
   }
 }
 
-export default withStyles(styles)(Header);
+export default withStyles(styles)((withWidth()(Header)));
