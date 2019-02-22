@@ -67,7 +67,7 @@ class MenuChar extends React.Component<MenuChar.Props, MenuChar.State> {
   };
 
   handleChange = (name: string) => (event: any) => {
-    if (event.target.value.length > 0) {
+    if (event.target.value != null) {
       switch (name) {
         case 'charType': {
           this.props.actionsQ.charQuery({...this.props.charQuery, type: event.target.value });

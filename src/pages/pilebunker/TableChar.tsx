@@ -125,7 +125,7 @@ class TableChar extends React.Component<TableChar.Props, TableChar.State> {
       if (listType[i].cname === weapon) {
         return (
           <label>
-            <img className={this.props.classes.typeImage} src={listType[i].image} alt={listType[i].name} />
+            <img className={this.props.classes.typeImage} key={listType[i].name} src={listType[i].image} alt={listType[i].name} />
             {weapon}
           </label>
         );
