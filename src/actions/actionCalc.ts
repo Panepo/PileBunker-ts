@@ -35,3 +35,10 @@ export function refineChangeMarco(command: string): Action<string> {
     payload: command
   };
 }
+
+export function charQuery(wepId: number): Action<number> {
+  return {
+    type: ActionType.WEAPON_QUERY,
+    payload: wepId
+  };
+}

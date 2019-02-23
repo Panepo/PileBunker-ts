@@ -3,6 +3,7 @@ import { Action, ActionType } from '../model/model';
 import { CharInput, BuffInput, EnemyInput, CalcState } from '../model/modelCalc';
 import { calcOutput } from './calcOutput';
 import { updateRefine, updateRefineMarco } from './calcRefine';
+import { queryWeapon } from '../raw/dbQuery';
 
 const initialChar: CharInput = {
   charType: 'sword',
@@ -42,6 +43,7 @@ const initialState: CalcState = {
   buffInput: initialBuff,
   enemyInput: initialEnemy,
   output: calcOutput(initialChar, initialBuff, initialEnemy),
+  wepQuery: queryWeapon(1)
 };
 
 describe('calc reducer test', () => {
@@ -70,6 +72,7 @@ describe('calc reducer test', () => {
       buffInput: initialBuff,
       enemyInput: initialEnemy,
       output: calcOutput(action.payload, initialBuff, initialEnemy),
+      wepQuery: queryWeapon(1)
     };
     expect(reducerCalc(initialState, action)).toEqual(outputState);
   });
@@ -95,6 +98,7 @@ describe('calc reducer test', () => {
       buffInput: action.payload,
       enemyInput: initialEnemy,
       output: calcOutput(initialChar, action.payload, initialEnemy),
+      wepQuery: queryWeapon(1)
     };
     expect(reducerCalc(initialState, action)).toEqual(outputState);
   });
@@ -118,6 +122,7 @@ describe('calc reducer test', () => {
       buffInput: initialBuff,
       enemyInput: action.payload,
       output: calcOutput(initialChar, initialBuff, action.payload),
+      wepQuery: queryWeapon(1)
     };
     expect(reducerCalc(initialState, action)).toEqual(outputState);
   });
@@ -133,6 +138,7 @@ describe('calc reducer test', () => {
       buffInput: initialBuff,
       enemyInput: initialEnemy,
       output: calcOutput(initialChar, initialBuff, initialEnemy),
+      wepQuery: queryWeapon(1)
     };
     expect(reducerCalc(initialState, action)).toEqual(outputState);
   });
@@ -148,6 +154,7 @@ describe('calc reducer test', () => {
       buffInput: initialBuff,
       enemyInput: initialEnemy,
       output: calcOutput(initialChar, initialBuff, initialEnemy),
+      wepQuery: queryWeapon(1)
     };
     expect(reducerCalc(initialState, action)).toEqual(outputState);
   });

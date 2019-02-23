@@ -38,6 +38,7 @@ export interface CalcState {
   buffInput: BuffInput;
   enemyInput: EnemyInput;
   output: WeaponInfo[];
+  wepQuery: WeaponInfo;
 }
 
 // slotType: <[name cname frame1 frame2 range hp atk def hpM atkM defM]>

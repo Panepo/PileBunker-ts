@@ -3,6 +3,7 @@ import { Action, ActionType } from '../model/model';
 import { CharInput, BuffInput, EnemyInput, CalcState } from '../model/modelCalc';
 import { calcOutput } from './calcOutput';
 import { updateRefine, updateRefineMarco } from './calcRefine';
+import { queryWeapon } from '../raw/dbQuery';
 
 const initialChar: CharInput = {
   charType: 'sword',
@@ -42,6 +43,7 @@ const initialState: CalcState = {
   buffInput: initialBuff,
   enemyInput: initialEnemy,
   output: calcOutput(initialChar, initialBuff, initialEnemy),
+  wepQuery: queryWeapon(1)
 };
 
 export const reducerCalc = createReducer(initialState, {
@@ -61,5 +63,8 @@ export const reducerCalc = createReducer(initialState, {
   [ActionType.REFINE_CHANGE_MARCO](state: CalcState, action: Action<string>) {
     updateRefineMarco(action.payload);
     return { ...state, output: calcOutput(state.charInput, state.buffInput, state.enemyInput) };
+  },
+  [ActionType.WEAPON_QUERY](state: CalcState, action: Action<number>) {
+    return { ...state, wepQuery: queryWeapon(action.payload) };
   },
 });
