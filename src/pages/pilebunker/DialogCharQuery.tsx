@@ -17,7 +17,7 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import Button from '@material-ui/core/Button';
 import { listType, ListType, listRarity, ListRarity, listTerrain, ListTerrain } from '../../constants/ConstCalc';
 
-export namespace MenuQuery {
+export namespace DialogCharQuery {
   export interface Props extends WithStyles<typeof styles> {
     actionsQ: typeof ActionsQuery;
     actionsC: typeof ActionsCalc;
@@ -41,7 +41,7 @@ const styles = (theme: Theme) => createStyles({
   }
 });
 
-class MenuQuery extends React.Component<MenuQuery.Props> {
+class DialogCharQuery extends React.Component<DialogCharQuery.Props> {
   // ================================================================================
   // Render select character type
   // ================================================================================
@@ -211,4 +211,4 @@ function mapDispatchToProps(dispatch: any) {
   };
 }
 
-export default withStyles(styles)(connect(mapStateToProps, mapDispatchToProps)(MenuQuery));
+export default withStyles(styles)(connect(mapStateToProps, mapDispatchToProps)(DialogCharQuery));

@@ -7,7 +7,7 @@ import * as ActionsQuery from '../../actions/actionQuery';
 import * as ActionsCalc from '../../actions/actionCalc';
 import { RootState } from '../../reducers/index';
 import { createStyles, Theme, WithStyles, withStyles } from '@material-ui/core';
-import MenuQuery from './MenuQuery';
+import DialogCharQuery from './DialogCharQuery';
 import InputLabel from '@material-ui/core/InputLabel';
 import Select from '@material-ui/core/Select';
 import FormControl from '@material-ui/core/FormControl';
@@ -163,7 +163,7 @@ class MenuChar extends React.Component<MenuChar.Props, MenuChar.State> {
 
   renderSelectDialog = (): JSX.Element => {
     return (
-      <MenuQuery
+      <DialogCharQuery
         statusDialog={this.state.statusDialog}
         statusFunction={this.handleCharClose}
         />

@@ -28,6 +28,7 @@ export namespace TableWeapon {
     page: number;
     rowsPerPage: number;
     selected: number[];
+    statusDialog: boolean;
   }
 }
 
@@ -52,6 +53,7 @@ class TableWeapon extends React.Component<TableWeapon.Props, TableWeapon.State> 
     data: this.props.weaponInfo,
     page: 0,
     rowsPerPage: 10,
+    statusDialog: false,
   };
 
   static getDerivedStateFromProps(nextProps: Readonly<TableWeapon.Props>) {
@@ -108,6 +110,14 @@ class TableWeapon extends React.Component<TableWeapon.Props, TableWeapon.State> 
 
   handleRefine = (name: string) => (event: any) => {
     this.props.actionsC.refineChange(name);
+  }
+
+  handleQueryOpen = () => {
+    this.setState({ statusDialog: true});
+  }
+
+  handleQueryClose = () => {
+    this.setState({ statusDialog: false});
   }
 
   isSelected = (id: number) => this.state.selected.indexOf(id) !== -1;
