@@ -169,10 +169,18 @@ export const calcOutput = (charInput: CharInput, buffInput: BuffInput, enemyInpu
     }
     data.dps =
       Math.floor(
-        ((data.damage * data.hit * parameters.valueFPS) /
-          (data.frame1 + data.frame2)) *
+        ((data.damage * data.hit) / (data.frame1 + data.frame2)) *
           100
       ) / 100;
+
+    let timeTemp = Math.ceil(enemyInput.enemyHitpoint / data.dps) * (data.frame1 + data.frame2);
+    if (data.target === 0) {
+      data.time = timeTemp;
+    } else if (data.target >= enemyInput.enemyNumber) {
+      data.time = timeTemp;
+    } else {
+      data.time = timeTemp * Math.ceil(enemyInput.enemyNumber / data.target);
+    }
 
     return data;
   });

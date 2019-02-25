@@ -22,7 +22,7 @@ export const menuBuffSwitch: MenuList[] = [
 
 export const menuEnemyList: MenuList[] = [
   { id: 'select-enemyNumber', label: '數目', value: 'enemyNumber' },
-  { id: 'select-enemyHitpoint', label: '體力', value: 'enemyHitpoint' },
+  { id: 'select-enemyHitpoint', label: '耐久', value: 'enemyHitpoint' },
   { id: 'select-enemyDef', label: '防禦力', value: 'enemyDef' },
   { id: 'select-enemyDefPercent', label: '防禦力減少%', value: 'enemyDefPercent' },
   { id: 'select-enemyDefNumber', label: '防禦力減少', value: 'enemyDefNumber' },

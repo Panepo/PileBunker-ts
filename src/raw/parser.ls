@@ -23,6 +23,7 @@ for weapon, i in outWeapon
   weapon.frame1 = 0
   weapon.frame2 = 0
   weapon.dps = 0
+  weapon.time = 0
 
 outWeapon = JSON.stringify outWeapon
 console.log 'weapons.json arrange complete!'

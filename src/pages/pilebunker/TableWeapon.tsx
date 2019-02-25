@@ -162,11 +162,9 @@ class TableWeapon extends React.Component<TableWeapon.Props, TableWeapon.State> 
                       </TableCell>
                       <TableCell align="left" padding="dense">{n.rare}</TableCell>
                       <TableCell align="left" padding="dense" onClick={this.handleRefine(n.name)}>{n.refText}</TableCell>
-                      <TableCell align="left" padding="dense">{n.atk}</TableCell>
                       <TableCell align="left" padding="dense">{n.damage}</TableCell>
                       <TableCell align="left" padding="dense">{n.dps}</TableCell>
-                      <TableCell align="left" padding="dense">{n.frame1}</TableCell>
-                      <TableCell align="left" padding="dense">{n.frame2}</TableCell>
+                      <TableCell align="left" padding="dense">{n.time}</TableCell>
                       <TableCell align="left" padding="dense">{n.text}</TableCell>
                     </TableRow>
                   );
