@@ -36,7 +36,7 @@ export function refineChangeMarco(command: string): Action<string> {
   };
 }
 
-export function charQuery(wepId: number): Action<number> {
+export function weaponQuery(wepId: number): Action<number> {
   return {
     type: ActionType.WEAPON_QUERY,
     payload: wepId

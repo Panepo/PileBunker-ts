@@ -13,6 +13,7 @@ import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import Checkbox from '@material-ui/core/Checkbox';
 import MucTableHead from '../../components/MucTableHead';
+import DialogWepQuery from './DialogWepQuery';
 import { stableSort, getSorting } from '../../helpers/table.helper';
 import { tableWeaponHead } from '../../constants/ConstTable';
 
@@ -112,8 +113,9 @@ class TableWeapon extends React.Component<TableWeapon.Props, TableWeapon.State> 
     this.props.actionsC.refineChange(name);
   }
 
-  handleQueryOpen = () => {
+  handleQueryOpen = (wepId: number) => (event: any) => {
     this.setState({ statusDialog: true});
+    this.props.actionsC.weaponQuery(wepId);
   }
 
   handleQueryClose = () => {
@@ -130,6 +132,10 @@ class TableWeapon extends React.Component<TableWeapon.Props, TableWeapon.State> 
     return (
       <Paper className={classes.root}>
         <div className={classes.tableWrapper}>
+          <DialogWepQuery
+            statusDialog={this.state.statusDialog}
+            statusFunction={this.handleQueryClose}
+            />
           <Table className={classes.table} aria-labelledby="tableTitle">
             <MucTableHead
               numSelected={selected.length}
@@ -157,7 +163,7 @@ class TableWeapon extends React.Component<TableWeapon.Props, TableWeapon.State> 
                       <TableCell padding="checkbox">
                         <Checkbox checked={isSelected} onClick={event => this.handleClick(event, n.id)}/>
                       </TableCell>
-                      <TableCell component="th" scope="row" padding="none">
+                      <TableCell component="th" scope="row" padding="none" onClick={this.handleQueryOpen(n.id)}>
                         {n.name}
                       </TableCell>
                       <TableCell align="left" padding="dense">{n.rare}</TableCell>
