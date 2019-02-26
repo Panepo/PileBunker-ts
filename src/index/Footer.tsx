@@ -20,11 +20,11 @@ class Footer extends React.Component<WithStyles<typeof styles>> {
   render(): JSX.Element {
     return (
       <footer className={this.props.classes.root}>
-        <Typography className={this.props.classes.text}>
-          <div>『<a href="http://www.dmm.com/netgame_s/oshirore/">城プロRE</a>』(C) DMMゲームズ</div>
-          <div>「城プロRE」から転載された全てのコンテンツの著作権につきましては、権利者様へ帰属します。</div>
-          <div>Copyright &copy; Panepo@Github 2018 All Rights Reserved.</div>
-        </Typography>
+        <div className={this.props.classes.text}>
+          <Typography>『<a href="http://www.dmm.com/netgame_s/oshirore/">城プロRE</a>』(C) DMMゲームズ</Typography>
+          <Typography>「城プロRE」から転載された全てのコンテンツの著作権につきましては、権利者様へ帰属します。</Typography>
+          <Typography>Copyright &copy; Panepo@Github 2018 All Rights Reserved.</Typography>
+        </div>
       </footer>
     );
   }

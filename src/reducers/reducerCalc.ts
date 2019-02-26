@@ -24,7 +24,6 @@ const initialBuff: BuffInput = {
   buffHitnumber: 0,
   buffIgoreDef: 0,
   buffTerrain: true,
-  buffDirect: true,
 };
 
 const initialEnemy: EnemyInput = {

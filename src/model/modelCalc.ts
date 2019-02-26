@@ -18,7 +18,6 @@ export interface BuffInput {
   buffHitnumber: number; // バフ攻撃対象数
   buffIgoreDef: number; // バフ無視防禦%
   buffTerrain: boolean; // 地形適性有無
-  buffDirect: boolean; // 直擊有無
 }
 
 export interface EnemyInput {

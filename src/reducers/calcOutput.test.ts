@@ -42,3 +42,15 @@ describe('Query weapon type data', () => {
     expect(calc.checkType('test')).toEqual(output);
   });
 });
+
+describe('Calculate cannon time', () => {
+  it('should calculate the correct time', () => {
+    expect(calc.calcCannonTime(100, 50, 1000, 1)).toEqual(10);
+    expect(calc.calcCannonTime(100, 50, 1000, 2)).toEqual(15);
+    expect(calc.calcCannonTime(100, 50, 1000, 3)).toEqual(18);
+    expect(calc.calcCannonTime(100, 50, 1000, 4)).toEqual(19);
+    expect(calc.calcCannonTime(100, 50, 1000, 5)).toEqual(20);
+    expect(calc.calcCannonTime(100, 50, 1000, 6)).toEqual(20);
+    expect(calc.calcCannonTime(100, 50, 1000, 7)).toEqual(20);
+  });
+});

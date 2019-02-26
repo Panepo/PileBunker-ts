@@ -24,7 +24,6 @@ const initialBuff: BuffInput = {
   buffHitnumber: 0,
   buffIgoreDef: 0,
   buffTerrain: true,
-  buffDirect: true,
 };
 
 const initialEnemy: EnemyInput = {
@@ -90,7 +89,6 @@ describe('calc reducer test', () => {
         buffHitnumber: 0,
         buffIgoreDef: 20,
         buffTerrain: true,
-        buffDirect: true,
       },
     };
     const outputState: CalcState = {

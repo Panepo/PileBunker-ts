@@ -60,6 +60,8 @@ export const calcOutput = (charInput: CharInput, buffInput: BuffInput, enemyInpu
     .data();
   let maxMux: number = 1;
   let paraMux: number = 1;
+  let paraMuxSub: number = 1;
+  let subSwitch: boolean = false;
   let totalDef: number = 0;
   let charAtk: number = calcAtk(charInput);
   const weaponType: ListType = checkType(charInput.charType);
@@ -90,7 +92,9 @@ export const calcOutput = (charInput: CharInput, buffInput: BuffInput, enemyInpu
 
   // ===============================================================
   // 砲弾が敵に直撃した場合、攻撃力が50%アップ。
-  if (charInput.charType === 'cannon' && buffInput.buffDirect) {
+  if (charInput.charType === 'cannon') {
+    paraMuxSub = paraMux;
+    subSwitch = true;
     if (buffInput.buffDirectUp === 0) {
       paraMux *= 1 + parameters.muxCanDirect;
     } else {
@@ -127,6 +131,9 @@ export const calcOutput = (charInput: CharInput, buffInput: BuffInput, enemyInpu
   weaponSelected.map(data => {
     let totalAtk: number = 0;
     let paraMuxTemp: number = paraMux;
+    let paraMuxTempSub: number = paraMuxSub;
+    let totalAtkSub: number = 0;
+    let damageSub: number = 0;
 
     // ===============================================================
     // 飛行敵に対する特殊武器攻撃力ボーナス
@@ -140,9 +147,11 @@ export const calcOutput = (charInput: CharInput, buffInput: BuffInput, enemyInpu
 
     // ===============================================================
     // 直擊に対する特殊武器攻撃力ボーナス
-    if (charInput.charType === 'hammer' && buffInput.buffDirect) {
+    if (charInput.charType === 'hammer') {
       for (let i = 0; i < parameters.weaponAtkUp.length; i += 1) {
         if (parameters.weaponAtkUp[i] === data.name) {
+          paraMuxTempSub = paraMuxTemp;
+          subSwitch = true;
           paraMuxTemp *= (1 + parameters.weaponAtkUpValue / 100);
         }
       }
@@ -173,14 +182,23 @@ export const calcOutput = (charInput: CharInput, buffInput: BuffInput, enemyInpu
           100
       ) / 100;
 
-    let timeTemp = Math.ceil(enemyInput.enemyHitpoint / data.dps) * (data.frame1 + data.frame2);
-    if (data.target === 0) {
-      data.time = timeTemp;
-    } else if (data.target >= enemyInput.enemyNumber) {
-      data.time = timeTemp;
-    } else {
-      data.time = timeTemp * Math.ceil(enemyInput.enemyNumber / data.target);
+    if (subSwitch) {
+      totalAtkSub =
+        ((charAtk + data.atk) * maxMux * (1 + buffInput.buffAtkPercent / 100) +
+        buffInput.buffAtkNumber) *
+        paraMuxTempSub;
+
+      damageSub = calcDam(
+          totalAtkSub,
+          totalDef,
+          data.name,
+          buffInput.buffDamageUp,
+          enemyInput.enemyDamageUp
+        );
+      console.log(damageSub);
     }
+
+    data.time = calcTime(data, enemyInput, damageSub);
 
     return data;
   });
@@ -218,4 +236,42 @@ export const calcAtkDef = (atk: number, def: number, skillDamUp: number, skillRe
     );
   }
   return damage;
+};
+
+export const calcTime = (data: WeaponInfo, enemy: EnemyInput, damageSub: number): number => {
+  let timeDamage = Math.ceil(enemy.enemyHitpoint / data.damage) * (data.frame1 + data.frame2);
+
+  switch (data.type) {
+    case 'bell':
+      return Math.ceil(enemy.enemyHitpoint / data.dps);
+    case 'cannon':
+      return calcCannonTime(data.damage, damageSub, enemy.enemyHitpoint, enemy.enemyNumber) * (data.frame1 + data.frame2);
+    case 'hammer':
+      if (damageSub !== 0) {
+        return calcCannonTime(data.damage, damageSub, enemy.enemyHitpoint, enemy.enemyNumber) * (data.frame1 + data.frame2);
+      } else {
+        return timeDamage;
+      }
+    default:
+      if (data.target === 0) {
+        return timeDamage;
+      } else if (data.target >= enemy.enemyNumber) {
+        return timeDamage;
+      } else {
+        return timeDamage * Math.ceil(enemy.enemyNumber / data.target);
+      }
+  }
+};
+
+export const calcCannonTime = (damage: number, damageSub: number, eHit: number, eNum: number): number => {
+  let time = 0;
+
+  const loopTemp = Math.ceil(eHit / damageSub);
+  const maxloop = eNum > loopTemp ? loopTemp : eNum;
+
+  for (let i = 0; i < maxloop; i += 1) {
+    let timeTemp = Math.ceil((eHit - time * damageSub) / damage ) ;
+    time += timeTemp;
+  }
+  return time;
 };

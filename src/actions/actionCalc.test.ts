@@ -30,7 +30,6 @@ describe('action calc test', () => {
       buffHitnumber: 0,
       buffIgoreDef: 0,
       buffTerrain: true,
-      buffDirect: true,
     };
     const expectedAction = {
       type: ActionType.INPUT_BUFF_CHANGE,

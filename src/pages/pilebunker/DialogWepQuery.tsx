@@ -69,13 +69,13 @@ class DialogWepQuery extends React.Component<DialogWepQuery.Props> {
           <ListItemIcon>
             <IconSchedule color="primary"/>
           </ListItemIcon>
-          <ListItemText primary={'攻撃間隔: ' + this.state.data.f1} />
+          <ListItemText primary={'攻撃間隔: ' + this.state.data.frame1} />
         </ListItem>
         <ListItem button>
           <ListItemIcon>
             <IconRestore color="primary"/>
           </ListItemIcon>
-          <ListItemText primary={'攻撃後の隙: ' + this.state.data.f2} />
+          <ListItemText primary={'攻撃後の隙: ' + this.state.data.frame2} />
         </ListItem>
         <ListItem button>
           <ListItemIcon>
@@ -148,9 +148,9 @@ class DialogWepQuery extends React.Component<DialogWepQuery.Props> {
         <DialogTitle id="select-dialog-title">
           <div>
             {this.renderTypeIcon()}
-            {this.state.data.name}
+            {this.state.data.refText + ' ' + this.state.data.name}
           </div>
-          <div>{this.renderRarity()}</div>
+          {this.renderRarity()}
         </DialogTitle>
         <DialogContent>
           <DialogContentText id="select-dialog-description">

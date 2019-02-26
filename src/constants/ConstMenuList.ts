@@ -17,7 +17,6 @@ export const menuBuffList: MenuList[] = [
 
 export const menuBuffSwitch: MenuList[] = [
   { id: 'switch-buffTerrain', label: '地形適性', value: 'buffTerrain' },
-  { id: 'switch-buffDirect', label: '直擊', value: 'buffDirect' },
 ];
 
 export const menuEnemyList: MenuList[] = [
