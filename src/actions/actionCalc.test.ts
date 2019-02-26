@@ -74,4 +74,13 @@ describe('action calc test', () => {
     };
     expect(actionCalc.refineChangeMarco(input)).toEqual(expectedAction);
   });
+
+  it('should create a correct action', () => {
+    const input: number = 123;
+    const expectedAction = {
+      type: ActionType.WEAPON_QUERY,
+      payload: input
+    };
+    expect(actionCalc.weaponQuery(input)).toEqual(expectedAction);
+  });
 });

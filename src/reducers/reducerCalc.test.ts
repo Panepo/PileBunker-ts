@@ -158,4 +158,19 @@ describe('calc reducer test', () => {
     };
     expect(reducerCalc(initialState, action)).toEqual(outputState);
   });
+
+  it('should handle WEAPON_QUERY', () => {
+    const action: Action<number> = {
+      type: ActionType.WEAPON_QUERY,
+      payload: 100,
+    };
+    const outputState: CalcState = {
+      charInput: initialChar,
+      buffInput: initialBuff,
+      enemyInput: initialEnemy,
+      output: calcOutput(initialChar, initialBuff, initialEnemy),
+      wepQuery: queryWeapon(100)
+    };
+    expect(reducerCalc(initialState, action)).toEqual(outputState);
+  });
 });
