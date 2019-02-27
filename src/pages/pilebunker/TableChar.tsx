@@ -115,9 +115,11 @@ class TableChar extends React.Component<TableChar.Props, TableChar.State> {
     this.setState({ rowsPerPage: event.target.value });
   };
 
-  handleSelect = (event: any, atF: string) => {
+  handleSelect = (event: any, atF: string, dfF: string, hpF: string) => {
     this.props.closeFunction();
-    this.props.actionsC.charInput({...this.props.charInput, charAtkParm: +atF * 100 });
+    this.props.actionsC.charInput(
+      {...this.props.charInput, charAtkParm: +atF * 100, charDefParm: +dfF * 100, charHPParm: +hpF * 100 }
+      );
   }
 
   renderTypeIcon = (weapon: string): JSX.Element => {
@@ -170,7 +172,7 @@ class TableChar extends React.Component<TableChar.Props, TableChar.State> {
                       selected={isSelected}
                     >
                       <TableCell padding="checkbox">
-                        <Checkbox checked={isSelected} onClick={event => this.handleSelect(event, n.atF)}/>
+                        <Checkbox checked={isSelected} onClick={event => this.handleSelect(event, n.atF, n.dfF, n.hpF)}/>
                       </TableCell>
                       <TableCell component="th" scope="row" padding="none">
                         {n.name}

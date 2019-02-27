@@ -15,6 +15,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import TextField from '@material-ui/core/TextField';
 import { listType, ListType, listMax, ListMax } from '../../constants/ConstCalc';
 import NumberFormat from 'react-number-format';
+import * as calcChar from '../../reducers/calcChar';
 
 export namespace MenuChar {
   export interface Props extends WithStyles<typeof styles> {
@@ -227,16 +228,56 @@ class MenuChar extends React.Component<MenuChar.Props, MenuChar.State> {
     );
   };
 
+  renderCharInfo = (): JSX.Element => {
+    return (
+      <div>
+        <TextField
+            id="standard-name"
+            label="耐久"
+            className={this.props.classes.formControl}
+            value={calcChar.calcHP(this.props.charInput)}
+            margin="normal"
+            InputProps={{
+              readOnly: true,
+            }}
+          />
+        <TextField
+            id="standard-name"
+            label="攻擊"
+            className={this.props.classes.formControl}
+            value={calcChar.calcAtk(this.props.charInput)}
+            margin="normal"
+            InputProps={{
+              readOnly: true,
+            }}
+          />
+        <TextField
+            id="standard-name"
+            label="防禦"
+            className={this.props.classes.formControl}
+            value={calcChar.calcDef(this.props.charInput)}
+            margin="normal"
+            InputProps={{
+              readOnly: true,
+            }}
+          />
+      </div>
+    );
+  }
+
   render(): JSX.Element {
     return (
       <div className={this.props.classes.root}>
-        {this.renderSelectType()}
-        {this.renderSelectLevel()}
-        {this.renderSelectAtkParm()}
-        {this.renderSelectDialog()}
-        {this.renderSelecMax()}
-        {this.renderSelectCompanion()}
-        {this.renderSelectStructure()}
+        <div>
+          {this.renderSelectType()}
+          {this.renderSelectLevel()}
+          {this.renderSelectAtkParm()}
+          {this.renderSelectDialog()}
+          {this.renderSelecMax()}
+          {this.renderSelectCompanion()}
+          {this.renderSelectStructure()}
+        </div>
+        {this.renderCharInfo()}
       </div>
     );
   }

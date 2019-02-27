@@ -8,6 +8,8 @@ describe('action calc test', () => {
       charType: 'sword',
       charLevel: 50,
       charAtkParm: 100,
+      charDefParm: 100,
+      charHPParm: 100,
       charMax: 1,
       charCompanion: 100,
       charStructure: 0,
