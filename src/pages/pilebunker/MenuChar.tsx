@@ -232,8 +232,7 @@ class MenuChar extends React.Component<MenuChar.Props, MenuChar.State> {
     return (
       <div>
         <TextField
-            id="standard-name"
-            label="耐久"
+            label="基礎耐久"
             className={this.props.classes.formControl}
             value={calcChar.calcHP(this.props.charInput)}
             margin="normal"
@@ -242,8 +241,7 @@ class MenuChar extends React.Component<MenuChar.Props, MenuChar.State> {
             }}
           />
         <TextField
-            id="standard-name"
-            label="攻擊"
+            label="基礎攻擊"
             className={this.props.classes.formControl}
             value={calcChar.calcAtk(this.props.charInput)}
             margin="normal"
@@ -252,8 +250,7 @@ class MenuChar extends React.Component<MenuChar.Props, MenuChar.State> {
             }}
           />
         <TextField
-            id="standard-name"
-            label="防禦"
+            label="基礎防禦"
             className={this.props.classes.formControl}
             value={calcChar.calcDef(this.props.charInput)}
             margin="normal"
