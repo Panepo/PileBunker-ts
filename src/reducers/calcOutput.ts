@@ -214,7 +214,7 @@ export const calcAtkDef = (atk: number, def: number, skillDamUp: number, skillRe
 };
 
 export const calcTime = (data: WeaponInfo, enemy: EnemyInput, damageSub: number): number => {
-  let timeDamage = Math.ceil(enemy.enemyHitpoint / data.damage) * (data.frame1 + data.frame2);
+  let timeDamage = Math.ceil(enemy.enemyHitpoint / (data.damage * data.hit)) * (data.frame1 + data.frame2);
 
   switch (data.type) {
     case 'bell':
