@@ -23,9 +23,9 @@ class Footer extends React.Component<WithStyles<typeof styles>> {
     return (
       <footer className={this.props.classes.root}>
         <div className={this.props.classes.textDiv}>
-          <Typography>『<a href="http://www.dmm.com/netgame_s/oshirore/">城プロRE</a>』(C) DMMゲームズ</Typography>
-          <Typography>「城プロRE」から転載された全てのコンテンツの著作権につきましては、権利者様へ帰属します。</Typography>
-          <Typography>Copyright &copy; Panepo@Github 2018 All Rights Reserved.</Typography>
+          <Typography className={this.props.classes.text}>『<a href="http://www.dmm.com/netgame_s/oshirore/">城プロRE</a>』(C) DMMゲームズ</Typography>
+          <Typography className={this.props.classes.text}>「城プロRE」から転載された全てのコンテンツの著作権につきましては、権利者様へ帰属します。</Typography>
+          <Typography className={this.props.classes.text}>Copyright &copy; Panepo@Github 2018 All Rights Reserved.</Typography>
         </div>
       </footer>
     );

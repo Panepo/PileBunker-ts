@@ -173,7 +173,7 @@ export const calcOutput = (charInput: CharInput, buffInput: BuffInput, enemyInpu
       console.log(damageSub);
     }
 
-    data.time = calcTime(data, enemyInput, damageSub);
+    data.time = calcTime(data, enemyInput, damageSub, buffInput.buffHitnumber);
 
     return data;
   });
@@ -213,8 +213,9 @@ export const calcAtkDef = (atk: number, def: number, skillDamUp: number, skillRe
   return damage;
 };
 
-export const calcTime = (data: WeaponInfo, enemy: EnemyInput, damageSub: number): number => {
-  let timeDamage = Math.ceil(enemy.enemyHitpoint / (data.damage * data.hit)) * (data.frame1 + data.frame2);
+export const calcTime = (data: WeaponInfo, enemy: EnemyInput, damageSub: number, buffHitnumber: number): number => {
+  const timeDamage = Math.ceil(enemy.enemyHitpoint / (data.damage * data.hit)) * (data.frame1 + data.frame2);
+  const hitnumber = data.target + buffHitnumber;
 
   switch (data.type) {
     case 'bell':
@@ -236,23 +237,21 @@ export const calcTime = (data: WeaponInfo, enemy: EnemyInput, damageSub: number)
     default:
       if (data.target === 0) {
         return timeDamage;
-      } else if (data.target >= enemy.enemyNumber) {
+      } else if (hitnumber >= enemy.enemyNumber) {
         return timeDamage;
       } else {
-        return timeDamage * Math.ceil(enemy.enemyNumber / data.target);
+        return timeDamage * Math.ceil(enemy.enemyNumber / hitnumber);
       }
   }
 };
 
 export const calcCannonTime = (damage: number, damageSub: number, eHit: number, eNum: number): number => {
-  let time = 0;
-
   const loopTemp = Math.ceil(eHit / damageSub);
   const maxloop = eNum > loopTemp ? loopTemp : eNum;
 
+  let time = 0;
   for (let i = 0; i < maxloop; i += 1) {
-    let timeTemp = Math.ceil((eHit - time * damageSub) / damage ) ;
-    time += timeTemp;
+    time += Math.ceil((eHit - time * damageSub) / damage );
   }
   return time;
 };
