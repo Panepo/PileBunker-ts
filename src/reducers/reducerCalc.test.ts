@@ -1,9 +1,9 @@
-import { reducerCalc } from './reducerCalc';
-import { Action, ActionType } from '../model/model';
-import { CharInput, BuffInput, EnemyInput, CalcState } from '../model/modelCalc';
-import { calcOutput } from './calcOutput';
-import { updateRefine, updateRefineMarco } from './calcRefine';
-import { queryWeapon } from '../raw/dbQuery';
+import { reducerCalc } from './reducerCalc'
+import { Action, ActionType } from '../model/model'
+import { CharInput, BuffInput, EnemyInput, CalcState } from '../model/modelCalc'
+import { calcOutput } from './calcOutput'
+import { updateRefine, updateRefineMarco } from './calcRefine'
+import { queryWeapon } from '../raw/dbQuery'
 
 const initialChar: CharInput = {
   charType: 'sword',
@@ -13,8 +13,8 @@ const initialChar: CharInput = {
   charHPParm: 100,
   charMax: 1,
   charCompanion: 100,
-  charStructure: 0,
-};
+  charStructure: 0
+}
 
 const initialBuff: BuffInput = {
   buffAtkPercent: 0,
@@ -25,8 +25,8 @@ const initialBuff: BuffInput = {
   buffDirectUp: 0,
   buffHitnumber: 0,
   buffIgoreDef: 0,
-  buffTerrain: true,
-};
+  buffTerrain: true
+}
 
 const initialEnemy: EnemyInput = {
   enemyNumber: 1,
@@ -36,8 +36,8 @@ const initialEnemy: EnemyInput = {
   enemyDefNumber: 0,
   enemyDamageUp: 0,
   enemyFly: false,
-  enemyMonster: false,
-};
+  enemyMonster: false
+}
 
 const initialState: CalcState = {
   charInput: initialChar,
@@ -45,16 +45,16 @@ const initialState: CalcState = {
   enemyInput: initialEnemy,
   output: calcOutput(initialChar, initialBuff, initialEnemy),
   wepQuery: queryWeapon(1)
-};
+}
 
 describe('calc reducer test', () => {
   it('should return the initial state', () => {
     const action: Action<any> = {
       type: ActionType.CHAR_QUERY,
-      payload: 'test',
-    };
-    expect(reducerCalc(undefined, action)).toEqual(initialState);
-  });
+      payload: 'test'
+    }
+    expect(reducerCalc(undefined, action)).toEqual(initialState)
+  })
 
   it('should handle INPUT_CHAR_CHANGE', () => {
     const action: Action<CharInput> = {
@@ -67,18 +67,18 @@ describe('calc reducer test', () => {
         charHPParm: 100,
         charMax: 1,
         charCompanion: 100,
-        charStructure: 0,
-      },
-    };
+        charStructure: 0
+      }
+    }
     const outputState: CalcState = {
       charInput: action.payload,
       buffInput: initialBuff,
       enemyInput: initialEnemy,
       output: calcOutput(action.payload, initialBuff, initialEnemy),
       wepQuery: queryWeapon(1)
-    };
-    expect(reducerCalc(initialState, action)).toEqual(outputState);
-  });
+    }
+    expect(reducerCalc(initialState, action)).toEqual(outputState)
+  })
 
   it('should handle INPUT_BUFF_CHANGE', () => {
     const action: Action<BuffInput> = {
@@ -92,18 +92,18 @@ describe('calc reducer test', () => {
         buffDirectUp: 50,
         buffHitnumber: 0,
         buffIgoreDef: 20,
-        buffTerrain: true,
-      },
-    };
+        buffTerrain: true
+      }
+    }
     const outputState: CalcState = {
       charInput: initialChar,
       buffInput: action.payload,
       enemyInput: initialEnemy,
       output: calcOutput(initialChar, action.payload, initialEnemy),
       wepQuery: queryWeapon(1)
-    };
-    expect(reducerCalc(initialState, action)).toEqual(outputState);
-  });
+    }
+    expect(reducerCalc(initialState, action)).toEqual(outputState)
+  })
 
   it('should handle INPUT_ENEMY_CHANGE', () => {
     const action: Action<EnemyInput> = {
@@ -116,63 +116,63 @@ describe('calc reducer test', () => {
         enemyDefNumber: 10,
         enemyDamageUp: 10,
         enemyFly: true,
-        enemyMonster: true,
-      },
-    };
+        enemyMonster: true
+      }
+    }
     const outputState: CalcState = {
       charInput: initialChar,
       buffInput: initialBuff,
       enemyInput: action.payload,
       output: calcOutput(initialChar, initialBuff, action.payload),
       wepQuery: queryWeapon(1)
-    };
-    expect(reducerCalc(initialState, action)).toEqual(outputState);
-  });
+    }
+    expect(reducerCalc(initialState, action)).toEqual(outputState)
+  })
 
   it('should handle REFINE_CHANGE', () => {
     const action: Action<string> = {
       type: ActionType.REFINE_CHANGE,
-      payload: '手裏剣',
-    };
-    updateRefine(action.payload);
+      payload: '手裏剣'
+    }
+    updateRefine(action.payload)
     const outputState: CalcState = {
       charInput: initialChar,
       buffInput: initialBuff,
       enemyInput: initialEnemy,
       output: calcOutput(initialChar, initialBuff, initialEnemy),
       wepQuery: queryWeapon(1)
-    };
-    expect(reducerCalc(initialState, action)).toEqual(outputState);
-  });
+    }
+    expect(reducerCalc(initialState, action)).toEqual(outputState)
+  })
 
   it('should handle REFINE_CHANGE_MARCO', () => {
     const action: Action<string> = {
       type: ActionType.REFINE_CHANGE_MARCO,
-      payload: '1-ref-10',
-    };
-    updateRefineMarco(action.payload);
+      payload: '1-ref-10'
+    }
+    updateRefineMarco(action.payload)
     const outputState: CalcState = {
       charInput: initialChar,
       buffInput: initialBuff,
       enemyInput: initialEnemy,
       output: calcOutput(initialChar, initialBuff, initialEnemy),
       wepQuery: queryWeapon(1)
-    };
-    expect(reducerCalc(initialState, action)).toEqual(outputState);
-  });
+    }
+    expect(reducerCalc(initialState, action)).toEqual(outputState)
+  })
 
   it('should handle WEAPON_QUERY', () => {
     const action: Action<number> = {
       type: ActionType.WEAPON_QUERY,
-      payload: 100,
-    };
+      payload: 100
+    }
     const outputState: CalcState = {
       charInput: initialChar,
       buffInput: initialBuff,
       enemyInput: initialEnemy,
       output: calcOutput(initialChar, initialBuff, initialEnemy),
       wepQuery: queryWeapon(100)
-    };
-    expect(reducerCalc(initialState, action)).toEqual(outputState);
-  });
-});
+    }
+    expect(reducerCalc(initialState, action)).toEqual(outputState)
+  })
+})

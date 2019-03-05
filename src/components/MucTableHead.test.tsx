@@ -1,14 +1,14 @@
-import * as React from 'react';
-import * as ReactDOM from 'react-dom';
-import Table from '@material-ui/core/Table';
-import MucTableHead from './MucTableHead';
-import { tableCharHead } from '../constants/ConstTable';
+import * as React from 'react'
+import * as ReactDOM from 'react-dom'
+import Table from '@material-ui/core/Table'
+import MucTableHead from './MucTableHead'
+import { tableCharHead } from '../constants/ConstTable'
 
-const handleRequestSort = (event: any, property: string) => {};
-const handleSelectAllClick = (event: any) => {};
+const handleRequestSort = (event: any, property: string) => {}
+const handleSelectAllClick = (event: any) => {}
 
 it('renders without crashing', () => {
-  const div = document.createElement('div');
+  const div = document.createElement('div')
   ReactDOM.render(
     <Table>
       <MucTableHead
@@ -21,6 +21,7 @@ it('renders without crashing', () => {
         rows={tableCharHead}
       />
     </Table>,
-    div);
-  ReactDOM.unmountComponentAtNode(div);
-});
+    div
+  )
+  ReactDOM.unmountComponentAtNode(div)
+})

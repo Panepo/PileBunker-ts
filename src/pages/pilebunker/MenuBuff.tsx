@@ -1,34 +1,38 @@
-import * as React from 'react';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import { BuffInput } from '../../model/modelCalc';
-import * as ActionsCalc from '../../actions/actionCalc';
-import { RootState } from '../../reducers/index';
-import NumberFormat from 'react-number-format';
-import { createStyles, Theme, WithStyles, withStyles } from '@material-ui/core';
-import TextField from '@material-ui/core/TextField';
-import { MenuList, menuBuffList, menuBuffSwitch } from '../../constants/ConstMenuList';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
+import * as React from 'react'
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
+import { BuffInput } from '../../model/modelCalc'
+import * as ActionsCalc from '../../actions/actionCalc'
+import { RootState } from '../../reducers/index'
+import NumberFormat from 'react-number-format'
+import { createStyles, Theme, WithStyles, withStyles } from '@material-ui/core'
+import TextField from '@material-ui/core/TextField'
+import {
+  MenuList,
+  menuBuffList,
+  menuBuffSwitch
+} from '../../constants/ConstMenuList'
+import FormControlLabel from '@material-ui/core/FormControlLabel'
+import Checkbox from '@material-ui/core/Checkbox'
 
 export namespace MenuBuff {
   export interface Props extends WithStyles<typeof styles> {
-    actionsC: typeof ActionsCalc;
-    buffInput: BuffInput;
+    actionsC: typeof ActionsCalc
+    buffInput: BuffInput
   }
 }
 
-const styles = (theme: Theme) => createStyles({
-  root: {
-  },
-  formControl: {
-    margin: theme.spacing.unit,
-    width: 160,
-  },
-});
+const styles = (theme: Theme) =>
+  createStyles({
+    root: {},
+    formControl: {
+      margin: theme.spacing.unit,
+      width: 160
+    }
+  })
 
 function NumberFormatCustom(props: any) {
-  const { inputRef, onChange, ...other } = props;
+  const { inputRef, onChange, ...other } = props
 
   return (
     <NumberFormat
@@ -37,25 +41,31 @@ function NumberFormatCustom(props: any) {
       onValueChange={(values: any) => {
         onChange({
           target: {
-            value: values.value,
-          },
-        });
+            value: values.value
+          }
+        })
       }}
       allowNegative={false}
       allowEmptyFormatting={false}
     />
-  );
+  )
 }
 
 class MenuBuff extends React.Component<MenuBuff.Props> {
   handleChange = (value: string) => (event: any) => {
     if (event.target.value.length > 0) {
-      this.props.actionsC.buffInput({...this.props.buffInput, [value]: event.target.value });
+      this.props.actionsC.buffInput({
+        ...this.props.buffInput,
+        [value]: event.target.value
+      })
     }
   }
 
   handleSwitch = (name: string) => (event: any) => {
-    this.props.actionsC.buffInput({...this.props.buffInput, [name]: event.target.checked });
+    this.props.actionsC.buffInput({
+      ...this.props.buffInput,
+      [name]: event.target.checked
+    })
   }
 
   renderMenu = () => {
@@ -70,12 +80,12 @@ class MenuBuff extends React.Component<MenuBuff.Props> {
           onChange={this.handleChange(data.value)}
           margin="normal"
           InputProps={{
-            inputComponent: NumberFormatCustom,
+            inputComponent: NumberFormatCustom
           }}
         />
-      );
-      return output;
-    },                         []);
+      )
+      return output
+    }, [])
   }
 
   renderMenuSwitch = () => {
@@ -93,9 +103,9 @@ class MenuBuff extends React.Component<MenuBuff.Props> {
           }
           label={data.label}
         />
-      );
-      return output;
-    },                           []);
+      )
+      return output
+    }, [])
   }
 
   render(): JSX.Element {
@@ -104,20 +114,25 @@ class MenuBuff extends React.Component<MenuBuff.Props> {
         <div>{this.renderMenu()}</div>
         <div>{this.renderMenuSwitch()}</div>
       </div>
-    );
+    )
   }
 }
 
 function mapStateToProps(state: RootState) {
   return {
     buffInput: state.reducerCalc.buffInput
-  };
+  }
 }
 
 function mapDispatchToProps(dispatch: any) {
   return {
     actionsC: bindActionCreators(ActionsCalc as any, dispatch)
-  };
+  }
 }
 
-export default withStyles(styles)(connect(mapStateToProps, mapDispatchToProps)(MenuBuff));
+export default withStyles(styles)(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(MenuBuff)
+)

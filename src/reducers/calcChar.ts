@@ -1,5 +1,5 @@
-import { dbType } from '../raw/database';
-import { CharInput, WeaponType } from '../model/modelCalc';
+import { dbType } from '../raw/database'
+import { CharInput, WeaponType } from '../model/modelCalc'
 
 // ===============================================================================
 // calculate basic attack value for the character
@@ -17,40 +17,44 @@ export const calcAtk = (input: CharInput): number => {
   const typeSelected: WeaponType[] = dbType
     .chain()
     .find({ name: input.charType })
-    .data();
+    .data()
 
-  const typeAtk: number = (typeSelected[0].atkM - typeSelected[0].atk) / 1000;
-  const comAtk: number = 1 + Math.floor(input.charCompanion / 10) / 100;
-  let charAtk: number = Math.floor(typeAtk * input.charLevel + typeSelected[0].atk);
-  charAtk = Math.floor((charAtk * input.charAtkParm) / 100);
-  charAtk = Math.floor(charAtk * comAtk);
-  return charAtk;
-};
+  const typeAtk: number = (typeSelected[0].atkM - typeSelected[0].atk) / 1000
+  const comAtk: number = 1 + Math.floor(input.charCompanion / 10) / 100
+  let charAtk: number = Math.floor(
+    typeAtk * input.charLevel + typeSelected[0].atk
+  )
+  charAtk = Math.floor((charAtk * input.charAtkParm) / 100)
+  charAtk = Math.floor(charAtk * comAtk)
+  return charAtk
+}
 
 export const calcDef = (input: CharInput): number => {
   const typeSelected: WeaponType[] = dbType
     .chain()
     .find({ name: input.charType })
-    .data();
+    .data()
 
-  const typeDef: number = (typeSelected[0].defM - typeSelected[0].def) / 1000;
-  const comDef: number = 1 + Math.floor(input.charCompanion / 10) / 100;
-  let charDef: number = Math.floor(typeDef * input.charLevel + typeSelected[0].def);
-  charDef = Math.floor((charDef * input.charDefParm) / 100);
-  charDef = Math.floor(charDef * comDef);
-  return charDef;
-};
+  const typeDef: number = (typeSelected[0].defM - typeSelected[0].def) / 1000
+  const comDef: number = 1 + Math.floor(input.charCompanion / 10) / 100
+  let charDef: number = Math.floor(
+    typeDef * input.charLevel + typeSelected[0].def
+  )
+  charDef = Math.floor((charDef * input.charDefParm) / 100)
+  charDef = Math.floor(charDef * comDef)
+  return charDef
+}
 
 export const calcHP = (input: CharInput): number => {
   const typeSelected: WeaponType[] = dbType
     .chain()
     .find({ name: input.charType })
-    .data();
+    .data()
 
-  const typeHP: number = (typeSelected[0].hpM - typeSelected[0].hp) / 1000;
-  const comHP: number = 1 + Math.floor(input.charCompanion / 10) / 100;
-  let charHP: number = Math.floor(typeHP * input.charLevel + typeSelected[0].hp);
-  charHP = Math.floor((charHP * input.charHPParm) / 100);
-  charHP = Math.floor(charHP * comHP);
-  return charHP;
-};
+  const typeHP: number = (typeSelected[0].hpM - typeSelected[0].hp) / 1000
+  const comHP: number = 1 + Math.floor(input.charCompanion / 10) / 100
+  let charHP: number = Math.floor(typeHP * input.charLevel + typeSelected[0].hp)
+  charHP = Math.floor((charHP * input.charHPParm) / 100)
+  charHP = Math.floor(charHP * comHP)
+  return charHP
+}

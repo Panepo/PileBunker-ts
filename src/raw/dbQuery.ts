@@ -1,7 +1,12 @@
-import { dbChar, dbWeapon } from './database';
-import { listType, listRarity, ListRarity, listTerrainQuery } from '../constants/ConstCalc';
-import { QueryInput, CharInfo } from '../model/modelQuery';
-import { WeaponInfo } from '../model/modelCalc';
+import { dbChar, dbWeapon } from './database'
+import {
+  listType,
+  listRarity,
+  ListRarity,
+  listTerrainQuery
+} from '../constants/ConstCalc'
+import { QueryInput, CharInfo } from '../model/modelQuery'
+import { WeaponInfo } from '../model/modelCalc'
 
 export const queryChar = (input: QueryInput): CharInfo[] => {
   for (let i = 0; i < listType.length; i += 1) {
@@ -22,24 +27,24 @@ export const queryChar = (input: QueryInput): CharInfo[] => {
                 }
               ]
             })
-            .data();
+            .data()
 
           charTemp.forEach((char: CharInfo) => {
-            output.push(char);
-          });
+            output.push(char)
+          })
         }
-        return output;
-      },                       []);
+        return output
+      }, [])
     }
   }
-  return [];
-};
+  return []
+}
 
 export const queryWeapon = (input: number): WeaponInfo => {
   const weaponSelected: WeaponInfo[] = dbWeapon
     .chain()
     .find({ id: input })
-    .data();
+    .data()
 
-  return weaponSelected[0];
-};
+  return weaponSelected[0]
+}

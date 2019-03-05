@@ -1,6 +1,6 @@
-import { ActionType } from '../model/model';
-import * as actionCalc from './actionCalc';
-import { CharInput, BuffInput, EnemyInput } from '../model/modelCalc';
+import { ActionType } from '../model/model'
+import * as actionCalc from './actionCalc'
+import { CharInput, BuffInput, EnemyInput } from '../model/modelCalc'
 
 describe('action calc test', () => {
   it('should create a correct action', () => {
@@ -12,14 +12,14 @@ describe('action calc test', () => {
       charHPParm: 100,
       charMax: 1,
       charCompanion: 100,
-      charStructure: 0,
-    };
+      charStructure: 0
+    }
     const expectedAction = {
       type: ActionType.INPUT_CHAR_CHANGE,
       payload: input
-    };
-    expect(actionCalc.charInput(input)).toEqual(expectedAction);
-  });
+    }
+    expect(actionCalc.charInput(input)).toEqual(expectedAction)
+  })
 
   it('should create a correct action', () => {
     const input: BuffInput = {
@@ -31,14 +31,14 @@ describe('action calc test', () => {
       buffDirectUp: 0,
       buffHitnumber: 0,
       buffIgoreDef: 0,
-      buffTerrain: true,
-    };
+      buffTerrain: true
+    }
     const expectedAction = {
       type: ActionType.INPUT_BUFF_CHANGE,
       payload: input
-    };
-    expect(actionCalc.buffInput(input)).toEqual(expectedAction);
-  });
+    }
+    expect(actionCalc.buffInput(input)).toEqual(expectedAction)
+  })
 
   it('should create a correct action', () => {
     const input: EnemyInput = {
@@ -49,39 +49,39 @@ describe('action calc test', () => {
       enemyDefNumber: 0,
       enemyDamageUp: 0,
       enemyFly: false,
-      enemyMonster: false,
-    };
+      enemyMonster: false
+    }
     const expectedAction = {
       type: ActionType.INPUT_ENEMY_CHANGE,
       payload: input
-    };
-    expect(actionCalc.enemyInput(input)).toEqual(expectedAction);
-  });
+    }
+    expect(actionCalc.enemyInput(input)).toEqual(expectedAction)
+  })
 
   it('should create a correct action', () => {
-    const input: string = 'test';
+    const input: string = 'test'
     const expectedAction = {
       type: ActionType.REFINE_CHANGE,
       payload: input
-    };
-    expect(actionCalc.refineChange(input)).toEqual(expectedAction);
-  });
+    }
+    expect(actionCalc.refineChange(input)).toEqual(expectedAction)
+  })
 
   it('should create a correct action', () => {
-    const input: string = 'test';
+    const input: string = 'test'
     const expectedAction = {
       type: ActionType.REFINE_CHANGE_MARCO,
       payload: input
-    };
-    expect(actionCalc.refineChangeMarco(input)).toEqual(expectedAction);
-  });
+    }
+    expect(actionCalc.refineChangeMarco(input)).toEqual(expectedAction)
+  })
 
   it('should create a correct action', () => {
-    const input: number = 123;
+    const input: number = 123
     const expectedAction = {
       type: ActionType.WEAPON_QUERY,
       payload: input
-    };
-    expect(actionCalc.weaponQuery(input)).toEqual(expectedAction);
-  });
-});
+    }
+    expect(actionCalc.weaponQuery(input)).toEqual(expectedAction)
+  })
+})

@@ -1,4 +1,4 @@
-import * as ActionsQuery from './actionQuery';
-import * as ActionsCalc from './actionCalc';
+import * as ActionsQuery from './actionQuery'
+import * as ActionsCalc from './actionCalc'
 
-export const ActionCreators = Object.assign({}, ActionsQuery, ActionsCalc);
+export const ActionCreators = Object.assign({}, ActionsQuery, ActionsCalc)

@@ -5,10 +5,10 @@ export enum ActionType {
   INPUT_BUFF_CHANGE,
   INPUT_ENEMY_CHANGE,
   REFINE_CHANGE_MARCO,
-  REFINE_CHANGE,
+  REFINE_CHANGE
 }
 
 export interface Action<T> {
-  type: ActionType;
-  payload: T;
+  type: ActionType
+  payload: T
 }

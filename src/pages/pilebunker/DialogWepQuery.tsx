@@ -1,59 +1,67 @@
-import * as React from 'react';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import * as ActionsCalc from '../../actions/actionCalc';
-import { RootState } from '../../reducers/index';
-import { WeaponInfo } from '../../model/modelCalc';
-import { createStyles, Theme, WithStyles, withStyles } from '@material-ui/core';
-import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
-import DialogTitle from '@material-ui/core/DialogTitle';
-import Button from '@material-ui/core/Button';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
-import IconColorize from '@material-ui/icons/Colorize';
-import IconSchedule from '@material-ui/icons/Schedule';
-import IconRestore from '@material-ui/icons/Restore';
-import IconRedo from '@material-ui/icons/Redo';
-import Divider from '@material-ui/core/Divider';
-import { listType } from '../../constants/ConstCalc';
+import * as React from 'react'
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
+import * as ActionsCalc from '../../actions/actionCalc'
+import { RootState } from '../../reducers/index'
+import { WeaponInfo } from '../../model/modelCalc'
+import { createStyles, Theme, WithStyles, withStyles } from '@material-ui/core'
+import Dialog from '@material-ui/core/Dialog'
+import DialogActions from '@material-ui/core/DialogActions'
+import DialogContent from '@material-ui/core/DialogContent'
+import DialogContentText from '@material-ui/core/DialogContentText'
+import DialogTitle from '@material-ui/core/DialogTitle'
+import Button from '@material-ui/core/Button'
+import List from '@material-ui/core/List'
+import ListItem from '@material-ui/core/ListItem'
+import ListItemIcon from '@material-ui/core/ListItemIcon'
+import ListItemText from '@material-ui/core/ListItemText'
+import IconColorize from '@material-ui/icons/Colorize'
+import IconSchedule from '@material-ui/icons/Schedule'
+import IconRestore from '@material-ui/icons/Restore'
+import IconRedo from '@material-ui/icons/Redo'
+import Divider from '@material-ui/core/Divider'
+import { listType } from '../../constants/ConstCalc'
 
 export namespace DialogWepQuery {
   export interface Props extends WithStyles<typeof styles> {
-    actionsC: typeof ActionsCalc;
-    wepInfo: WeaponInfo;
-    statusDialog: boolean;
-    statusFunction: () => void;
+    actionsC: typeof ActionsCalc
+    wepInfo: WeaponInfo
+    statusDialog: boolean
+    statusFunction: () => void
   }
   export interface State {
-    data: WeaponInfo;
+    data: WeaponInfo
   }
 }
 
-const styles = (theme: Theme) => createStyles({
-  typeImage: {
-    width: 18,
-    height: 18,
-    marginRight: theme.spacing.unit,
-  }
-});
+const styles = (theme: Theme) =>
+  createStyles({
+    typeImage: {
+      width: 18,
+      height: 18,
+      marginRight: theme.spacing.unit
+    }
+  })
 
 class DialogWepQuery extends React.Component<DialogWepQuery.Props> {
   state = {
     data: this.props.wepInfo
-  };
+  }
 
   renderTypeIcon = (): JSX.Element | null => {
     for (let i = 0; i < listType.length; i += 1) {
       if (listType[i].name === this.state.data.type) {
-        return <img className={this.props.classes.typeImage} key={listType[i].name} src={listType[i].image} alt={listType[i].name} />;
+        return (
+          <img
+            className={this.props.classes.typeImage}
+            key={listType[i].name}
+            src={listType[i].image}
+            alt={listType[i].name}
+          />
+        )
       }
     }
-    return null;
+    return null
   }
 
   renderContent = (): JSX.Element => {
@@ -61,39 +69,39 @@ class DialogWepQuery extends React.Component<DialogWepQuery.Props> {
       <List component="nav">
         <ListItem button>
           <ListItemIcon>
-            <IconColorize color="primary"/>
+            <IconColorize color="primary" />
           </ListItemIcon>
           <ListItemText primary={'攻擊: ' + this.state.data.atk} />
         </ListItem>
         <ListItem button>
           <ListItemIcon>
-            <IconSchedule color="primary"/>
+            <IconSchedule color="primary" />
           </ListItemIcon>
           <ListItemText primary={'攻撃間隔: ' + this.state.data.frame1} />
         </ListItem>
         <ListItem button>
           <ListItemIcon>
-            <IconRestore color="primary"/>
+            <IconRestore color="primary" />
           </ListItemIcon>
           <ListItemText primary={'攻撃後の隙: ' + this.state.data.frame2} />
         </ListItem>
         <ListItem button>
           <ListItemIcon>
-            <IconRedo color="primary"/>
+            <IconRedo color="primary" />
           </ListItemIcon>
           <ListItemText primary={'範圍: ' + this.state.data.range} />
         </ListItem>
         {this.renderDivider()}
         {this.renderText()}
       </List>
-    );
+    )
   }
 
   renderDivider = (): JSX.Element | null => {
     if (this.state.data.text.length > 0) {
-      return <Divider />;
+      return <Divider />
     } else {
-      return null;
+      return null
     }
   }
 
@@ -103,37 +111,37 @@ class DialogWepQuery extends React.Component<DialogWepQuery.Props> {
         <ListItem button>
           <ListItemText primary={this.state.data.text} />
         </ListItem>
-      );
+      )
     } else {
-      return null;
+      return null
     }
   }
 
   renderRarity = () => {
     switch (this.state.data.rare) {
       case 8:
-        return '★★★★★★★★';
+        return '★★★★★★★★'
       case 7:
-        return '★★★★★★★';
+        return '★★★★★★★'
       case 6:
-        return '★★★★★★';
+        return '★★★★★★'
       case 5:
-        return '★★★★★';
+        return '★★★★★'
       case 4:
-        return '★★★★';
+        return '★★★★'
       case 3:
-        return '★★★';
+        return '★★★'
       case 2:
-        return '★★';
+        return '★★'
       case 1:
-        return '★';
+        return '★'
       default:
-        return '★';
+        return '★'
     }
-  };
+  }
 
   static getDerivedStateFromProps(nextProps: Readonly<DialogWepQuery.Props>) {
-    return { data: nextProps.wepInfo };
+    return { data: nextProps.wepInfo }
   }
 
   render(): JSX.Element {
@@ -163,20 +171,25 @@ class DialogWepQuery extends React.Component<DialogWepQuery.Props> {
           </Button>
         </DialogActions>
       </Dialog>
-    );
+    )
   }
 }
 
 function mapStateToProps(state: RootState) {
   return {
     wepInfo: state.reducerCalc.wepQuery
-  };
+  }
 }
 
 function mapDispatchToProps(dispatch: any) {
   return {
     actionsC: bindActionCreators(ActionsCalc as any, dispatch)
-  };
+  }
 }
 
-export default withStyles(styles)(connect(mapStateToProps, mapDispatchToProps)(DialogWepQuery));
+export default withStyles(styles)(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(DialogWepQuery)
+)
