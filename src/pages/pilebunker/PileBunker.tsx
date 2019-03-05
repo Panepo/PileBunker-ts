@@ -5,11 +5,6 @@ import { RootState } from '../../reducers/index';
 import { CharInput } from '../../model/modelCalc';
 import { createStyles, Theme, WithStyles, withStyles, withWidth } from '@material-ui/core';
 import { WithWidth } from '@material-ui/core/withWidth';
-import MenuChar from './MenuChar';
-import MenuBuff from './MenuBuff';
-import MenuEnemy from './MenuEnemy';
-import MenuRefine from './MenuRefine';
-import TableWeapon from './TableWeapon';
 import Grid from '@material-ui/core/Grid';
 import ExpansionPanel from '@material-ui/core/ExpansionPanel';
 import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
@@ -21,6 +16,13 @@ import BuildIcon from '@material-ui/icons/Build';
 import PlaylistAddIcon from '@material-ui/icons/PlaylistAdd';
 import BugReportIcon from '@material-ui/icons/BugReport';
 import { isSmartphone } from '../../helpers/responsive.helper';
+
+// Lazy component
+const MenuChar = React.lazy(() => import('./MenuChar'));
+const MenuBuff = React.lazy(() => import('./MenuBuff'));
+const MenuEnemy = React.lazy(() => import('./MenuEnemy'));
+const MenuRefine = React.lazy(() => import('./MenuRefine'));
+const TableWeapon = React.lazy(() => import('./TableWeapon'));
 
 export namespace PileBunker {
   export interface Props extends RouteComponentProps<void>, WithStyles<typeof styles>, WithWidth {
@@ -77,7 +79,9 @@ class PileBunker extends React.Component<PileBunker.Props, PileBunker.State> {
                 <Typography className={this.props.classes.heading}>城娘設定</Typography>
               </ExpansionPanelSummary>
               <ExpansionPanelDetails>
-                <MenuChar />
+                <React.Suspense fallback={<Typography>Loading...</Typography>}>
+                  <MenuChar />
+                </React.Suspense>
               </ExpansionPanelDetails>
             </ExpansionPanel>
             <ExpansionPanel expanded={this.state.expanded === 'panel2'} onChange={this.handleChange('panel2')}>
@@ -86,7 +90,9 @@ class PileBunker extends React.Component<PileBunker.Props, PileBunker.State> {
                 <Typography className={this.props.classes.heading}>バフ設定</Typography>
               </ExpansionPanelSummary>
               <ExpansionPanelDetails>
-                <MenuBuff />
+                <React.Suspense fallback={<Typography>Loading...</Typography>}>
+                  <MenuBuff />
+                </React.Suspense>
               </ExpansionPanelDetails>
             </ExpansionPanel>
             <ExpansionPanel expanded={this.state.expanded === 'panel3'} onChange={this.handleChange('panel3')}>
@@ -95,7 +101,9 @@ class PileBunker extends React.Component<PileBunker.Props, PileBunker.State> {
                 <Typography className={this.props.classes.heading}>敵設定</Typography>
               </ExpansionPanelSummary>
               <ExpansionPanelDetails>
-                <MenuEnemy />
+                <React.Suspense fallback={<Typography>Loading...</Typography>}>
+                  <MenuEnemy />
+                </React.Suspense>
               </ExpansionPanelDetails>
             </ExpansionPanel>
             <ExpansionPanel expanded={this.state.expanded === 'panel4'} onChange={this.handleChange('panel4')}>
@@ -104,10 +112,14 @@ class PileBunker extends React.Component<PileBunker.Props, PileBunker.State> {
                 <Typography className={this.props.classes.heading}>精煉設定</Typography>
               </ExpansionPanelSummary>
               <ExpansionPanelDetails>
-                <MenuRefine />
+                <React.Suspense fallback={<Typography>Loading...</Typography>}>
+                  <MenuRefine />
+                </React.Suspense>
               </ExpansionPanelDetails>
             </ExpansionPanel>
-            <TableWeapon />
+            <React.Suspense fallback={<Typography>Loading...</Typography>}>
+              <TableWeapon />
+            </React.Suspense>
           </Grid>
         </Grid>
       </main>

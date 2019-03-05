@@ -2,11 +2,11 @@ import * as React from 'react';
 import { Route, RouteComponentProps } from 'react-router';
 import { history } from './configureStore';
 import { ConnectedRouter } from 'connected-react-router';
-import Header from './index/Header';
-import Ribbon from './index/Ribbon';
-import Footer from './index/Footer';
-import PileBunker from './pages/pilebunker/PileBunker';
+import Header from './pages/Header';
+import Ribbon from './pages/Ribbon';
+import Footer from './pages/Footer';
 import { createStyles, Theme, WithStyles, withStyles } from '@material-ui/core';
+import Typography from '@material-ui/core/Typography';
 import withRoot from './withRoot';
 
 export namespace App {
@@ -22,12 +22,15 @@ const styles = (theme: Theme) => createStyles({
   },
 });
 
+// Lazy component
+const PileBunker = React.lazy(() => import('./pages/pilebunker/PileBunker'));
+
 class App extends React.Component<App.Props> {
   routes = (
-    <div>
+    <React.Suspense fallback={<Typography>Loading...</Typography>}>
       <Route exact={true} path="/" component={PileBunker} />
-      <Route exact={true} path="/pilebunker" component={PileBunker} />
-    </div>
+      <Route path="/pilebunker" component={PileBunker} />
+    </React.Suspense>
   );
 
   render() {
