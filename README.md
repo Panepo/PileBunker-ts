@@ -11,8 +11,6 @@
 [codecov-image]: https://codecov.io/gh/Panepo/PileBunker-ts/branch/master/graph/badge.svg
 [codecov-url]: https://codecov.io/gh/Panepo/PileBunker-ts
 
-![demo](https://github.com/Panepo/PileBunker-ts/blob/master/doc/demo.png)
-
 Shiropro RE weapon damage calculator PileBunker
 
 城プロRE 武器傷害機算機 パイルバンカー
@@ -21,6 +19,12 @@ Shiropro RE weapon damage calculator PileBunker
 * 「城プロRE」から転載された全てのコンテンツの著作権につきましては、権利者様へ帰属します。
 
 Build with Create React App, Material-UI and typescript.
+
+## Screenshot
+
+![demo1](https://github.com/Panepo/PileBunker-ts/blob/master/doc/demo1.png)
+![demo2](https://github.com/Panepo/PileBunker-ts/blob/master/doc/demo2.png)
+![demo3](https://github.com/Panepo/PileBunker-ts/blob/master/doc/demo3.png)
 
 ## Data
 
