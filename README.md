@@ -11,12 +11,16 @@
 [codecov-image]: https://codecov.io/gh/Panepo/PileBunker-ts/branch/master/graph/badge.svg
 [codecov-url]: https://codecov.io/gh/Panepo/PileBunker-ts
 
+![demo](https://github.com/Panepo/PileBunker-ts/blob/master/doc/demo.png)
+
 Shiropro RE weapon damage calculator PileBunker
 
 城プロRE 武器傷害機算機 パイルバンカー
 
 * 『[城プロRE](http://www.dmm.com/netgame_s/oshirore/)』(C) DMMゲームズ
 * 「城プロRE」から転載された全てのコンテンツの著作権につきましては、権利者様へ帰属します。
+
+Build with Create React App, Material-UI and typescript.
 
 ## Data
 
@@ -106,21 +110,9 @@ $ yarn start
 |`start`              |Serves your app at `localhost:3000`|
 |`parser`             |Parses raw data in ./src/raw to generate .json file|
 |`test`               |Run test code in ./src|
-|`lint`               |Lint code in ./src|
 |`prettier`           |Prettier code in ./src|
 |`build`              |Builds the production application to ./build|
 |`deploy`             |Deploy the production application to github pages|
-
-### Test
-
-Jest is used for test runner. Jest will look for test files with any of the following naming conventions:
-
-* Files with `.js` suffix in `__tests__` folders.
-* Files with `.test.js` suffix.
-* Files with `.spec.js` suffix.
-
-Jest has an integrated coverage reporter that works well with ES6 and requires no configuration.
-Run `npm test -- --coverage` (note extra `--` in the middle) to include a coverage report.
 
 ### Production
 
