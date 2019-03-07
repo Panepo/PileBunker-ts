@@ -96,11 +96,11 @@ Lv.Xでの城娘の能力値Y算出（※2017/08/08メンテ後）
 
 1. Clone source code
 ```
-$ git clone https://github.com/Panepo/PileBunker.git
+$ git clone https://github.com/Panepo/PileBunker-ts.git
 ```
 2. Install dependencies
 ```
-$ cd PileBunker
+$ cd PileBunker-ts
 $ yarn
 ```
 3. Start development server and visit [http://localhost:3000/](http://localhost:3000/)
