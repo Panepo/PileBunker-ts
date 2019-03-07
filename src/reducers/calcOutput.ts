@@ -247,7 +247,7 @@ export const calcTime = (
 
   switch (data.type) {
     case 'bell':
-      return Math.ceil(enemy.enemyHitpoint / data.dps)
+      return Math.ceil(enemy.enemyHitpoint / data.dps) * parameters.valueFPS
     case 'cannon':
       return (
         calcCannonTime(
