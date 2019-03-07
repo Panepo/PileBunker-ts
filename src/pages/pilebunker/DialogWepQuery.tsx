@@ -44,8 +44,17 @@ const styles = (theme: Theme) =>
   })
 
 class DialogWepQuery extends React.Component<DialogWepQuery.Props> {
+  constructor(props: Readonly<DialogWepQuery.Props>) {
+    super(props)
+    this.setState({ data: this.props.wepInfo })
+  }
+
   state = {
     data: this.props.wepInfo
+  }
+
+  static getDerivedStateFromProps(nextProps: Readonly<DialogWepQuery.Props>) {
+    return { data: nextProps.wepInfo }
   }
 
   renderTypeIcon = (): JSX.Element | null => {
@@ -138,10 +147,6 @@ class DialogWepQuery extends React.Component<DialogWepQuery.Props> {
       default:
         return '★'
     }
-  }
-
-  static getDerivedStateFromProps(nextProps: Readonly<DialogWepQuery.Props>) {
-    return { data: nextProps.wepInfo }
   }
 
   render(): JSX.Element {

@@ -7,19 +7,17 @@ import configureStore from './configureStore'
 
 const { persistor, store } = configureStore()
 
-class ReduxRoot extends React.Component {
-  render() {
-    return (
-      <Provider store={store}>
-        <PersistGate
-          loading={<Typography>Loading...</Typography>}
-          persistor={persistor}
-        >
-          <App />
-        </PersistGate>
-      </Provider>
-    )
-  }
+const ReduxRoot = () => {
+  return (
+    <Provider store={store}>
+      <PersistGate
+        loading={<Typography>Loading...</Typography>}
+        persistor={persistor}
+      >
+        <App />
+      </PersistGate>
+    </Provider>
+  )
 }
 
 export default ReduxRoot

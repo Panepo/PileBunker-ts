@@ -24,6 +24,7 @@ import BugReportIcon from '@material-ui/icons/BugReport'
 import { isSmartphone } from '../../helpers/responsive.helper'
 
 // Lazy component
+import Loading from '../Loading'
 const MenuChar = React.lazy(() => import('./MenuChar'))
 const MenuBuff = React.lazy(() => import('./MenuBuff'))
 const MenuEnemy = React.lazy(() => import('./MenuEnemy'))
@@ -104,7 +105,7 @@ class PileBunker extends React.Component<PileBunker.Props, PileBunker.State> {
                 </Typography>
               </ExpansionPanelSummary>
               <ExpansionPanelDetails>
-                <React.Suspense fallback={<Typography>Loading...</Typography>}>
+                <React.Suspense fallback={<Loading />}>
                   <MenuChar />
                 </React.Suspense>
               </ExpansionPanelDetails>
@@ -123,7 +124,7 @@ class PileBunker extends React.Component<PileBunker.Props, PileBunker.State> {
                 </Typography>
               </ExpansionPanelSummary>
               <ExpansionPanelDetails>
-                <React.Suspense fallback={<Typography>Loading...</Typography>}>
+                <React.Suspense fallback={<Loading />}>
                   <MenuBuff />
                 </React.Suspense>
               </ExpansionPanelDetails>
@@ -142,7 +143,7 @@ class PileBunker extends React.Component<PileBunker.Props, PileBunker.State> {
                 </Typography>
               </ExpansionPanelSummary>
               <ExpansionPanelDetails>
-                <React.Suspense fallback={<Typography>Loading...</Typography>}>
+                <React.Suspense fallback={<Loading />}>
                   <MenuEnemy />
                 </React.Suspense>
               </ExpansionPanelDetails>
@@ -161,12 +162,12 @@ class PileBunker extends React.Component<PileBunker.Props, PileBunker.State> {
                 </Typography>
               </ExpansionPanelSummary>
               <ExpansionPanelDetails>
-                <React.Suspense fallback={<Typography>Loading...</Typography>}>
+                <React.Suspense fallback={<Loading />}>
                   <MenuRefine />
                 </React.Suspense>
               </ExpansionPanelDetails>
             </ExpansionPanel>
-            <React.Suspense fallback={<Typography>Loading...</Typography>}>
+            <React.Suspense fallback={<Loading />}>
               <TableWeapon />
             </React.Suspense>
           </Grid>
