@@ -12,6 +12,7 @@ const imageDance = require('../images/type-dance.png')
 const imageSpell = require('../images/type-spell.png')
 const imageStaff = require('../images/type-staff.png')
 const imageBell = require('../images/type-bell.png')
+const imageOnusa = require('../images/type-onusa.png')
 
 export interface ListType {
   cname: string
@@ -131,6 +132,14 @@ export const listType: ListType[] = [
     cname: '鈴',
     name: 'bell',
     image: imageBell,
+    melee: false,
+    physic: false,
+    magic: true
+  },
+  {
+    cname: '祓串',
+    name: 'onusa',
+    image: imageOnusa,
     melee: false,
     physic: false,
     magic: true
