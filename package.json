@@ -35,6 +35,7 @@
     "history": "^4.7.2",
     "localforage": "1.7.3",
     "lokijs": "^1.5.5",
+    "prop-types": "^15.7.2",
     "react": "16.7.0",
     "react-dom": "16.7.0",
     "react-ga": "^2.5.7",
