@@ -234,8 +234,7 @@ class TableWeapon extends React.Component<
 
 function mapStateToProps(state: RootState) {
   return {
-    weaponInfo: state.reducerCalc.output,
-    weaponQuery: state.reducerCalc.wepQuery
+    weaponInfo: state.reducerCalc.output
   }
 }
 
