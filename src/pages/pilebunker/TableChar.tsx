@@ -120,9 +120,9 @@ class TableChar extends React.Component<TableChar.Props, TableChar.State> {
     this.props.closeFunction()
     this.props.actionsC.charInput({
       ...this.props.charInput,
-      charAtkParm: +atF * 100,
-      charDefParm: +dfF * 100,
-      charHPParm: +hpF * 100
+      charAtkParm: Math.round(+atF * 100),
+      charDefParm: Math.round(+dfF * 100),
+      charHPParm: Math.round(+hpF * 100)
     })
   }
 
