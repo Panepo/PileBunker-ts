@@ -1,6 +1,6 @@
 # [PileBunker](https://github.com/Panepo/PileBunker-ts)
 
-[![Build Status][travis-image]][travis-url] [![Style Status][prettier-image]][prettier-url] [![Coverage Status][codecov-image]][codecov-url] [David-image]
+[![Build Status][travis-image]][travis-url] [![Style Status][prettier-image]][prettier-url] [![Coverage Status][codecov-image]][codecov-url] [[David-image]]
 
 [travis-image]: https://travis-ci.org/Panepo/PileBunker-ts.svg
 [travis-url]: https://travis-ci.org/Panepo/PileBunker-ts.svg?branch=master
