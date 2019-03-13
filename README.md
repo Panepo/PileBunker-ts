@@ -1,6 +1,6 @@
 # [PileBunker](https://github.com/Panepo/PileBunker-ts)
 
-[![Build Status][travis-image]][travis-url] [![Style Status][prettier-image]][prettier-url] [![Coverage Status][codecov-image]][codecov-url] ![David-image]([David-image])
+[![Build Status][travis-image]][travis-url] [![Style Status][prettier-image]][prettier-url] [![Coverage Status][codecov-image]][codecov-url]
 
 [travis-image]: https://travis-ci.org/Panepo/PileBunker-ts.svg
 [travis-url]: https://travis-ci.org/Panepo/PileBunker-ts.svg?branch=master
@@ -10,8 +10,6 @@
 
 [codecov-image]: https://codecov.io/gh/Panepo/PileBunker-ts/branch/master/graph/badge.svg
 [codecov-url]: https://codecov.io/gh/Panepo/PileBunker-ts
-
-[David-image]: https://david-dm.org/Panepo/PileBunker-ts.svg
 
 Shiropro RE weapon damage calculator PileBunker
 
@@ -116,6 +114,7 @@ $ yarn start
 |`start`              |Serves your app at `localhost:3000`|
 |`parser`             |Parses raw data in ./src/raw to generate .json file|
 |`test`               |Run test code in ./src|
+|`lint`               |Lint code in ./src|
 |`prettier`           |Prettier code in ./src|
 |`build`              |Builds the production application to ./build|
 |`deploy`             |Deploy the production application to github pages|
