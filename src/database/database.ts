@@ -1,7 +1,7 @@
 import * as Lokijs from 'lokijs'
-import * as weaponData from './weapons.json'
-import * as typeData from './weaponTypes.json'
-import * as charData from './chars.json'
+import * as weaponData from '../resource/weapons.json'
+import * as typeData from '../resource/weaponTypes.json'
+import * as charData from '../resource/chars.json'
 import { WeaponType, WeaponInfo } from '../model/modelCalc'
 import { CharInfo } from '../model/modelQuery'
 

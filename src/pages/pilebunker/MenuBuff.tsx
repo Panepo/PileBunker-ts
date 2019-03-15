@@ -56,7 +56,7 @@ class MenuBuff extends React.Component<MenuBuff.Props> {
     if (event.target.value.length > 0) {
       this.props.actionsC.buffInput({
         ...this.props.buffInput,
-        [value]: event.target.value
+        [value]: +event.target.value
       })
     }
   }

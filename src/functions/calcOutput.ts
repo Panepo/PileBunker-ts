@@ -1,4 +1,4 @@
-import { dbWeapon } from '../raw/database'
+import { dbWeapon } from '../database/database'
 import { listType, ListType } from '../constants/ConstCalc'
 import * as parameters from '../constants/ConstParameters'
 import {
@@ -180,7 +180,7 @@ export const calcOutput = (
         buffInput.buffDamageUp,
         enemyInput.enemyDamageUp
       )
-      console.log(damageSub)
+      subSwitch = false
     }
 
     data.time = calcTime(data, enemyInput, damageSub, buffInput.buffHitnumber)

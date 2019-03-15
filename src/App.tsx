@@ -1,12 +1,12 @@
 import * as React from 'react'
 import * as PropTypes from 'prop-types'
-import { Route, RouteComponentProps } from 'react-router'
+import { Route, Switch, RouteComponentProps } from 'react-router'
 import { history } from './configureStore'
 import { ConnectedRouter } from 'connected-react-router'
 import Header from './pages/Header'
 import Ribbon from './pages/Ribbon'
 import Footer from './pages/Footer'
-import Loading from './pages/Loading'
+import PileBunker from './pages/pilebunker/PileBunker'
 import { createStyles, WithStyles, withStyles } from '@material-ui/core'
 import withRoot from './withRoot'
 
@@ -22,18 +22,6 @@ export interface Props
   extends RouteComponentProps<void>,
     WithStyles<typeof styles> {}
 
-// Lazy component
-const PileBunker = React.lazy(() => import('./pages/pilebunker/PileBunker'))
-
-const routes = () => {
-  return (
-    <React.Suspense fallback={Loading}>
-      <Route exact={true} path="/" component={PileBunker} />
-      <Route path="/pilebunker" component={PileBunker} />
-    </React.Suspense>
-  )
-}
-
 const App = (props: Props) => {
   const { classes } = props
 
@@ -42,7 +30,11 @@ const App = (props: Props) => {
       <div className={classes.root}>
         <Header />
         <Ribbon />
-        {routes()}
+        <Switch>
+          <Route exact={true} path="/" component={PileBunker} />
+          <Route path="/pilebunker" component={PileBunker} />
+          <Route component={() => <div>Not Found</div>} />
+        </Switch>
         <Footer />
       </div>
     </ConnectedRouter>

@@ -1,7 +1,7 @@
 import createReducer from './createReducer'
 import { Action, ActionType } from '../model/model'
 import { QueryInput, QueryState } from '../model/modelQuery'
-import { queryChar } from '../raw/dbQuery'
+import { queryChar } from '../database/dbQuery'
 
 const initialState: QueryState = {
   input: { type: 'sword', plain: 15, rarity: 192 },

@@ -56,7 +56,7 @@ class MenuEnemy extends React.Component<MenuEnemy.Props> {
     if (event.target.value.length > 0) {
       this.props.actionsC.enemyInput({
         ...this.props.enemyInput,
-        [value]: event.target.value
+        [value]: +event.target.value
       })
     }
   }

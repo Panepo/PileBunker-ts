@@ -1,4 +1,4 @@
-import { dbType } from '../raw/database'
+import { dbType } from '../database/database'
 import { CharInput, WeaponType } from '../model/modelCalc'
 
 // ===============================================================================

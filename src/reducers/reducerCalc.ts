@@ -1,9 +1,9 @@
 import createReducer from './createReducer'
 import { Action, ActionType } from '../model/model'
 import { CharInput, BuffInput, EnemyInput, CalcState } from '../model/modelCalc'
-import { calcOutput } from './calcOutput'
-import { updateRefine, updateRefineMarco } from './calcRefine'
-import { queryWeapon } from '../raw/dbQuery'
+import { calcOutput } from '../functions/calcOutput'
+import { updateRefine, updateRefineMarco } from '../functions/calcRefine'
+import { queryWeapon } from '../database/dbQuery'
 
 const initialChar: CharInput = {
   charType: 'sword',

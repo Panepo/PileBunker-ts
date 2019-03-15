@@ -44,13 +44,12 @@ const styles = (theme: Theme) =>
   })
 
 class DialogWepQuery extends React.Component<DialogWepQuery.Props> {
-  constructor(props: Readonly<DialogWepQuery.Props>) {
-    super(props)
-    this.setState({ data: this.props.wepInfo })
-  }
-
   state = {
     data: this.props.wepInfo
+  }
+
+  componentDidMount() {
+    this.setState({ data: this.props.wepInfo })
   }
 
   static getDerivedStateFromProps(nextProps: Readonly<DialogWepQuery.Props>) {
@@ -159,11 +158,17 @@ class DialogWepQuery extends React.Component<DialogWepQuery.Props> {
         maxWidth={'lg'}
       >
         <DialogTitle id="select-dialog-title">
-          <div>
-            {this.renderTypeIcon()}
-            {this.state.data.refText + ' ' + this.state.data.name}
-          </div>
-          {this.renderRarity()}
+          <List component="nav">
+            <ListItem>
+              <ListItemText>
+                {this.renderTypeIcon()}
+                {this.state.data.refText + ' ' + this.state.data.name}
+              </ListItemText>
+            </ListItem>
+            <ListItem>
+              <ListItemText>{this.renderRarity()}</ListItemText>
+            </ListItem>
+          </List>
         </DialogTitle>
         <DialogContent>
           <DialogContentText id="select-dialog-description">

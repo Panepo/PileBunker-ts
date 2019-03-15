@@ -3,7 +3,7 @@ import TableWeapon from './TableWeapon'
 import { createMockStore } from 'redux-test-utils'
 import shallowWithStore from '../../helpers/enzyme.helper'
 import { CharInput, BuffInput, EnemyInput } from '../../model/modelCalc'
-import { calcOutput } from '../../reducers/calcOutput'
+import { calcOutput } from '../../functions/calcOutput'
 
 const initialChar: CharInput = {
   charType: 'bell',

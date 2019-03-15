@@ -1,4 +1,4 @@
-import { dbWeapon } from '../raw/database'
+import { dbWeapon } from '../database/database'
 import { WeaponInfo } from '../model/modelCalc'
 import * as parameters from '../constants/ConstParameters'
 

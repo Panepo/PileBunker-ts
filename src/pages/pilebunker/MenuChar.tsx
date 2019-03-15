@@ -15,7 +15,7 @@ import MenuItem from '@material-ui/core/MenuItem'
 import TextField from '@material-ui/core/TextField'
 import { listType, ListType, listMax, ListMax } from '../../constants/ConstCalc'
 import NumberFormat from 'react-number-format'
-import * as calcChar from '../../reducers/calcChar'
+import * as calcChar from '../../functions/calcChar'
 
 export namespace MenuChar {
   export interface Props extends WithStyles<typeof styles> {
@@ -84,7 +84,7 @@ class MenuChar extends React.Component<MenuChar.Props, MenuChar.State> {
         case 'charLevel': {
           this.props.actionsC.charInput({
             ...this.props.charInput,
-            charLevel: event.target.value
+            charLevel: +event.target.value
           })
           break
         }
@@ -98,14 +98,14 @@ class MenuChar extends React.Component<MenuChar.Props, MenuChar.State> {
         case 'charCompanion': {
           this.props.actionsC.charInput({
             ...this.props.charInput,
-            charCompanion: event.target.value
+            charCompanion: +event.target.value
           })
           break
         }
         case 'charStructure': {
           this.props.actionsC.charInput({
             ...this.props.charInput,
-            charStructure: event.target.value
+            charStructure: +event.target.value
           })
           break
         }

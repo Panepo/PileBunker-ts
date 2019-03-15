@@ -1,7 +1,7 @@
 import { reducerQuery } from './reducerQuery'
 import { Action, ActionType } from '../model/model'
 import { QueryState } from '../model/modelQuery'
-import { queryChar } from '../raw/dbQuery'
+import { queryChar } from '../database/dbQuery'
 
 describe('query reducer test', () => {
   it('should return the initial state', () => {

@@ -1,5 +1,5 @@
 import * as calcRefine from './calcRefine'
-import { dbWeapon } from '../raw/database'
+import { dbWeapon } from '../database/database'
 import { WeaponInfo } from '../model/modelCalc'
 
 describe('Single update test', () => {
