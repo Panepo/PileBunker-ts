@@ -5,8 +5,8 @@ import {
   ListRarity,
   listTerrainQuery
 } from '../constants/ConstCalc'
-import { QueryInput, CharInfo } from '../model/modelQuery'
-import { WeaponInfo } from '../model/modelCalc'
+import { QueryInput } from '../models/modelQuery'
+import { WeaponInfo, CharInfo } from '../models/modelResource'
 
 export const queryChar = (input: QueryInput): CharInfo[] => {
   for (let i = 0; i < listType.length; i += 1) {

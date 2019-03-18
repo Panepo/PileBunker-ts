@@ -1,6 +1,6 @@
 import * as calcRefine from './calcRefine'
 import { dbWeapon } from '../database/database'
-import { WeaponInfo } from '../model/modelCalc'
+import { WeaponInfo } from '../models/modelResource'
 
 describe('Single update test', () => {
   it('should get the correct data', () => {

@@ -1,9 +1,6 @@
-export interface LinkInterface {
-  text: string
-  link: string
-}
+import { Link } from '../models/modelLink'
 
-export const listLink = [
+export const linkHeader: Link[] = [
   { text: '城プロRE', link: 'http://www.dmm.com/netgame_s/oshirore/' },
   { text: '攻略wiki', link: 'http://scre.swiki.jp/' },
   {
@@ -13,7 +10,7 @@ export const listLink = [
   { text: 'ダメージ計算機', link: 'http://cascal.html.xdomain.jp/cascal/' }
 ]
 
-export const listDrawer = [
+export const linkDrawer: Link[] = [
   {
     text: '御城プロジェクト：RE',
     link: 'http://www.dmm.com/netgame_s/oshirore/'

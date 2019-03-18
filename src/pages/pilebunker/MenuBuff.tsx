@@ -1,17 +1,14 @@
 import * as React from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { BuffInput } from '../../model/modelCalc'
+import { BuffInput } from '../../models/modelCalc'
+import { Menu } from '../../models/modelMenu'
 import * as ActionsCalc from '../../actions/actionCalc'
 import { RootState } from '../../reducers/index'
 import NumberFormat from 'react-number-format'
 import { createStyles, Theme, WithStyles, withStyles } from '@material-ui/core'
 import TextField from '@material-ui/core/TextField'
-import {
-  MenuList,
-  menuBuffList,
-  menuBuffSwitch
-} from '../../constants/ConstMenuList'
+import { menuBuffList, menuBuffSwitch } from '../../constants/ConstMenuList'
 import FormControlLabel from '@material-ui/core/FormControlLabel'
 import Checkbox from '@material-ui/core/Checkbox'
 
@@ -69,7 +66,7 @@ class MenuBuff extends React.Component<MenuBuff.Props> {
   }
 
   renderMenu = () => {
-    return menuBuffList.reduce((output: any[], data: MenuList, i: number) => {
+    return menuBuffList.reduce((output: any[], data: Menu, i: number) => {
       output.push(
         <TextField
           key={data.id + i.toString()}
@@ -89,7 +86,7 @@ class MenuBuff extends React.Component<MenuBuff.Props> {
   }
 
   renderMenuSwitch = () => {
-    return menuBuffSwitch.reduce((output: any[], data: MenuList, i: number) => {
+    return menuBuffSwitch.reduce((output: any[], data: Menu, i: number) => {
       output.push(
         <FormControlLabel
           key={data.id + i.toString()}

@@ -1,5 +1,6 @@
 import { dbType } from '../database/database'
-import { CharInput, WeaponType } from '../model/modelCalc'
+import { CharInput } from '../models/modelCalc'
+import { WeaponType } from '../models/modelResource'
 
 // ===============================================================================
 // calculate basic attack value for the character

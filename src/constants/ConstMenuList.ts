@@ -1,10 +1,6 @@
-export interface MenuList {
-  id: string
-  label: string
-  value: string
-}
+import { Menu } from '../models/modelMenu'
 
-export const menuBuffList: MenuList[] = [
+export const menuBuffList: Menu[] = [
   {
     id: 'select-buffAtkPercent',
     label: '攻擊力增加(%)',
@@ -43,11 +39,11 @@ export const menuBuffList: MenuList[] = [
   }
 ]
 
-export const menuBuffSwitch: MenuList[] = [
+export const menuBuffSwitch: Menu[] = [
   { id: 'switch-buffTerrain', label: '地形適性', value: 'buffTerrain' }
 ]
 
-export const menuEnemyList: MenuList[] = [
+export const menuEnemyList: Menu[] = [
   { id: 'select-enemyNumber', label: '數目', value: 'enemyNumber' },
   { id: 'select-enemyHitpoint', label: '耐久', value: 'enemyHitpoint' },
   { id: 'select-enemyDef', label: '防禦力', value: 'enemyDef' },
@@ -64,12 +60,12 @@ export const menuEnemyList: MenuList[] = [
   }
 ]
 
-export const menuEnemySwitch: MenuList[] = [
+export const menuEnemySwitch: Menu[] = [
   { id: 'switch-enemyFly', label: '飛行', value: 'enemyFly' },
   { id: 'switch-enemyMonster', label: '妖怪', value: 'enemyMonster' }
 ]
 
-export const menuRefineList: MenuList[] = [
+export const menuRefineList: Menu[] = [
   { id: 'button-all-ref-0', label: '無精煉', value: 'all-ref-0' },
   { id: 'button-all-ref-10', label: '全精煉+10', value: 'all-ref-10' },
   { id: 'button-4-ref-10', label: '★4+10', value: '4-ref-10' },

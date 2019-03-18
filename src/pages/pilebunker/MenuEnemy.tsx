@@ -1,17 +1,14 @@
 import * as React from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { EnemyInput } from '../../model/modelCalc'
+import { EnemyInput } from '../../models/modelCalc'
+import { Menu } from '../../models/modelMenu'
 import * as ActionsCalc from '../../actions/actionCalc'
 import { RootState } from '../../reducers/index'
 import NumberFormat from 'react-number-format'
 import { createStyles, Theme, WithStyles, withStyles } from '@material-ui/core'
 import TextField from '@material-ui/core/TextField'
-import {
-  MenuList,
-  menuEnemyList,
-  menuEnemySwitch
-} from '../../constants/ConstMenuList'
+import { menuEnemyList, menuEnemySwitch } from '../../constants/ConstMenuList'
 import FormControlLabel from '@material-ui/core/FormControlLabel'
 import Checkbox from '@material-ui/core/Checkbox'
 
@@ -69,7 +66,7 @@ class MenuEnemy extends React.Component<MenuEnemy.Props> {
   }
 
   renderMenu = () => {
-    return menuEnemyList.reduce((output: any[], data: MenuList, i: number) => {
+    return menuEnemyList.reduce((output: any[], data: Menu, i: number) => {
       output.push(
         <TextField
           key={data.id + i.toString()}
@@ -89,26 +86,23 @@ class MenuEnemy extends React.Component<MenuEnemy.Props> {
   }
 
   renderMenuSwitch = () => {
-    return menuEnemySwitch.reduce(
-      (output: any[], data: MenuList, i: number) => {
-        output.push(
-          <FormControlLabel
-            key={data.id + i.toString()}
-            control={
-              <Checkbox
-                checked={this.props.enemyInput[data.value] ? true : false}
-                onChange={this.handleSwitch(data.value)}
-                value={data.value}
-                color="primary"
-              />
-            }
-            label={data.label}
-          />
-        )
-        return output
-      },
-      []
-    )
+    return menuEnemySwitch.reduce((output: any[], data: Menu, i: number) => {
+      output.push(
+        <FormControlLabel
+          key={data.id + i.toString()}
+          control={
+            <Checkbox
+              checked={this.props.enemyInput[data.value] ? true : false}
+              onChange={this.handleSwitch(data.value)}
+              value={data.value}
+              color="primary"
+            />
+          }
+          label={data.label}
+        />
+      )
+      return output
+    }, [])
   }
 
   render(): JSX.Element {

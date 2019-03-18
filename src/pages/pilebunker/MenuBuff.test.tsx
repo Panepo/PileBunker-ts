@@ -2,8 +2,7 @@ import * as React from 'react'
 import MenuBuff from './MenuBuff'
 import { createMockStore, createMockDispatch } from 'redux-test-utils'
 import shallowWithStore from '../../helpers/enzyme.helper'
-import { ActionType } from '../../model/model'
-import { BuffInput } from '../../model/modelCalc'
+import { ActionTypeCalc, BuffInput } from '../../models/modelCalc'
 
 const testBuffState: BuffInput = {
   buffAtkPercent: 0,
@@ -45,7 +44,7 @@ describe('MenuBuff test', () => {
     }
     const store = createMockStore(mockState)
     const action = {
-      type: ActionType.INPUT_BUFF_CHANGE,
+      type: ActionTypeCalc.INPUT_BUFF_CHANGE,
       payload: testBuffInput
     }
     store.dispatch(action)
@@ -59,7 +58,7 @@ describe('MenuBuff test', () => {
   it('should createMockDispatch works', () => {
     const dispatchMock = createMockDispatch()
     const action = {
-      type: ActionType.INPUT_BUFF_CHANGE,
+      type: ActionTypeCalc.INPUT_BUFF_CHANGE,
       payload: testBuffInput
     }
     dispatchMock.dispatch(action)

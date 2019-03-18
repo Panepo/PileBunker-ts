@@ -1,8 +1,5 @@
 import * as React from 'react'
-import { connect } from 'react-redux'
 import { RouteComponentProps } from 'react-router'
-import { RootState } from '../../reducers/index'
-import { CharInput } from '../../model/modelCalc'
 import {
   createStyles,
   Theme,
@@ -35,9 +32,7 @@ export namespace PileBunker {
   export interface Props
     extends RouteComponentProps<void>,
       WithStyles<typeof styles>,
-      WithWidth {
-    charInput: CharInput
-  }
+      WithWidth {}
   export interface State {
     expanded: string | boolean
   }
@@ -177,12 +172,4 @@ class PileBunker extends React.Component<PileBunker.Props, PileBunker.State> {
   }
 }
 
-function mapStateToProps(state: RootState) {
-  return {
-    charInput: state.reducerCalc.charInput
-  }
-}
-
-export default withStyles(styles)(
-  connect(mapStateToProps)(withWidth()(PileBunker))
-)
+export default withStyles(styles)(withWidth()(PileBunker))

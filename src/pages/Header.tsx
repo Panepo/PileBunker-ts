@@ -19,7 +19,8 @@ import ListItemIcon from '@material-ui/core/ListItemIcon'
 import IconBookmark from '@material-ui/icons/Bookmarks'
 import Button from '@material-ui/core/Button'
 import Typography from '@material-ui/core/Typography'
-import { LinkInterface, listLink, listDrawer } from '../constants/ConstLink'
+import { Link } from '../models/modelLink'
+import { linkHeader, linkDrawer } from '../constants/ConstLink'
 import { isSmartphone } from '../helpers/responsive.helper'
 
 export namespace Header {
@@ -68,7 +69,7 @@ class Header extends React.Component<Header.Props, Header.State> {
   }
 
   render(): JSX.Element {
-    const renderLink = listLink.reduce((output: any[], data: LinkInterface) => {
+    const renderLink = linkHeader.reduce((output: any[], data: Link) => {
       output.push(
         <Button
           color="primary"
@@ -84,7 +85,7 @@ class Header extends React.Component<Header.Props, Header.State> {
 
     const renderDrawer = (
       <List>
-        {listDrawer.map((data: LinkInterface) => (
+        {linkDrawer.map((data: Link) => (
           <ListItem
             button
             divider

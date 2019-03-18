@@ -1,12 +1,8 @@
 import { dbWeapon } from '../database/database'
 import { listType, ListType } from '../constants/ConstCalc'
 import * as parameters from '../constants/ConstParameters'
-import {
-  CharInput,
-  BuffInput,
-  EnemyInput,
-  WeaponInfo
-} from '../model/modelCalc'
+import { CharInput, BuffInput, EnemyInput } from '../models/modelCalc'
+import { WeaponInfo } from '../models/modelResource'
 import { calcAtk } from './calcChar'
 
 export const checkType = (weaponType: string): ListType => {

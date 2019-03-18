@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { createStyles, Theme, WithStyles, withStyles } from '@material-ui/core'
-import { TableHeadInterface } from '../constants/ConstTable'
+import { MuiTableHead } from '../models/modelMuiTable'
 import TableCell from '@material-ui/core/TableCell'
 import TableHead from '@material-ui/core/TableHead'
 import TableRow from '@material-ui/core/TableRow'
@@ -16,7 +16,7 @@ export namespace MucTableHead {
     rowCount: number
     onRequestSort: (event: any, property: any) => void
     onSelectAllClick: (event: any) => void
-    rows: TableHeadInterface[]
+    rows: MuiTableHead[]
   }
 }
 

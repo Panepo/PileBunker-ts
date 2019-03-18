@@ -1,6 +1,10 @@
-import { ActionType } from '../model/model'
 import * as actionCalc from './actionCalc'
-import { CharInput, BuffInput, EnemyInput } from '../model/modelCalc'
+import {
+  ActionTypeCalc,
+  CharInput,
+  BuffInput,
+  EnemyInput
+} from '../models/modelCalc'
 
 describe('action calc test', () => {
   it('should create a correct action', () => {
@@ -15,7 +19,7 @@ describe('action calc test', () => {
       charStructure: 0
     }
     const expectedAction = {
-      type: ActionType.INPUT_CHAR_CHANGE,
+      type: ActionTypeCalc.INPUT_CHAR_CHANGE,
       payload: input
     }
     expect(actionCalc.charInput(input)).toEqual(expectedAction)
@@ -34,7 +38,7 @@ describe('action calc test', () => {
       buffTerrain: true
     }
     const expectedAction = {
-      type: ActionType.INPUT_BUFF_CHANGE,
+      type: ActionTypeCalc.INPUT_BUFF_CHANGE,
       payload: input
     }
     expect(actionCalc.buffInput(input)).toEqual(expectedAction)
@@ -52,7 +56,7 @@ describe('action calc test', () => {
       enemyMonster: false
     }
     const expectedAction = {
-      type: ActionType.INPUT_ENEMY_CHANGE,
+      type: ActionTypeCalc.INPUT_ENEMY_CHANGE,
       payload: input
     }
     expect(actionCalc.enemyInput(input)).toEqual(expectedAction)
@@ -61,7 +65,7 @@ describe('action calc test', () => {
   it('should create a correct action', () => {
     const input: string = 'test'
     const expectedAction = {
-      type: ActionType.REFINE_CHANGE,
+      type: ActionTypeCalc.REFINE_CHANGE,
       payload: input
     }
     expect(actionCalc.refineChange(input)).toEqual(expectedAction)
@@ -70,18 +74,9 @@ describe('action calc test', () => {
   it('should create a correct action', () => {
     const input: string = 'test'
     const expectedAction = {
-      type: ActionType.REFINE_CHANGE_MARCO,
+      type: ActionTypeCalc.REFINE_CHANGE_MARCO,
       payload: input
     }
     expect(actionCalc.refineChangeMarco(input)).toEqual(expectedAction)
-  })
-
-  it('should create a correct action', () => {
-    const input: number = 123
-    const expectedAction = {
-      type: ActionType.WEAPON_QUERY,
-      payload: input
-    }
-    expect(actionCalc.weaponQuery(input)).toEqual(expectedAction)
   })
 })

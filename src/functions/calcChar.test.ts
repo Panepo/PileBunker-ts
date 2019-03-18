@@ -1,5 +1,5 @@
 import * as calc from './calcChar'
-import { CharInput } from '../model/modelCalc'
+import { CharInput } from '../models/modelCalc'
 
 describe('Calculate character attack', () => {
   it('should get an equal value', () => {

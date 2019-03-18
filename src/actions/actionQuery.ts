@@ -1,9 +1,16 @@
-import { Action, ActionType } from '../model/model'
-import { QueryInput } from '../model/modelQuery'
+import { Action } from '../models/modelAction'
+import { ActionTypeQuery, QueryInput } from '../models/modelQuery'
 
-export function charQuery(input: QueryInput): Action<QueryInput> {
+export const charQuery = (input: QueryInput): Action<QueryInput> => {
   return {
-    type: ActionType.CHAR_QUERY,
+    type: ActionTypeQuery.CHAR_QUERY,
     payload: input
+  }
+}
+
+export const weaponQuery = (wepId: number): Action<number> => {
+  return {
+    type: ActionTypeQuery.WEAPON_QUERY,
+    payload: wepId
   }
 }

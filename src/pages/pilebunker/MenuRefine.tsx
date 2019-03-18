@@ -5,7 +5,8 @@ import * as ActionsCalc from '../../actions/actionCalc'
 import { RootState } from '../../reducers/index'
 import { createStyles, Theme, WithStyles, withStyles } from '@material-ui/core'
 import Button from '@material-ui/core/Button'
-import { MenuList, menuRefineList } from '../../constants/ConstMenuList'
+import { Menu } from '../../models/modelMenu'
+import { menuRefineList } from '../../constants/ConstMenuList'
 
 export namespace MenuRefine {
   export interface Props extends WithStyles<typeof styles> {
@@ -27,7 +28,7 @@ class MenuRefine extends React.Component<MenuRefine.Props> {
   }
 
   render() {
-    return menuRefineList.reduce((output: any[], data: MenuList, i: number) => {
+    return menuRefineList.reduce((output: any[], data: Menu, i: number) => {
       output.push(
         <Button
           className={this.props.classes.button}

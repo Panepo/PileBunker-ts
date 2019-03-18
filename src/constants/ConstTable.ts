@@ -1,11 +1,6 @@
-export interface TableHeadInterface {
-  id: string
-  numeric: boolean
-  disablePadding: boolean
-  label: string
-}
+import { MuiTableHead } from '../models/modelMuiTable'
 
-export const tableCharHead = [
+export const tableHeadChar: MuiTableHead[] = [
   { id: 'name', numeric: false, disablePadding: false, label: '名稱' },
   { id: 'weapon', numeric: false, disablePadding: false, label: '武器種' },
   { id: 'rarity', numeric: false, disablePadding: false, label: '★' },
@@ -16,7 +11,7 @@ export const tableCharHead = [
   { id: 'totF', numeric: false, disablePadding: true, label: '係數合計' }
 ]
 
-export const tableWeaponHead = [
+export const tableHeadWeapon: MuiTableHead[] = [
   { id: 'name', numeric: false, disablePadding: false, label: '名稱' },
   { id: 'rare', numeric: false, disablePadding: true, label: '★' },
   { id: 'refText', numeric: false, disablePadding: true, label: '精煉' },

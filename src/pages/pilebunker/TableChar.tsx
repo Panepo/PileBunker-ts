@@ -1,8 +1,8 @@
 import * as React from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { CharInput } from '../../model/modelCalc'
-import { CharInfo } from '../../model/modelQuery'
+import { CharInput } from '../../models/modelCalc'
+import { CharInfo } from '../../models/modelResource'
 import * as ActionsCalc from '../../actions/actionCalc'
 import { RootState } from '../../reducers/index'
 import { createStyles, Theme, WithStyles, withStyles } from '@material-ui/core'
@@ -15,7 +15,7 @@ import Paper from '@material-ui/core/Paper'
 import Checkbox from '@material-ui/core/Checkbox'
 import MucTableHead from '../../components/MucTableHead'
 import { stableSort, getSorting } from '../../helpers/table.helper'
-import { tableCharHead } from '../../constants/ConstTable'
+import { tableHeadChar } from '../../constants/ConstTable'
 import { listType } from '../../constants/ConstCalc'
 
 export namespace TableChar {
@@ -164,7 +164,7 @@ class TableChar extends React.Component<TableChar.Props, TableChar.State> {
               onSelectAllClick={this.handleSelectAllClick}
               onRequestSort={this.handleRequestSort}
               rowCount={data.length}
-              rows={tableCharHead}
+              rows={tableHeadChar}
             />
             <TableBody>
               {stableSort(data, getSorting(order, orderBy))

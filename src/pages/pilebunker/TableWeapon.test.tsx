@@ -2,7 +2,7 @@ import * as React from 'react'
 import TableWeapon from './TableWeapon'
 import { createMockStore } from 'redux-test-utils'
 import shallowWithStore from '../../helpers/enzyme.helper'
-import { CharInput, BuffInput, EnemyInput } from '../../model/modelCalc'
+import { CharInput, BuffInput, EnemyInput } from '../../models/modelCalc'
 import { calcOutput } from '../../functions/calcOutput'
 
 const initialChar: CharInput = {

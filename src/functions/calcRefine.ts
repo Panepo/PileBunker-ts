@@ -1,5 +1,5 @@
 import { dbWeapon } from '../database/database'
-import { WeaponInfo } from '../model/modelCalc'
+import { WeaponInfo } from '../models/modelResource'
 import * as parameters from '../constants/ConstParameters'
 
 export const updateRefineMarco = (command: string) => {

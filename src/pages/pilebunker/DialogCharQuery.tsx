@@ -1,8 +1,9 @@
 import * as React from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { CharInput } from '../../model/modelCalc'
-import { QueryInput, CharInfo } from '../../model/modelQuery'
+import { CharInput } from '../../models/modelCalc'
+import { QueryInput } from '../../models/modelQuery'
+import { CharInfo } from '../../models/modelResource'
 import * as ActionsQuery from '../../actions/actionQuery'
 import * as ActionsCalc from '../../actions/actionCalc'
 import { RootState } from '../../reducers/index'
@@ -211,8 +212,8 @@ class DialogCharQuery extends React.Component<DialogCharQuery.Props> {
             {this.renderSelectTerrain()}
             {this.renderSelectRarity()}
           </DialogContentText>
+          <TableChar closeFunction={this.props.statusFunction} />
         </DialogContent>
-        <TableChar closeFunction={this.props.statusFunction} />
         <DialogActions>
           <Button onClick={this.props.statusFunction} color="primary" autoFocus>
             Close

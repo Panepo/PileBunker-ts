@@ -1,44 +1,42 @@
-import { Action, ActionType } from '../model/model'
-import { CharInput, BuffInput, EnemyInput } from '../model/modelCalc'
+import { Action } from '../models/modelAction'
+import {
+  ActionTypeCalc,
+  CharInput,
+  BuffInput,
+  EnemyInput
+} from '../models/modelCalc'
 
-export function charInput(input: CharInput): Action<CharInput> {
+export const charInput = (input: CharInput): Action<CharInput> => {
   return {
-    type: ActionType.INPUT_CHAR_CHANGE,
+    type: ActionTypeCalc.INPUT_CHAR_CHANGE,
     payload: input
   }
 }
 
-export function buffInput(input: BuffInput): Action<BuffInput> {
+export const buffInput = (input: BuffInput): Action<BuffInput> => {
   return {
-    type: ActionType.INPUT_BUFF_CHANGE,
+    type: ActionTypeCalc.INPUT_BUFF_CHANGE,
     payload: input
   }
 }
 
-export function enemyInput(input: EnemyInput): Action<EnemyInput> {
+export const enemyInput = (input: EnemyInput): Action<EnemyInput> => {
   return {
-    type: ActionType.INPUT_ENEMY_CHANGE,
+    type: ActionTypeCalc.INPUT_ENEMY_CHANGE,
     payload: input
   }
 }
 
-export function refineChange(wepName: string): Action<string> {
+export const refineChange = (wepName: string): Action<string> => {
   return {
-    type: ActionType.REFINE_CHANGE,
+    type: ActionTypeCalc.REFINE_CHANGE,
     payload: wepName
   }
 }
 
-export function refineChangeMarco(command: string): Action<string> {
+export const refineChangeMarco = (command: string): Action<string> => {
   return {
-    type: ActionType.REFINE_CHANGE_MARCO,
+    type: ActionTypeCalc.REFINE_CHANGE_MARCO,
     payload: command
-  }
-}
-
-export function weaponQuery(wepId: number): Action<number> {
-  return {
-    type: ActionType.WEAPON_QUERY,
-    payload: wepId
   }
 }

@@ -1,9 +1,14 @@
 import createReducer from './createReducer'
-import { Action, ActionType } from '../model/model'
-import { CharInput, BuffInput, EnemyInput, CalcState } from '../model/modelCalc'
+import { Action } from '../models/modelAction'
+import {
+  ActionTypeCalc,
+  CharInput,
+  BuffInput,
+  EnemyInput,
+  CalcState
+} from '../models/modelCalc'
 import { calcOutput } from '../functions/calcOutput'
 import { updateRefine, updateRefineMarco } from '../functions/calcRefine'
-import { queryWeapon } from '../database/dbQuery'
 
 const initialChar: CharInput = {
   charType: 'sword',
@@ -43,26 +48,31 @@ const initialState: CalcState = {
   charInput: initialChar,
   buffInput: initialBuff,
   enemyInput: initialEnemy,
-  output: calcOutput(initialChar, initialBuff, initialEnemy),
-  wepQuery: queryWeapon(1)
+  output: calcOutput(initialChar, initialBuff, initialEnemy)
 }
 
 export const reducerCalc = createReducer(initialState, {
-  [ActionType.INPUT_CHAR_CHANGE](state: CalcState, action: Action<CharInput>) {
+  [ActionTypeCalc.INPUT_CHAR_CHANGE](
+    state: CalcState,
+    action: Action<CharInput>
+  ) {
     return {
       ...state,
       charInput: action.payload,
       output: calcOutput(action.payload, state.buffInput, state.enemyInput)
     }
   },
-  [ActionType.INPUT_BUFF_CHANGE](state: CalcState, action: Action<BuffInput>) {
+  [ActionTypeCalc.INPUT_BUFF_CHANGE](
+    state: CalcState,
+    action: Action<BuffInput>
+  ) {
     return {
       ...state,
       buffInput: action.payload,
       output: calcOutput(state.charInput, action.payload, state.enemyInput)
     }
   },
-  [ActionType.INPUT_ENEMY_CHANGE](
+  [ActionTypeCalc.INPUT_ENEMY_CHANGE](
     state: CalcState,
     action: Action<EnemyInput>
   ) {
@@ -72,21 +82,21 @@ export const reducerCalc = createReducer(initialState, {
       output: calcOutput(state.charInput, state.buffInput, action.payload)
     }
   },
-  [ActionType.REFINE_CHANGE](state: CalcState, action: Action<string>) {
+  [ActionTypeCalc.REFINE_CHANGE](state: CalcState, action: Action<string>) {
     updateRefine(action.payload)
     return {
       ...state,
       output: calcOutput(state.charInput, state.buffInput, state.enemyInput)
     }
   },
-  [ActionType.REFINE_CHANGE_MARCO](state: CalcState, action: Action<string>) {
+  [ActionTypeCalc.REFINE_CHANGE_MARCO](
+    state: CalcState,
+    action: Action<string>
+  ) {
     updateRefineMarco(action.payload)
     return {
       ...state,
       output: calcOutput(state.charInput, state.buffInput, state.enemyInput)
     }
-  },
-  [ActionType.WEAPON_QUERY](state: CalcState, action: Action<number>) {
-    return { ...state, wepQuery: queryWeapon(action.payload) }
   }
 })

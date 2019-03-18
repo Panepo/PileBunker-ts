@@ -3,8 +3,8 @@ import { History } from 'history'
 import { combineReducers } from 'redux'
 import * as reducerCalc from './reducerCalc'
 import * as reducerQuery from './reducerQuery'
-import { QueryState } from '../model/modelQuery'
-import { CalcState } from '../model/modelCalc'
+import { QueryState } from '../models/modelQuery'
+import { CalcState } from '../models/modelCalc'
 
 export interface RootState {
   reducerQuery: QueryState

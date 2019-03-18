@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import * as ActionsCalc from '../../actions/actionCalc'
 import { RootState } from '../../reducers/index'
-import { WeaponInfo } from '../../model/modelCalc'
+import { WeaponInfo } from '../../models/modelResource'
 import { createStyles, Theme, WithStyles, withStyles } from '@material-ui/core'
 import Dialog from '@material-ui/core/Dialog'
 import DialogActions from '@material-ui/core/DialogActions'
@@ -187,7 +187,7 @@ class DialogWepQuery extends React.Component<DialogWepQuery.Props> {
 
 function mapStateToProps(state: RootState) {
   return {
-    wepInfo: state.reducerCalc.wepQuery
+    wepInfo: state.reducerQuery.wepQuery
   }
 }
 

@@ -1,7 +1,7 @@
 import { dbChar } from './database'
 import * as dbQuery from './dbQuery'
-import { QueryInput } from '../model/modelQuery'
-import { CharInfo } from '../model/modelQuery'
+import { QueryInput } from '../models/modelQuery'
+import { CharInfo } from '../models/modelResource'
 
 it('Query character from database', () => {
   let input: QueryInput = { type: 'bell', plain: 2, rarity: 8 }

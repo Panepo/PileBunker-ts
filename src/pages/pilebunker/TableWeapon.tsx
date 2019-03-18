@@ -1,7 +1,8 @@
 import * as React from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { WeaponInfo } from '../../model/modelCalc'
+import { WeaponInfo } from '../../models/modelResource'
+import * as ActionsQuery from '../../actions/actionQuery'
 import * as ActionsCalc from '../../actions/actionCalc'
 import { RootState } from '../../reducers/index'
 import { createStyles, Theme, WithStyles, withStyles } from '@material-ui/core'
@@ -15,10 +16,11 @@ import Checkbox from '@material-ui/core/Checkbox'
 import MucTableHead from '../../components/MucTableHead'
 import DialogWepQuery from './DialogWepQuery'
 import { stableSort, getSorting } from '../../helpers/table.helper'
-import { tableWeaponHead } from '../../constants/ConstTable'
+import { tableHeadWeapon } from '../../constants/ConstTable'
 
 export namespace TableWeapon {
   export interface Props extends WithStyles<typeof styles> {
+    actionsQ: typeof ActionsQuery
     actionsC: typeof ActionsCalc
     weaponInfo: WeaponInfo[]
   }
@@ -119,7 +121,7 @@ class TableWeapon extends React.Component<
 
   handleQueryOpen = (wepId: number) => (event: any) => {
     this.setState({ statusDialog: true })
-    this.props.actionsC.weaponQuery(wepId)
+    this.props.actionsQ.weaponQuery(wepId)
   }
 
   handleQueryClose = () => {
@@ -149,7 +151,7 @@ class TableWeapon extends React.Component<
               onSelectAllClick={this.handleSelectAllClick}
               onRequestSort={this.handleRequestSort}
               rowCount={data.length}
-              rows={tableWeaponHead}
+              rows={tableHeadWeapon}
             />
             <TableBody>
               {stableSort(data, getSorting(order, orderBy))
@@ -240,6 +242,7 @@ function mapStateToProps(state: RootState) {
 
 function mapDispatchToProps(dispatch: any) {
   return {
+    actionsQ: bindActionCreators(ActionsQuery as any, dispatch),
     actionsC: bindActionCreators(ActionsCalc as any, dispatch)
   }
 }
