@@ -94,7 +94,7 @@ class Header extends React.Component<Header.Props, Header.State> {
             href={data.link}
           >
             <ListItemIcon>
-              <IconBookmark />
+              <IconBookmark color="secondary" />
             </ListItemIcon>
             <ListItemText primary={data.text} />
           </ListItem>

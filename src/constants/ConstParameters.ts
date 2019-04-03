@@ -36,6 +36,6 @@ export interface WeaponIgnoreDef {
 
 export const wepIgnoreDef: WeaponIgnoreDef[] = [
   { value: 0.9, name: ['氏康の獅盾', '真・氏康の獅盾', 'ヴァリス改'] },
-  { value: 0.92, name: ['ヴァリス'] },
+  { value: 0.92, name: ['ヴァリス', '幽閉の紅弓'] },
   { value: 0.95, name: ['聖剣エクスカリバー'] }
 ]
