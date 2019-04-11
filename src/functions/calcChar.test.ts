@@ -14,7 +14,7 @@ describe('Calculate character attack', () => {
       charCompanion: 100,
       charStructure: 0
     }
-    expect(calc.calcAtk(input)).toEqual(249)
+    expect(calc.calcAtk(input)).toEqual(269)
 
     // lv50 龜居城
     input = {
