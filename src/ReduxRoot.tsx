@@ -1,4 +1,4 @@
-import { Typography } from '@material-ui/core'
+import Typography from '@material-ui/core/Typography'
 import * as React from 'react'
 import { Provider } from 'react-redux'
 import { PersistGate } from 'redux-persist/integration/react'

@@ -8,6 +8,7 @@ import Ribbon from './pages/Ribbon'
 import Footer from './pages/Footer'
 import PileBunker from './pages/pilebunker/PileBunker'
 import { createStyles, WithStyles, withStyles } from '@material-ui/core'
+import Typography from '@material-ui/core/Typography'
 import withRoot from './withRoot'
 
 const styles = createStyles({
@@ -32,8 +33,8 @@ const App = (props: Props) => {
         <Ribbon />
         <Switch>
           <Route exact={true} path="/" component={PileBunker} />
-          <Route path="/pilebunker" component={PileBunker} />
-          <Route component={() => <div>Not Found</div>} />
+          <Route exact={true} path="/pilebunker" component={PileBunker} />
+          <Route component={() => <Typography>File not found</Typography>} />
         </Switch>
         <Footer />
       </div>
