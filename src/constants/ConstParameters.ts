@@ -18,16 +18,19 @@ export const weaponAntiFly = [
   'ダマスキナードナイフ',
   '月光の短剣'
 ]
-export const weaponAtkUp = ['義重の重槌', '真・義重の重槌']
-export const weaponAtkUpValue = 50
-
-export interface WeaponIgnoreDef {
+export interface WeaponSpecial {
   value: number
   name: string[]
 }
 
-export const wepIgnoreDef: WeaponIgnoreDef[] = [
+export const wepIgnoreDef: WeaponSpecial[] = [
   { value: 0.9, name: ['氏康の獅盾', '真・氏康の獅盾', 'ヴァリス改'] },
   { value: 0.92, name: ['ヴァリス', '幽閉の紅弓'] },
   { value: 0.95, name: ['聖剣エクスカリバー'] }
 ]
+
+export const wepDirectUp: WeaponSpecial[] = [
+  { value: 50, name: ['義重の重槌', '真・義重の重槌'] }
+]
+
+export const wepDamUp: WeaponSpecial[] = [{ value: 5, name: ['閻魔裁定筆'] }]

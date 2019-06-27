@@ -121,18 +121,20 @@ export const calcOutput = (
       for (let i = 0; i < parameters.weaponAntiFly.length; i += 1) {
         if (parameters.weaponAntiFly[i] === data.name) {
           paraMuxTemp *= 1.5
+          break
         }
       }
     }
 
     // ===============================================================
     // 直擊に対する特殊武器攻撃力ボーナス
-    if (charInput.charType === 'hammer') {
-      for (let i = 0; i < parameters.weaponAtkUp.length; i += 1) {
-        if (parameters.weaponAtkUp[i] === data.name) {
+    for (let i = 0; i < parameters.wepDirectUp.length; i += 1) {
+      for (let j = 0; j < parameters.wepDirectUp[i].name.length; j += 1) {
+        if (parameters.wepDirectUp[i].name[j] === data.name) {
           paraMuxTempSub = paraMuxTemp
           subSwitch = true
-          paraMuxTemp *= 1 + parameters.weaponAtkUpValue / 100
+          paraMuxTemp *= 1 + parameters.wepDirectUp[i].value / 100
+          break
         }
       }
     }
@@ -196,24 +198,28 @@ export const calcDam = (
   skillDamUp: number,
   skillRecDamUp: number
 ): number => {
+  // ===============================================================
+  // 敵の防御無視に対する特殊武器攻撃力ボーナス
   for (let i = 0; i < parameters.wepIgnoreDef.length; i += 1) {
     for (let j = 0; j < parameters.wepIgnoreDef[i].name.length; j += 1) {
       if (parameters.wepIgnoreDef[i].name[j] === name) {
         if (totalDef > 0) {
           let tempDef = Math.round(totalDef * parameters.wepIgnoreDef[i].value)
-          return calcAtkDef(totalAtk, tempDef, skillDamUp, skillRecDamUp)
+          return calcAtkDef(totalAtk, tempDef, skillDamUp, skillRecDamUp, name)
         }
       }
     }
   }
-  return calcAtkDef(totalAtk, totalDef, skillDamUp, skillRecDamUp)
+
+  return calcAtkDef(totalAtk, totalDef, skillDamUp, skillRecDamUp, name)
 }
 
 export const calcAtkDef = (
   atk: number,
   def: number,
   skillDamUp: number,
-  skillRecDamUp: number
+  skillRecDamUp: number,
+  name: string
 ): number => {
   let damage: number
   if (atk - parameters.valueProDam >= def) {
@@ -227,6 +233,18 @@ export const calcAtkDef = (
         (1 + skillRecDamUp / 100)
     )
   }
+
+  // ===============================================================
+  // 与ダメージ増加に対する特殊武器攻撃力ボーナス
+  for (let i = 0; i < parameters.wepDamUp.length; i += 1) {
+    for (let j = 0; j < parameters.wepDamUp[i].name.length; j += 1) {
+      if (parameters.wepDamUp[i].name[j] === name) {
+        damage = Math.floor(damage * (1 + parameters.wepDamUp[i].value / 100))
+        break
+      }
+    }
+  }
+
   return damage
 }
 

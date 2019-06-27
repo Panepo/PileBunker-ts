@@ -4,9 +4,9 @@ const imageSword = require('../images/type-sword.png')
 
 describe('Calculate damage', () => {
   it('should get an equal value', () => {
-    expect(calc.calcAtkDef(200, 100, 0, 100)).toEqual(200)
-    expect(calc.calcAtkDef(200, 100, 100, 0)).toEqual(200)
-    expect(calc.calcAtkDef(200, 100, 100, 100)).toEqual(400)
+    expect(calc.calcAtkDef(200, 100, 0, 100, 'test')).toEqual(200)
+    expect(calc.calcAtkDef(200, 100, 100, 0, 'test')).toEqual(200)
+    expect(calc.calcAtkDef(200, 100, 100, 100, 'test')).toEqual(400)
   })
 })
 
