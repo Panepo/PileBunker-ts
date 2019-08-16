@@ -68,6 +68,7 @@ export const menuEnemySwitch: Menu[] = [
 export const menuRefineList: Menu[] = [
   { id: 'button-all-ref-0', label: '無精煉', value: 'all-ref-0' },
   { id: 'button-all-ref-10', label: '全精煉+10', value: 'all-ref-10' },
+  { id: 'button-5-ref-10', label: '★5+10', value: '5-ref-10' },
   { id: 'button-4-ref-10', label: '★4+10', value: '4-ref-10' },
   { id: 'button-3-ref-10', label: '★3+10', value: '3-ref-10' },
   { id: 'button-2-ref-10', label: '★2+10', value: '2-ref-10' },

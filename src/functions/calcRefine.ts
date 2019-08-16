@@ -27,6 +27,20 @@ export const updateRefineMarco = (command: string) => {
       })
       dbWeapon.update(weaponSelected)
       break
+    case '5-ref-10':
+      weaponSelected = dbWeapon
+        .chain()
+        .find({ rare: 5 })
+        .data()
+      weaponSelected.map((data: WeaponInfo) => {
+        data.atk -= data.ref
+        data.atk += parameters.valueMaxRef
+        data.ref = parameters.valueMaxRef
+        data.refText = '+' + parameters.valueMaxRef.toString()
+        return data
+      })
+      dbWeapon.update(weaponSelected)
+      break
     case '4-ref-10':
       weaponSelected = dbWeapon
         .chain()
