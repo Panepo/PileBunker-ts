@@ -26,11 +26,15 @@ export interface WeaponSpecial {
 export const wepIgnoreDef: WeaponSpecial[] = [
   { value: 0.9, name: ['氏康の獅盾', '真・氏康の獅盾', 'ヴァリス改'] },
   { value: 0.92, name: ['ヴァリス', '幽閉の紅弓'] },
-  { value: 0.95, name: ['聖剣エクスカリバー'] }
+  { value: 0.95, name: ['聖剣エクスカリバー', '人間無骨[改]'] }
 ]
 
 export const wepDirectUp: WeaponSpecial[] = [
   { value: 50, name: ['義重の重槌', '真・義重の重槌'] }
 ]
 
-export const wepDamUp: WeaponSpecial[] = [{ value: 5, name: ['閻魔裁定筆'] }]
+export const wepDamUp: WeaponSpecial[] = [
+  { value: 5, name: ['閻魔裁定筆'] },
+  { value: 4, name: ['梓弓[改]', '雨夜手拍子[改]'] },
+  { value: 2, name: ['国崩し[改]'] }
+]
