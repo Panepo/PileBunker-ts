@@ -39,3 +39,8 @@ export const wepDamUp: WeaponSpecial[] = [
   { value: 4, name: ['梓弓[改]', '雨夜手拍子[改]'] },
   { value: 2, name: ['国崩し[改]'] }
 ]
+
+export const wepDefDown: WeaponSpecial[] = [
+  { value: 0.9, name: ['山姥の槍[改]', '未来ガジェット5号機'] },
+  { value: 0.92, name: ['妖刀村正[改]', '幽世の龍槍'] }
+]

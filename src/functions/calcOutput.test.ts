@@ -1,5 +1,6 @@
 import * as calc from './calcOutput'
 import { ListType } from '../constants/ConstCalc'
+import { BuffInput, EnemyInput } from '../models/modelCalc'
 const imageSword = require('../images/type-sword.png')
 
 describe('Calculate damage', () => {
@@ -12,9 +13,57 @@ describe('Calculate damage', () => {
 
 describe('Calculate damage for special weapon', () => {
   it('should get an equal value', () => {
-    expect(calc.calcDam(200, 100, 'test', 100, 0)).toEqual(200)
-    expect(calc.calcDam(200, 100, '真・氏康の獅盾', 0, 100)).toEqual(220)
-    expect(calc.calcDam(200, 100, '聖剣エクスカリバー', 100, 0)).toEqual(210)
+    const buffA: BuffInput = {
+      buffAtkPercent: 0,
+      buffAtkNumber: 0,
+      buffSpeedPre: 0,
+      buffSpeedPost: 0,
+      buffDamageUp: 0,
+      buffDirectUp: 0,
+      buffHitnumber: 0,
+      buffIgoreDef: 0,
+      buffTerrain: true
+    }
+
+    const buffB: BuffInput = {
+      buffAtkPercent: 0,
+      buffAtkNumber: 0,
+      buffSpeedPre: 0,
+      buffSpeedPost: 0,
+      buffDamageUp: 100,
+      buffDirectUp: 0,
+      buffHitnumber: 0,
+      buffIgoreDef: 0,
+      buffTerrain: true
+    }
+
+    const enemyA: EnemyInput = {
+      enemyNumber: 1,
+      enemyHitpoint: 1000,
+      enemyDef: 200,
+      enemyDefPercent: 0,
+      enemyDefNumber: 0,
+      enemyDamageUp: 0,
+      enemyFly: false,
+      enemyMonster: false
+    }
+
+    const enemyB: EnemyInput = {
+      enemyNumber: 1,
+      enemyHitpoint: 1000,
+      enemyDef: 200,
+      enemyDefPercent: 0,
+      enemyDefNumber: 0,
+      enemyDamageUp: 100,
+      enemyFly: false,
+      enemyMonster: false
+    }
+
+    expect(calc.calcDam(200, 100, 'test', buffB, enemyA)).toEqual(200)
+    expect(calc.calcDam(200, 100, '真・氏康の獅盾', buffA, enemyB)).toEqual(220)
+    expect(calc.calcDam(200, 100, '聖剣エクスカリバー', buffB, enemyA)).toEqual(
+      210
+    )
   })
 })
 

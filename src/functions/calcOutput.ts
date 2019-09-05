@@ -144,13 +144,7 @@ export const calcOutput = (
         buffInput.buffAtkNumber) *
       paraMuxTemp
 
-    data.damage = calcDam(
-      totalAtk,
-      totalDef,
-      data.name,
-      buffInput.buffDamageUp,
-      enemyInput.enemyDamageUp
-    )
+    data.damage = calcDam(totalAtk, totalDef, data.name, buffInput, enemyInput)
 
     data.frame1 = Math.round(data.f1 / (1 + buffInput.buffSpeedPre / 100))
     if (buffInput.buffSpeedPost >= parameters.maxskillSpdUpB) {
@@ -175,8 +169,8 @@ export const calcOutput = (
         totalAtkSub,
         totalDef,
         data.name,
-        buffInput.buffDamageUp,
-        enemyInput.enemyDamageUp
+        buffInput,
+        enemyInput
       )
       subSwitch = false
     }
@@ -195,8 +189,8 @@ export const calcDam = (
   totalAtk: number,
   totalDef: number,
   name: string,
-  skillDamUp: number,
-  skillRecDamUp: number
+  buffInput: BuffInput,
+  enemyInput: EnemyInput
 ): number => {
   // ===============================================================
   // 敵の防御無視に対する特殊武器攻撃力ボーナス
@@ -205,13 +199,55 @@ export const calcDam = (
       if (parameters.wepIgnoreDef[i].name[j] === name) {
         if (totalDef > 0) {
           let tempDef = Math.round(totalDef * parameters.wepIgnoreDef[i].value)
-          return calcAtkDef(totalAtk, tempDef, skillDamUp, skillRecDamUp, name)
+          return calcAtkDef(
+            totalAtk,
+            tempDef,
+            buffInput.buffDamageUp,
+            enemyInput.enemyDamageUp,
+            name
+          )
         }
       }
     }
   }
 
-  return calcAtkDef(totalAtk, totalDef, skillDamUp, skillRecDamUp, name)
+  // ===============================================================
+  // デバフ付加防禦下降に対する特殊武器攻撃力ボーナス
+  for (let i = 0; i < parameters.wepDefDown.length; i += 1) {
+    for (let j = 0; j < parameters.wepDefDown[i].name.length; j += 1) {
+      if (parameters.wepDefDown[i].name[j] === name) {
+        if (
+          totalDef > 0 &&
+          enemyInput.enemyDefPercent > parameters.wepDefDown[i].value
+        ) {
+          let tempDef =
+            enemyInput.enemyDef *
+              (1 - enemyInput.enemyDefPercent / 100) *
+              (1 - buffInput.buffIgoreDef / 100) -
+            enemyInput.enemyDefNumber
+
+          if (tempDef <= 0) {
+            tempDef = 0
+          }
+          return calcAtkDef(
+            totalAtk,
+            tempDef,
+            buffInput.buffDamageUp,
+            enemyInput.enemyDamageUp,
+            name
+          )
+        }
+      }
+    }
+  }
+
+  return calcAtkDef(
+    totalAtk,
+    totalDef,
+    buffInput.buffDamageUp,
+    enemyInput.enemyDamageUp,
+    name
+  )
 }
 
 export const calcAtkDef = (
