@@ -16,7 +16,9 @@ export const weaponAntiFly = [
   'ブーメランダガー',
   'ウォシュレ',
   'ダマスキナードナイフ',
-  '月光の短剣'
+  '月光の短剣',
+  '桜花爛漫短剣',
+  '桜花爛漫短剣[改]'
 ]
 export interface WeaponSpecial {
   value: number
@@ -27,7 +29,7 @@ export const wepIgnoreDef: WeaponSpecial[] = [
   { value: 0.9, name: ['氏康の獅盾', '真・氏康の獅盾', 'ヴァリス改'] },
   { value: 0.92, name: ['ヴァリス', '幽閉の紅弓'] },
   { value: 0.95, name: ['聖剣エクスカリバー', '人間無骨[改]'] },
-  { value: 0.97, name: ['月光の短剣[改]'] }
+  { value: 0.97, name: ['月光の短剣[改]', '桜花爛漫短剣[改]'] }
 ]
 
 export const wepDirectUp: WeaponSpecial[] = [
