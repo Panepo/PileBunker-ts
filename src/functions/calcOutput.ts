@@ -241,6 +241,23 @@ export const calcDam = (
     }
   }
 
+  // ===============================================================
+  // 攻撃上升に対する特殊武器攻撃力ボーナス
+  for (let i = 0; i < parameters.wepAtkUp.length; i += 1) {
+    for (let j = 0; j < parameters.wepAtkUp[i].name.length; j += 1) {
+      if (parameters.wepAtkUp[i].name[j] === name) {
+        const tempAtk = Math.round(totalAtk * parameters.wepAtkUp[i].value)
+        return calcAtkDef(
+          tempAtk,
+          totalDef,
+          buffInput.buffDamageUp,
+          enemyInput.enemyDamageUp,
+          name
+        )
+      }
+    }
+  }
+
   return calcAtkDef(
     totalAtk,
     totalDef,
