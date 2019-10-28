@@ -36,7 +36,8 @@ export const wepIgnoreDef: WeaponSpecial[] = [
 ]
 
 export const wepDirectUp: WeaponSpecial[] = [
-  { value: 50, name: ['義重の重槌', '真・義重の重槌'] }
+  { value: 50, name: ['義重の重槌', '真・義重の重槌'] },
+  { value: 60, name: ['真・義重の重槌[改]'] }
 ]
 
 export const wepDamUp: WeaponSpecial[] = [
