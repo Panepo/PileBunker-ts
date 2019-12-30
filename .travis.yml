@@ -1,6 +1,4 @@
 language: node_js
-python:
-- '3.6'
 node_js:
 - 8.11.3
 before_install:
@@ -10,6 +8,7 @@ install:
 script:
 - git clone --depth 1 --branch gh-pages https://$GH_TOKEN@github.com/Panepo/PileBunker-ts
   build
+- yarn crawler
 - yarn parser
 - yarn test && codecov
 - yarn build

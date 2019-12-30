@@ -2,7 +2,8 @@ require! {
   'fs': fs
   './weapons.ls': weapons
   './weaponType.ls': weaponType
-  './chars.ls': chars
+  "cheerio": cheerio
+  "./data.ls": Data
 }
 
 # ===============================================================================
@@ -46,16 +47,28 @@ fs.writeFileSync './src/resource/weaponTypes.json', outType
 # ===============================================================================
 # PARSE CHARACTER DATA
 # ===============================================================================
-outChar = []
-for char, i in chars.data
-  outChar[i] = {}
-  for slotValue, j in chars.slotChar
-    if slotValue !== 'X'
-      outChar[i][slotValue] = char[j]
+(err, data) <- fs.readFile "./src/resource/char.html"
+if err
+  throw err
 
-for char, i in outChar
+# read data
+$ = cheerio.load data.toString!
+output = []
+$("\a.dps_name").each (i, elem) ->
+  name = elem.children[0].data
+  char = new Data.Char name
+  status_data = elem.parent.parent.children
+  char.weapon = status_data[1].children[0].data
+  char.rarity = status_data[2].children[0].data
+  char.plain = status_data[3].children[0].data
+  char.hpF = status_data[4].children[0].data
+  char.atF = status_data[5].children[0].data
+  char.dfF = status_data[6].children[0].data
+  char.totF = status_data[7].children[0].data
   char.id = i
+  output.push char
 
-outChar = JSON.stringify outChar
+#parse data
+output = JSON.stringify output
 console.log 'chars.json arrange complete!'
-fs.writeFileSync './src/resource/chars.json', outChar
+fs.writeFileSync './src/resource/chars.json', output
