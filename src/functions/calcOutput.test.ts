@@ -5,9 +5,9 @@ const imageSword = require('../images/type-sword.png')
 
 describe('Calculate damage', () => {
   it('should get an equal value', () => {
-    expect(calc.calcAtkDef(200, 100, 0, 100, 'test')).toEqual(200)
-    expect(calc.calcAtkDef(200, 100, 100, 0, 'test')).toEqual(200)
-    expect(calc.calcAtkDef(200, 100, 100, 100, 'test')).toEqual(400)
+    expect(calc.calcAtkDef(200, 100, 0, 100, 0, 0, 'test')).toEqual(200)
+    expect(calc.calcAtkDef(200, 100, 100, 0, 0, 0, 'test')).toEqual(200)
+    expect(calc.calcAtkDef(200, 100, 100, 100, 0, 0, 'test')).toEqual(400)
   })
 })
 
@@ -22,6 +22,7 @@ describe('Calculate damage for special weapon', () => {
       buffDirectUp: 0,
       buffHitnumber: 0,
       buffIgoreDef: 0,
+      buffAddIgore: 0,
       buffTerrain: true
     }
 
@@ -34,6 +35,7 @@ describe('Calculate damage for special weapon', () => {
       buffDirectUp: 0,
       buffHitnumber: 0,
       buffIgoreDef: 0,
+      buffAddIgore: 0,
       buffTerrain: true
     }
 
@@ -59,11 +61,13 @@ describe('Calculate damage for special weapon', () => {
       enemyMonster: false
     }
 
-    expect(calc.calcDam(200, 100, 'test', buffB, enemyA)).toEqual(200)
-    expect(calc.calcDam(200, 100, '真・氏康の獅盾', buffA, enemyB)).toEqual(220)
-    expect(calc.calcDam(200, 100, '聖剣エクスカリバー', buffB, enemyA)).toEqual(
-      210
-    )
+    expect(calc.calcDam(200, 200, 100, 'test', buffB, enemyA)).toEqual(200)
+    expect(
+      calc.calcDam(200, 200, 100, '真・氏康の獅盾', buffA, enemyB)
+    ).toEqual(220)
+    expect(
+      calc.calcDam(200, 200, 100, '聖剣エクスカリバー', buffB, enemyA)
+    ).toEqual(210)
   })
 })
 

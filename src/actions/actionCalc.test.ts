@@ -35,6 +35,7 @@ describe('action calc test', () => {
       buffDirectUp: 0,
       buffHitnumber: 0,
       buffIgoreDef: 0,
+      buffAddIgore: 0,
       buffTerrain: true
     }
     const expectedAction = {

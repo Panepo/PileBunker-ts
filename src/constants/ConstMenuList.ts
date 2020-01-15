@@ -36,6 +36,11 @@ export const menuBuffList: Menu[] = [
     id: 'select-buffIgoreDef',
     label: '防御を無視する(%)',
     value: 'buffIgoreDef'
+  },
+  {
+    id: 'select-buffAddIgore',
+    label: '雷擊を追加(%)',
+    value: 'buffAddIgore'
   }
 ]
 

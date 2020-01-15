@@ -109,6 +109,7 @@ export const calcOutput = (
   // ===============================================================
   // ダメージ計算
   weaponSelected.map(data => {
+    let pureAtk: number = 0
     let totalAtk: number = 0
     let paraMuxTemp: number = paraMux
     let paraMuxTempSub: number = paraMuxSub
@@ -139,12 +140,20 @@ export const calcOutput = (
       }
     }
 
-    totalAtk =
-      ((charAtk + data.atk) * maxMux * (1 + buffInput.buffAtkPercent / 100) +
-        buffInput.buffAtkNumber) *
-      paraMuxTemp
+    pureAtk =
+      (charAtk + data.atk) * maxMux * (1 + buffInput.buffAtkPercent / 100) +
+      buffInput.buffAtkNumber
 
-    data.damage = calcDam(totalAtk, totalDef, data.name, buffInput, enemyInput)
+    totalAtk = pureAtk * paraMuxTemp
+
+    data.damage = calcDam(
+      pureAtk,
+      totalAtk,
+      totalDef,
+      data.name,
+      buffInput,
+      enemyInput
+    )
 
     data.frame1 = Math.round(data.f1 / (1 + buffInput.buffSpeedPre / 100))
     if (buffInput.buffSpeedPost >= parameters.maxskillSpdUpB) {
@@ -166,6 +175,7 @@ export const calcOutput = (
         paraMuxTempSub
 
       damageSub = calcDam(
+        pureAtk,
         totalAtkSub,
         totalDef,
         data.name,
@@ -186,6 +196,7 @@ export const calcOutput = (
 }
 
 export const calcDam = (
+  pureAtk: number,
   totalAtk: number,
   totalDef: number,
   name: string,
@@ -204,6 +215,8 @@ export const calcDam = (
             tempDef,
             buffInput.buffDamageUp,
             enemyInput.enemyDamageUp,
+            pureAtk,
+            buffInput.buffAddIgore,
             name
           )
         }
@@ -234,6 +247,8 @@ export const calcDam = (
             tempDef,
             buffInput.buffDamageUp,
             enemyInput.enemyDamageUp,
+            pureAtk,
+            buffInput.buffAddIgore,
             name
           )
         }
@@ -252,6 +267,8 @@ export const calcDam = (
           totalDef,
           buffInput.buffDamageUp,
           enemyInput.enemyDamageUp,
+          pureAtk,
+          buffInput.buffAddIgore,
           name
         )
       }
@@ -263,6 +280,8 @@ export const calcDam = (
     totalDef,
     buffInput.buffDamageUp,
     enemyInput.enemyDamageUp,
+    pureAtk,
+    buffInput.buffAddIgore,
     name
   )
 }
@@ -272,6 +291,8 @@ export const calcAtkDef = (
   def: number,
   skillDamUp: number,
   skillRecDamUp: number,
+  pureAtk: number,
+  skillAddIgnore: number,
   name: string
 ): number => {
   let damage: number
@@ -297,6 +318,17 @@ export const calcAtkDef = (
       }
     }
   }
+
+  // ===============================================================
+  // 雷擊追加ボーナス
+  damage =
+    damage +
+    Math.floor(
+      pureAtk *
+        (skillAddIgnore / 100) *
+        (1 + skillDamUp / 100) *
+        (1 + skillRecDamUp / 100)
+    )
 
   return damage
 }

@@ -30,6 +30,7 @@ const initialBuff: BuffInput = {
   buffDirectUp: 0,
   buffHitnumber: 0,
   buffIgoreDef: 0,
+  buffAddIgore: 0,
   buffTerrain: true
 }
 
@@ -87,6 +88,7 @@ describe('calc reducer test', () => {
         buffDirectUp: 50,
         buffHitnumber: 0,
         buffIgoreDef: 20,
+        buffAddIgore: 0,
         buffTerrain: true
       }
     }

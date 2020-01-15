@@ -29,6 +29,7 @@ export interface BuffInput {
   buffDirectUp: number // バフ直撃ボーナス
   buffHitnumber: number // バフ攻撃対象数
   buffIgoreDef: number // バフ無視防禦%
+  buffAddIgore: number // バフ雷擊追加%
   buffTerrain: boolean // 地形適性有無
 }
 

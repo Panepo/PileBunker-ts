@@ -13,6 +13,7 @@ const testBuffState: BuffInput = {
   buffDirectUp: 0,
   buffHitnumber: 0,
   buffIgoreDef: 0,
+  buffAddIgore: 0,
   buffTerrain: false
 }
 
@@ -25,6 +26,7 @@ const testBuffInput: BuffInput = {
   buffDirectUp: 10,
   buffHitnumber: 10,
   buffIgoreDef: 10,
+  buffAddIgore: 10,
   buffTerrain: true
 }
 
