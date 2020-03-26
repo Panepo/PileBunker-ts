@@ -52,5 +52,6 @@ export const wepDefDown: WeaponSpecial[] = [
 ]
 
 export const wepAtkUp: WeaponSpecial[] = [
-  { value: 1.05, name: ['真・利家の巨槍[改]'] }
+  { value: 1.05, name: ['真・利家の巨槍[改]'] },
+  { value: 1.08, name: ['真・兼続の愛砲[改]'] }
 ]
