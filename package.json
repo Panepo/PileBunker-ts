@@ -64,7 +64,7 @@
     "@types/redux-test-utils": "^0.2.0",
     "@types/webpack-env": "1.13.6",
     "cheerio": "^1.0.0-rc.3",
-    "codecov": "^3.2.0",
+    "codecov": "^3.6.5",
     "csstype": "^2.4.2",
     "enzyme": "^3.9.0",
     "enzyme-adapter-react-16": "^1.10.0",
