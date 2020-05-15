@@ -55,3 +55,12 @@ export const wepAtkUp: WeaponSpecial[] = [
   { value: 1.05, name: ['真・利家の巨槍[改]'] },
   { value: 1.08, name: ['真・兼続の愛砲[改]'] }
 ]
+
+export const wepAddDam: WeaponSpecial[] = [
+  { value: 20, name: ['月影手裏剣'] },
+  { value: 30, name: ['月影手裏剣[改]'] }
+]
+
+export const wepAddAtkDam: WeaponSpecial[] = [
+  { value: 0.1, name: ['アダマント・レイ'] }
+]

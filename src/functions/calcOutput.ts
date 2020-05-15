@@ -155,6 +155,28 @@ export const calcOutput = (
       enemyInput
     )
 
+    // ===============================================================
+    // 与ダメージに対する特殊武器攻撃力ボーナス
+    for (let i = 0; i < parameters.wepAddDam.length; i += 1) {
+      for (let j = 0; j < parameters.wepAddDam[i].name.length; j += 1) {
+        if (parameters.wepAddDam[i].name[j] === data.name) {
+          data.damage += parameters.wepAddDam[i].value
+          break
+        }
+      }
+    }
+
+    // ===============================================================
+    // 与ダメージに対する特殊武器攻撃力ボーナス
+    for (let i = 0; i < parameters.wepAddAtkDam.length; i += 1) {
+      for (let j = 0; j < parameters.wepAddAtkDam[i].name.length; j += 1) {
+        if (parameters.wepAddAtkDam[i].name[j] === data.name) {
+          data.damage += Math.floor(totalAtk * parameters.wepAddAtkDam[i].value)
+          break
+        }
+      }
+    }
+
     data.frame1 = Math.round(data.f1 / (1 + buffInput.buffSpeedPre / 100))
     if (buffInput.buffSpeedPost >= parameters.maxskillSpdUpB) {
       data.frame2 = 0
