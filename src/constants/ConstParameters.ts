@@ -26,10 +26,16 @@ export interface WeaponSpecial {
 }
 
 export const wepIgnoreDef: WeaponSpecial[] = [
-  { value: 0.85, name: ['天之瓊矛'] },
+  { value: 0.85, name: ['天之瓊矛', '鳳燐苦無[改]'] },
   {
     value: 0.9,
-    name: ['氏康の獅盾', '真・氏康の獅盾', 'ヴァリス改', '真・元親の荒刃[改]']
+    name: [
+      '氏康の獅盾',
+      '真・氏康の獅盾',
+      'ヴァリス改',
+      '真・元親の荒刃[改]',
+      '鳳燐苦無'
+    ]
   },
   { value: 0.92, name: ['ヴァリス', '幽閉の紅弓'] },
   {
