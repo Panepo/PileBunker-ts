@@ -4,14 +4,12 @@ import * as parameters from '../constants/ConstParameters'
 import { CharInput, BuffInput, EnemyInput } from '../models/modelCalc'
 import { WeaponInfo } from '../models/modelResource'
 import { calcAtk } from './calcChar'
+import { indexOfObject } from '../helpers/data.helper'
 
 export const checkType = (weaponType: string): ListType => {
-  for (let i = 0; i < listType.length; i += 1) {
-    if (listType[i].name === weaponType) {
-      return listType[i]
-    }
-  }
-  return listType[0]
+  const index = indexOfObject(listType, 'name', weaponType)
+  if (index > 0) return listType[index]
+  else return listType[0]
 }
 
 // ===============================================================================
