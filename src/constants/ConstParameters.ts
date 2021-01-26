@@ -26,6 +26,7 @@ export interface WeaponSpecial {
 }
 
 export const wepIgnoreDef: WeaponSpecial[] = [
+  { value: 0.8, name: ['聖剣エクスカリバー'] },
   { value: 0.85, name: ['天之瓊矛', '鳳燐苦無[改]', '大黒潮見舞鶴[改]'] },
   {
     value: 0.9,
@@ -41,7 +42,7 @@ export const wepIgnoreDef: WeaponSpecial[] = [
   { value: 0.92, name: ['ヴァリス', '幽閉の紅弓'] },
   {
     value: 0.95,
-    name: ['聖剣エクスカリバー', '人間無骨[改]', '元親の荒刃', '真・元親の荒刃']
+    name: ['人間無骨[改]', '元親の荒刃', '真・元親の荒刃']
   },
   { value: 0.97, name: ['月光の短剣[改]', '桜花爛漫短剣[改]'] }
 ]

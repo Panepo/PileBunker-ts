@@ -1,6 +1,7 @@
-import * as calc from './calcOutput'
 import { ListType } from '../constants/ConstCalc'
 import { BuffInput, EnemyInput } from '../models/modelCalc'
+import * as calc from './calcOutput'
+
 const imageSword = require('../images/type-sword.png')
 
 describe('Calculate damage', () => {
@@ -67,7 +68,7 @@ describe('Calculate damage for special weapon', () => {
     ).toEqual(220)
     expect(
       calc.calcDam(200, 200, 100, '聖剣エクスカリバー', buffB, enemyA)
-    ).toEqual(210)
+    ).toEqual(240)
   })
 })
 

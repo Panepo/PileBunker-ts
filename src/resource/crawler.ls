@@ -5,7 +5,7 @@ require! {
 }
 
 folder = "./src/resource/"
-url = "http://www116.sakura.ne.jp/~kuromoji/castle_unitdata.htm"
+url = "http://www116.sakura.ne.jp/~kuromoji/castle/castle_unitdata.htm"
 
 # download html from the source
 download_html = (name, url) ->
