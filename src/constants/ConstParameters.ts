@@ -26,6 +26,7 @@ export interface WeaponSpecial {
 }
 
 export const wepIgnoreDef: WeaponSpecial[] = [
+  { value: 0.75, name: ['聖剣エクスカリバー[改]'] },
   { value: 0.8, name: ['聖剣エクスカリバー'] },
   { value: 0.85, name: ['天之瓊矛', '鳳燐苦無[改]', '大黒潮見舞鶴[改]'] },
   {
