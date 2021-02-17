@@ -56,7 +56,8 @@ export const wepDirectUp: WeaponSpecial[] = [
 export const wepDamUp: WeaponSpecial[] = [
   { value: 5, name: ['閻魔裁定筆'] },
   { value: 4, name: ['梓弓[改]', '雨夜手拍子[改]'] },
-  { value: 2, name: ['国崩し[改]'] }
+  { value: 2, name: ['国崩し[改]'] },
+  { value: -8, name: ['夜叉の甘杓'] }
 ]
 
 export const wepDefDown: WeaponSpecial[] = [
