@@ -12,7 +12,8 @@ download_html = (name, url) ->
   request.get {url:url, encoding:null}, (err, resp, body) ->
     buffer = jconv.convert body, \SJIS, \UTF8
     (err) <- fs.writeFile folder+name+".html", buffer.toString!
-    console.log name+".html finished!"
+    console.log "[INFO] "+buffer.length+" bytes downloaded."
+    console.log "[INFO] "+name+".html finished!"
 
 download_html "char", url
 

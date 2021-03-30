@@ -26,8 +26,9 @@ for weapon, i in outWeapon
   weapon.dps = 0
   weapon.time = 0
 
+console.log '[INFO] weapons.json arrange complete! total ' + outWeapon.length + ' length processed'
+
 outWeapon = JSON.stringify outWeapon
-console.log 'weapons.json arrange complete!'
 fs.writeFileSync './src/resource/weapons.json', outWeapon
 
 # ===============================================================================
@@ -40,8 +41,9 @@ for type, i in weaponType.data
     if slotValue !== 'X'
       outType[i][slotValue] = type[j]
 
+console.log '[INFO] weaponTypes.json arrange complete! total ' + outType.length + ' length processed'
+
 outType = JSON.stringify outType
-console.log 'weaponTypes.json arrange complete!'
 fs.writeFileSync './src/resource/weaponTypes.json', outType
 
 # ===============================================================================
@@ -68,7 +70,8 @@ $("\a.dps_name").each (i, elem) ->
   char.id = i
   output.push char
 
+console.log '[INFO] chars.json arrange complete! total ' + output.length + ' length processed'
+
 #parse data
 output = JSON.stringify output
-console.log 'chars.json arrange complete!'
 fs.writeFileSync './src/resource/chars.json', output
