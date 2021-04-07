@@ -5,14 +5,16 @@ import { WeaponType } from '../models/modelResource'
 // ===============================================================================
 // calculate basic attack value for the character
 // ===============================================================================
+// http://www116.sakura.ne.jp/~kuromoji/castle/castle_unitdata.htm
 // Lv.Xでの城娘の能力値Y算出（※2017/08/08メンテ後）
+// Lv.Xでの城娘の能力値Y算出
 //
-//    計算式 … Y=INT(INT((A-B)/1000*X+B)*a)
-//        A … 武器種ごとのLv.1000の基本値
+//    計算式 … Y=INT(INT((A-B)/125*X+B)*a)
+//        A … 武器種ごとのLv.125の基本値
 //        B … 武器種ごとのLv.0の基本値
-//        a … 城娘ごとの能力値係數
+//        a … 城娘ごとの能力値係数
 //    計算例：Lv.110の駿府城の攻撃の値（絆ボーナス・武器・施設は無しでの値）
-//        INT(INT((1234-50)/1000*110+50)*1.10)=198
+//        INT(INT((1234-50)/125*110+50)*1.12)=201
 
 export const calcAtk = (input: CharInput): number => {
   const typeSelected: WeaponType[] = dbType
@@ -20,7 +22,7 @@ export const calcAtk = (input: CharInput): number => {
     .find({ name: input.charType })
     .data()
 
-  const typeAtk: number = (typeSelected[0].atkM - typeSelected[0].atk) / 1000
+  const typeAtk: number = (typeSelected[0].atkM - typeSelected[0].atk) / 125
   const comAtk: number = 1 + Math.floor(input.charCompanion / 10) / 100
   let charAtk: number = Math.floor(
     typeAtk * input.charLevel + typeSelected[0].atk
